@@ -20,9 +20,17 @@ namespace KcptunGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        String strKcptunConfig_Server, strKcptunConfig_LocalPort, strKcptunConfig_Mode, strKcptunConfig_Compress = "";//基础参数
+        String strKcptunCommand = "";
         public MainWindow()
         {
             InitializeComponent();
+            this.MainWindow_LogsText.Text = "";
+            strKcptunCommand="client_darwin_amd64.exe -r \"" + strKcptunConfig_Server +"\" -l \"0.0.0.0:"+strKcptunConfig_LocalPort+"\"";
+        }
+
+        private void ShowCommandInTitle(){
+            this.Title = "    " + "Command: [ " + strKcptunCommand + " ]";
         }
     }
 }
