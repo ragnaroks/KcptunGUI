@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text.RegularExpressions;
 
 namespace KcptunGUI
 {
@@ -10,6 +11,7 @@ namespace KcptunGUI
     public partial class MainWindow : Window
     {
         String strKcptunCommand;
+        Regex KcptunConfig_LocalPort_Regex = new Regex(@"\D");
         public MainWindow(){
             InitializeComponent();
             this.MainWindow_LogsText.Text = "KcptunGUI  Version: " + App.AppVersion + "(" + App.AppVersionR+")";
@@ -41,11 +43,12 @@ namespace KcptunGUI
             TextBox thisTextBox = (TextBox)sender; //if (false == thisTextBox.IsKeyboardFocused) { return; }
             switch (thisTextBox.Name) {
                 case "MainWindow_LogsText":
-                    this.MainWindow_LogsView.ScrollToBottom();
-                    break;
+                    this.MainWindow_LogsView.ScrollToBottom(); break;
                 case "KcptunConfig_Server":
-                    Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text;
-                    break;
+                    Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text; break;
+                case "KcptunConfig_LocalPort":
+                    thisTextBox.Text=KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text,""); if (thisTextBox.Text.Length >= 5) { thisTextBox.Text=thisTextBox.Text.Substring(0, 5); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 2) { Properties.Settings.Default.setKcptunConfig_LocalPort = UInt32.Parse(thisTextBox.Text); } break;
                 default:
                     break;
             }

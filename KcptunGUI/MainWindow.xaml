@@ -12,8 +12,8 @@
             <Grid Margin="0,0,-2,0">
                 <TextBlock Text="服务器及端口:" Height="20" Margin="125,10,0,0" FontSize="14" Width="95" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
                 <TextBox x:Name="KcptunConfig_Server" AllowDrop="False" Height="20" Margin="225,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"/>
-                <TextBlock Text="本地监听端口:" Height="20" Margin="417,10,0,0" FontSize="14" Width="95" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
-                <TextBox x:Name="KcptunConfig_LocalPort" AllowDrop="False" Height="20" Margin="517,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="64" Padding="0,1,0,0"/>
+                <TextBlock Text="本地监听端口:" Height="20" Margin="417,10,0,0" FontSize="14" Width="95" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0"/>
+                <TextBox x:Name="KcptunConfig_LocalPort" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="20" Margin="517,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="64" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"/>
                 <TextBlock Text="模式:" Height="20" Margin="588,10,0,0" FontSize="14" Width="36" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
                 <ComboBox x:Name="KcptunConfig_Mode" HorizontalAlignment="Left" Margin="629,10,0,0" VerticalAlignment="Top" Width="72" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="20" Padding="6,2,5,3" IsTabStop="False">
                     <ComboBoxItem Content="default"/>
