@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Text.RegularExpressions;
-using System.Runtime.InteropServices;
 
 namespace KcptunGUI
 {
@@ -12,8 +13,10 @@ namespace KcptunGUI
     public partial class MainWindow : Window
     {
         String strKcptunCommand;
+        String strKcptunArgvs;
         Regex KcptunConfig_LocalPort_Regex = new Regex(@"\D");
         System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();
+        Process cmdp;
         public MainWindow(){
             InitializeComponent();
             this.StateChanged += MainWindow_StateChanged;
@@ -37,6 +40,12 @@ namespace KcptunGUI
                                         + " -mode " + Properties.Settings.Default.setKcptunConfig_Mode
                                         + (Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp")
                                         + (Properties.Settings.Default.setKcptunConfig_Connects.Equals(0) ? "" : " -conn "+ Properties.Settings.Default.setKcptunConfig_Connects)
+                                        ;
+            strKcptunArgvs= " -r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\""
+                                        + " -l \"0.0.0.0:" + Properties.Settings.Default.setKcptunConfig_LocalPort.ToString() + "\""
+                                        + " -mode " + Properties.Settings.Default.setKcptunConfig_Mode
+                                        + (Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp")
+                                        + (Properties.Settings.Default.setKcptunConfig_Connects.Equals(0) ? "" : " -conn " + Properties.Settings.Default.setKcptunConfig_Connects)
                                         ;
             this.MainWindow_KcptunCommandLine.Text = strKcptunCommand;
         }
@@ -107,14 +116,35 @@ namespace KcptunGUI
         }
 
         private void MainWindow_RunKcptun_Click(object sender, RoutedEventArgs e){
+            cmdp = new Process();
+            cmdp.StartInfo.CreateNoWindow = true;
+            cmdp.StartInfo.FileName = Environment.CurrentDirectory +"\\"+ (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe");
+            cmdp.StartInfo.Arguments = strKcptunArgvs;
+            cmdp.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+            cmdp.StartInfo.UseShellExecute = false;
+            cmdp.StartInfo.RedirectStandardInput = true;
+            cmdp.StartInfo.RedirectStandardOutput = true;
+            cmdp.StartInfo.RedirectStandardError = true;
+            cmdp.OutputDataReceived += Cmdp_OutputDataReceived;
+            cmdp.Start();
+            cmdp.BeginOutputReadLine();
+
             this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口";
-            nicon.ShowBalloonTip(3000,App.AppName+"  "+App.AppVersion,"Kcptun已后台运行,监听本地"+Properties.Settings.Default.setKcptunConfig_LocalPort+"端口", System.Windows.Forms.ToolTipIcon.Info);
+            nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口", System.Windows.Forms.ToolTipIcon.Info);
             this.MainWindow_RunKcptun.IsEnabled = false; this.MainWindow_StopKcptun.IsEnabled = true;
         }
 
+        private void Cmdp_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            this.Dispatcher.Invoke(new Action(delegate {
+                this.MainWindow_LogsText.Text += "\n" + e.Data;
+            }));
+        }
+
         private void MainWindow_StopKcptun_Click(object sender, RoutedEventArgs e){
+            cmdp.CancelOutputRead(); cmdp.Kill();
             this.MainWindow_LogsText.Text += "\nKcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放";
-            nicon.ShowBalloonTip(3000, App.AppName + "  " + App.AppVersion, "Kcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放", System.Windows.Forms.ToolTipIcon.Info);
+            nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放", System.Windows.Forms.ToolTipIcon.Info);
             this.MainWindow_RunKcptun.IsEnabled = true; this.MainWindow_StopKcptun.IsEnabled = false;
         }
     }
