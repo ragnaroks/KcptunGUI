@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Configuration;
 
 namespace KcptunGUI
 {
@@ -20,17 +10,39 @@ namespace KcptunGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        String strKcptunConfig_Server, strKcptunConfig_LocalPort, strKcptunConfig_Mode, strKcptunConfig_Compress = "";//基础参数
+        Int32 intKcptunConfig_SystemBit=32;
+        Boolean boolKcptunConfig_Compress=false;
+        String strKcptunConfig_Server, strKcptunConfig_LocalPort, strKcptunConfig_Mode;//基础参数
         String strKcptunCommand = "";
+        Configuration AppConfig;
         public MainWindow()
         {
             InitializeComponent();
-            this.MainWindow_LogsText.Text = "";
-            strKcptunCommand="client_darwin_amd64.exe -r \"" + strKcptunConfig_Server +"\" -l \"0.0.0.0:"+strKcptunConfig_LocalPort+"\"";
+            AppConfig =System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         }
 
         private void ShowCommandInTitle(){
+            strKcptunCommand = (intKcptunConfig_SystemBit == 32 ? "client_windows_386.exe" : "client_windows_amd64.exe")
+                                        + " -r \""+strKcptunConfig_Server+"\""
+                                        + " -l \"0.0.0.0:"+strKcptunConfig_LocalPort+"\""
+                                        + " -mode "+strKcptunConfig_Mode
+                                        ;
             this.Title = "    " + "Command: [ " + strKcptunCommand + " ]";
+        }
+
+        private void KcptunConfig_SystemBit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox thisComboBox = (ComboBox)sender;
+            switch (thisComboBox.SelectedIndex) {
+                case 0:
+                    intKcptunConfig_SystemBit = 32;break;
+                case 1:
+                    intKcptunConfig_SystemBit = 64;break;
+                default:
+                    intKcptunConfig_SystemBit = 32;break;
+            }
+            AppConfig.AppSettings.Settings["setintKcptunConfig_SystemBit"].Value = intKcptunConfig_SystemBit.ToString();
+            ShowCommandInTitle();
         }
     }
 }
