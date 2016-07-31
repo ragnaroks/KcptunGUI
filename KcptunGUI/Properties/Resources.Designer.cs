@@ -59,5 +59,14 @@ namespace KcptunGUI.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 KcptunGUI 的本地化字符串。
+        /// </summary>
+        internal static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
     }
 }

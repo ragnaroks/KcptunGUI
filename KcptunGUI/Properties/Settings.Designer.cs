@@ -12,7 +12,7 @@ namespace KcptunGUI.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,6 +20,66 @@ namespace KcptunGUI.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int setKcptunConfig_SystemBit {
+            get {
+                return ((int)(this["setKcptunConfig_SystemBit"]));
+            }
+            set {
+                this["setKcptunConfig_SystemBit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool setKcptunConfig_Compress {
+            get {
+                return ((bool)(this["setKcptunConfig_Compress"]));
+            }
+            set {
+                this["setKcptunConfig_Compress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1:3128")]
+        public string setKcptunConfig_Server {
+            get {
+                return ((string)(this["setKcptunConfig_Server"]));
+            }
+            set {
+                this["setKcptunConfig_Server"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8213")]
+        public uint setKcptunConfig_LocalPort {
+            get {
+                return ((uint)(this["setKcptunConfig_LocalPort"]));
+            }
+            set {
+                this["setKcptunConfig_LocalPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("fast2")]
+        public string setKcptunConfig_Mode {
+            get {
+                return ((string)(this["setKcptunConfig_Mode"]));
+            }
+            set {
+                this["setKcptunConfig_Mode"] = value;
             }
         }
     }

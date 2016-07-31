@@ -1,5 +1,21 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KcptunGUI.Properties" GeneratedClassName="Settings">
   <Profiles />
-  <Settings />
+  <Settings>
+    <Setting Name="setKcptunConfig_SystemBit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_Compress" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_Server" Type="System.String" Scope="User">
+      <Value Profile="(Default)">127.0.0.1:3128</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_LocalPort" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">8213</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_Mode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">fast2</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
