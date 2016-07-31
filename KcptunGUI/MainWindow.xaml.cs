@@ -117,7 +117,7 @@ namespace KcptunGUI
 
         private void MainWindow_RunKcptun_Click(object sender, RoutedEventArgs e){
             cmdp = new Process();
-            cmdp.StartInfo.CreateNoWindow = true;
+            cmdp.StartInfo.CreateNoWindow = false;
             cmdp.StartInfo.FileName = Environment.CurrentDirectory +"\\"+ (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe");
             cmdp.StartInfo.Arguments = strKcptunArgvs;
             cmdp.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
@@ -129,7 +129,7 @@ namespace KcptunGUI
             cmdp.Start();
             cmdp.BeginOutputReadLine();
 
-            this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口";
+            this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口\n技术原因暂无法获得Kcptun的回显";
             nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口", System.Windows.Forms.ToolTipIcon.Info);
             this.MainWindow_RunKcptun.IsEnabled = false; this.MainWindow_StopKcptun.IsEnabled = true;
         }
