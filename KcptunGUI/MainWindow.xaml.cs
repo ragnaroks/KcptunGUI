@@ -18,7 +18,7 @@ namespace KcptunGUI
         public MainWindow()
         {
             InitializeComponent();
-            AppConfig =System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //AppConfig =System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         }
 
         private void ShowCommandInTitle(){
@@ -41,7 +41,7 @@ namespace KcptunGUI
                 default:
                     intKcptunConfig_SystemBit = 32;break;
             }
-            AppConfig.AppSettings.Settings["setintKcptunConfig_SystemBit"].Value = intKcptunConfig_SystemBit.ToString();
+            //AppConfig.AppSettings.Settings["setintKcptunConfig_SystemBit"].Value = intKcptunConfig_SystemBit.ToString();
             ShowCommandInTitle();
         }
     }
