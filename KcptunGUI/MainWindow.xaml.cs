@@ -42,12 +42,22 @@ namespace KcptunGUI
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e){//输入框变动事件
             TextBox thisTextBox = (TextBox)sender; //if (false == thisTextBox.IsKeyboardFocused) { return; }
+            switch (thisTextBox.Name) {
+                case "MainWindow_LogsText":
+                    this.MainWindow_LogsView.ScrollToBottom();
+                    break;
+                case "KcptunConfig_Server":
+                    Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text; ShowCommandInTitle();
+                    break;
+                default:
+                    break;
+            }
             
         }
         private void KcptunConfig_SystemBit_SelectionChanged(object sender, SelectionChangedEventArgs e){//更改了系统版本
             ComboBox thisComboBox = (ComboBox)sender;
             Properties.Settings.Default.setKcptunConfig_SystemBit = thisComboBox.SelectedIndex; Properties.Settings.Default.Save();
-            this.MainWindow_LogsText.Text += "\n已将系统版本更改为" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64");
+            this.MainWindow_LogsText.Text += "\n已将系统位元更改为" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64");
             ShowCommandInTitle();
         }
         private void ShowCommandInTitle(){
@@ -57,7 +67,7 @@ namespace KcptunGUI
                                         + " -mode " + Properties.Settings.Default.setKcptunConfig_Mode
                                         + (Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp")
                                         ;
-            this.Title = Properties.Resources.AppName + "  -  Command: [ " + strKcptunCommand + " ]";
+            this.MainWindow_KcptunCommand.Text = strKcptunCommand;
         }
     }
 }
