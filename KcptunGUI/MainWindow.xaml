@@ -17,9 +17,9 @@
                 <TextBlock Text="模式:" Height="20" Margin="547,10,0,0" FontSize="14" Width="31" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
                 <ComboBox x:Name="KcptunConfig_Mode" Margin="583,10,0,0" VerticalAlignment="Top" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="20" Padding="6,2,5,3" IsTabStop="False" HorizontalAlignment="Left" Width="72" SelectionChanged="ComboBox_SelectionChanged">
                     <ComboBoxItem Content="default"/>
-                    <ComboBoxItem Content="normal" Padding="4,1"/>
+                    <ComboBoxItem Content="normal"/>
                     <ComboBoxItem Content="fast"/>
-                    <ComboBoxItem Content="fast2" IsSelected="True"/>
+                    <ComboBoxItem Content="fast2"/>
                     <ComboBoxItem Content="fast3"/>
                 </ComboBox>
                 <CheckBox x:Name="KcptunConfig_Compress" Content="压缩" Margin="0,12,10,0" FontSize="14" IsHitTestVisible="True" IsTabStop="False" IsChecked="True" ToolTip="提示: 关闭压缩可能会降低延迟。" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Height="16" VerticalAlignment="Top" HorizontalAlignment="Right" Width="48"/>
@@ -31,7 +31,7 @@
                     <ComboBoxItem Content="x86"/>
                     <ComboBoxItem Content="x86_64"/>
                 </ComboBox>
-                <TextBox x:Name="MainWindow_KcptunCommand" Height="20" Margin="10,0,10,10" VerticalAlignment="Bottom" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled"/>
+                <TextBox x:Name="MainWindow_KcptunCommandLine" Margin="10,1,10,10" TextWrapping="Wrap" Height="20" VerticalAlignment="Bottom" AllowDrop="False" IsTabStop="False"/>
             </Grid>
         </GroupBox>
 
