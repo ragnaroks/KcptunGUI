@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
 
 namespace KcptunGUI
 {
@@ -12,15 +13,22 @@ namespace KcptunGUI
     {
         String strKcptunCommand;
         Regex KcptunConfig_LocalPort_Regex = new Regex(@"\D");
-        
+        System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();
         public MainWindow(){
             InitializeComponent();
             this.StateChanged += MainWindow_StateChanged;
+            nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
+            nicon.Text = App.AppName; nicon.Visible = true; nicon.MouseClick += Nicon_MouseClick;
             this.MainWindow_LogsText.Text = "KcptunGUI  Version: " + App.AppVersion + "(" + App.AppVersionR+")";
             this.KcptunConfig_SystemBit.SelectedIndex = Properties.Settings.Default.setKcptunConfig_SystemBit;
             this.KcptunConfig_Mode.SelectedIndex = 3;
             this.KcptunConfig_Compress.IsChecked = (true == Properties.Settings.Default.setKcptunConfig_Compress ? true : false);
         }
+        // C函数声明
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern bool IsWindowVisible(IntPtr hWnd);
+
+
         //
         private void GenCommandLine(){//生成命令行
             strKcptunCommand = (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe")
@@ -90,7 +98,24 @@ namespace KcptunGUI
             Properties.Settings.Default.Save(); GenCommandLine();
         }
         private void MainWindow_StateChanged(object sender, EventArgs e){
-            if (this.WindowState.Equals(WindowState.Minimized)){ this.Hide();}
+            if (this.WindowState.Equals(WindowState.Minimized) && MainWindow.IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle)) { this.Hide();}
+        }
+        
+        private void Nicon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e){
+            if (MainWindow.IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle)) { this.Hide(); }
+            else { this.Show(); this.WindowState = WindowState.Normal; }
+        }
+
+        private void MainWindow_RunKcptun_Click(object sender, RoutedEventArgs e){
+            this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口";
+            nicon.ShowBalloonTip(3000,App.AppName+"  "+App.AppVersion,"Kcptun已后台运行,监听本地"+Properties.Settings.Default.setKcptunConfig_LocalPort+"端口", System.Windows.Forms.ToolTipIcon.Info);
+            this.MainWindow_RunKcptun.IsEnabled = false; this.MainWindow_StopKcptun.IsEnabled = true;
+        }
+
+        private void MainWindow_StopKcptun_Click(object sender, RoutedEventArgs e){
+            this.MainWindow_LogsText.Text += "\nKcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放";
+            nicon.ShowBalloonTip(3000, App.AppName + "  " + App.AppVersion, "Kcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放", System.Windows.Forms.ToolTipIcon.Info);
+            this.MainWindow_RunKcptun.IsEnabled = true; this.MainWindow_StopKcptun.IsEnabled = false;
         }
     }
 }

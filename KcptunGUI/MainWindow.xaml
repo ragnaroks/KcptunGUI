@@ -52,6 +52,7 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <Button x:Name="button" Content="运行Kcptun" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" Width="80" Height="24"/>
+        <Button x:Name="MainWindow_RunKcptun" Content="运行Kcptun" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" Width="80" Height="24" Click="MainWindow_RunKcptun_Click" IsTabStop="False" Focusable="False"/>
+        <Button x:Name="MainWindow_StopKcptun" Content="停止Kcptun" HorizontalAlignment="Left" Margin="95,174,0,0" VerticalAlignment="Top" Width="80" Height="24" IsTabStop="False" Focusable="False" Click="MainWindow_StopKcptun_Click" IsEnabled="False"/>
     </Grid>
 </Window>
