@@ -10,35 +10,32 @@ namespace KcptunGUI
     public partial class MainWindow : Window
     {
         String strKcptunCommand;
-        public MainWindow()
-        {
+        public MainWindow(){
             InitializeComponent();
             this.MainWindow_LogsText.Text = "KcptunGUI  Version: " + App.AppVersion + "(" + App.AppVersionR+")";
             this.KcptunConfig_SystemBit.SelectedIndex = Properties.Settings.Default.setKcptunConfig_SystemBit;
             this.KcptunConfig_Compress.IsChecked = (true == Properties.Settings.Default.setKcptunConfig_Compress ? true : false);
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e){
+        private void CheckBox_Checked(object sender, RoutedEventArgs e){//选择框选择事件
             CheckBox thisCheckBox = (CheckBox)sender; if (false==thisCheckBox.IsMouseOver) { return; }
             switch (thisCheckBox.Name) {
                 case "KcptunConfig_Compress":
-                    Properties.Settings.Default.setKcptunConfig_Compress = true; Properties.Settings.Default.Save(); break;
+                    Properties.Settings.Default.setKcptunConfig_Compress = true; break;
                 default:
                     break;
             }
-            ShowCommandInTitle();
+            Properties.Settings.Default.Save(); ShowCommand();
         }
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e){//选择框取消选择事件
             CheckBox thisCheckBox = (CheckBox)sender; if (false == thisCheckBox.IsMouseOver) { return; }
-            switch (thisCheckBox.Name)
-            {
+            switch (thisCheckBox.Name){
                 case "KcptunConfig_Compress":
-                    Properties.Settings.Default.setKcptunConfig_Compress = false; Properties.Settings.Default.Save(); break;
+                    Properties.Settings.Default.setKcptunConfig_Compress = false; break;
                 default:
                     break;
             }
-            ShowCommandInTitle();
+            Properties.Settings.Default.Save(); ShowCommand();
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e){//输入框变动事件
             TextBox thisTextBox = (TextBox)sender; //if (false == thisTextBox.IsKeyboardFocused) { return; }
@@ -47,20 +44,26 @@ namespace KcptunGUI
                     this.MainWindow_LogsView.ScrollToBottom();
                     break;
                 case "KcptunConfig_Server":
-                    Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text; ShowCommandInTitle();
+                    Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text;
                     break;
                 default:
                     break;
             }
-            
+            Properties.Settings.Default.Save(); ShowCommand();
         }
-        private void KcptunConfig_SystemBit_SelectionChanged(object sender, SelectionChangedEventArgs e){//更改了系统版本
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e){//下拉选单变动事件
             ComboBox thisComboBox = (ComboBox)sender;
-            Properties.Settings.Default.setKcptunConfig_SystemBit = thisComboBox.SelectedIndex; Properties.Settings.Default.Save();
-            this.MainWindow_LogsText.Text += "\n已将系统位元更改为" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64");
-            ShowCommandInTitle();
+            switch (thisComboBox.Name) {
+                case "KcptunConfig_SystemBit":
+                    Properties.Settings.Default.setKcptunConfig_SystemBit = thisComboBox.SelectedIndex; this.MainWindow_LogsText.Text += "\n已将系统位元更改为" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64");
+                    break;
+                case "KcptunConfig_Mode":
+                default:
+                    break;
+            }
+            Properties.Settings.Default.Save(); ShowCommand();
         }
-        private void ShowCommandInTitle(){
+        private void ShowCommand(){//生成命令行
             strKcptunCommand = (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe")
                                         + " -r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\""
                                         + " -l \"0.0.0.0:" + Properties.Settings.Default.setKcptunConfig_LocalPort + "\""
