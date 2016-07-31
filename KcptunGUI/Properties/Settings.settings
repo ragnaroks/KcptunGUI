@@ -9,10 +9,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="setKcptunConfig_Server" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1:3128</Value>
+      <Value Profile="(Default)">0.0.0.0:0</Value>
     </Setting>
     <Setting Name="setKcptunConfig_LocalPort" Type="System.UInt32" Scope="User">
-      <Value Profile="(Default)">8213</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="setKcptunConfig_Mode" Type="System.String" Scope="User">
       <Value Profile="(Default)">fast2</Value>

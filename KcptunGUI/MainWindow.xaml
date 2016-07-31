@@ -8,14 +8,14 @@
                 <TextBox x:Name="MainWindow_LogsText" IsTabStop="False" AllowDrop="False" IsReadOnly="True" IsUndoEnabled="False" TextWrapping="Wrap" TextChanged="TextBox_TextChanged"/>
             </ScrollViewer>
         </GroupBox>
-        <GroupBox x:Name="MainWindow_Prarms" Header="参数设定" Margin="10,10,10,0" VerticalAlignment="Top" Height="90">
+        <GroupBox x:Name="MainWindow_Prarms" Header="参数设定" Margin="10,10,10,0" VerticalAlignment="Top" Height="122">
             <Grid Margin="0,0,-2,0">
                 <TextBlock Text="服务器及端口:" Height="20" Margin="120,10,0,0" FontSize="14" Width="87" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
                 <TextBox x:Name="KcptunConfig_Server" AllowDrop="False" Height="20" Margin="213,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"/>
                 <TextBlock Text="本地监听端口:" Height="20" Margin="402,10,0,0" FontSize="14" Width="87" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0"/>
-                <TextBox x:Name="KcptunConfig_LocalPort" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="20" Margin="495,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="46" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"/>
+                <TextBox x:Name="KcptunConfig_LocalPort" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="20" Margin="495,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="46" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" ToolTip="至少2位数的端口"/>
                 <TextBlock Text="模式:" Height="20" Margin="547,10,0,0" FontSize="14" Width="31" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
-                <ComboBox x:Name="KcptunConfig_Mode" Margin="583,10,0,0" VerticalAlignment="Top" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="20" Padding="6,2,5,3" IsTabStop="False" HorizontalAlignment="Left" Width="72">
+                <ComboBox x:Name="KcptunConfig_Mode" Margin="583,10,0,0" VerticalAlignment="Top" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="20" Padding="6,2,5,3" IsTabStop="False" HorizontalAlignment="Left" Width="72" SelectionChanged="ComboBox_SelectionChanged">
                     <ComboBoxItem Content="default"/>
                     <ComboBoxItem Content="normal" Padding="4,1"/>
                     <ComboBoxItem Content="fast"/>
@@ -28,7 +28,7 @@
                     <ComboBox.DataContext>
                         <Properties:Settings/>
                     </ComboBox.DataContext>
-                    <ComboBoxItem Content="x86_64"/>
+                    <ComboBoxItem Content="x86"/>
                     <ComboBoxItem Content="x86_64"/>
                 </ComboBox>
                 <TextBox x:Name="MainWindow_KcptunCommand" Height="20" Margin="10,0,10,10" VerticalAlignment="Bottom" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled"/>

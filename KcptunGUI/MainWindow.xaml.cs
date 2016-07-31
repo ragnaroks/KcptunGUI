@@ -10,10 +10,11 @@ namespace KcptunGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        String strKcptunCommand;
+        String strKcptunCommand="";
         Regex KcptunConfig_LocalPort_Regex = new Regex(@"\D");
         public MainWindow(){
             InitializeComponent();
+            Properties.Settings.Default.Reset();
             this.MainWindow_LogsText.Text = "KcptunGUI  Version: " + App.AppVersion + "(" + App.AppVersionR+")";
             this.KcptunConfig_SystemBit.SelectedIndex = Properties.Settings.Default.setKcptunConfig_SystemBit;
             this.KcptunConfig_Compress.IsChecked = (true == Properties.Settings.Default.setKcptunConfig_Compress ? true : false);
@@ -23,7 +24,7 @@ namespace KcptunGUI
             CheckBox thisCheckBox = (CheckBox)sender; if (false==thisCheckBox.IsMouseOver) { return; }
             switch (thisCheckBox.Name) {
                 case "KcptunConfig_Compress":
-                    Properties.Settings.Default.setKcptunConfig_Compress = true; break;
+                    Properties.Settings.Default.setKcptunConfig_Compress = true; this.MainWindow_LogsText.Text += "\n已启用数据压缩"; break;
                 default:
                     break;
             }
@@ -33,7 +34,7 @@ namespace KcptunGUI
             CheckBox thisCheckBox = (CheckBox)sender; if (false == thisCheckBox.IsMouseOver) { return; }
             switch (thisCheckBox.Name){
                 case "KcptunConfig_Compress":
-                    Properties.Settings.Default.setKcptunConfig_Compress = false; break;
+                    Properties.Settings.Default.setKcptunConfig_Compress = false; this.MainWindow_LogsText.Text += "\n已停用数据压缩"; break;
                 default:
                     break;
             }
@@ -48,7 +49,7 @@ namespace KcptunGUI
                     Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text; break;
                 case "KcptunConfig_LocalPort":
                     thisTextBox.Text=KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text,""); if (thisTextBox.Text.Length >= 5) { thisTextBox.Text=thisTextBox.Text.Substring(0, 5); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
-                    if (thisTextBox.Text.Length > 2) { Properties.Settings.Default.setKcptunConfig_LocalPort = UInt32.Parse(thisTextBox.Text); } break;
+                    if (thisTextBox.Text.Length > 1) { Properties.Settings.Default.setKcptunConfig_LocalPort = UInt32.Parse(thisTextBox.Text); } break;
                 default:
                     break;
             }
@@ -58,9 +59,12 @@ namespace KcptunGUI
             ComboBox thisComboBox = (ComboBox)sender;
             switch (thisComboBox.Name) {
                 case "KcptunConfig_SystemBit":
-                    Properties.Settings.Default.setKcptunConfig_SystemBit = thisComboBox.SelectedIndex; this.MainWindow_LogsText.Text += "\n已将系统位元更改为" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64");
-                    break;
+                    Properties.Settings.Default.setKcptunConfig_SystemBit = thisComboBox.SelectedIndex;
+                    this.MainWindow_LogsText.Text += "\n将使用" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64")+"版本"; break;
                 case "KcptunConfig_Mode":
+                    Properties.Settings.Default.setKcptunConfig_Mode = "fast2";
+                    this.MainWindow_LogsText.Text += "\n已选择" + (Properties.Settings.Default.setKcptunConfig_Mode)+"模式"; 
+                    break;
                 default:
                     break;
             }
@@ -69,10 +73,11 @@ namespace KcptunGUI
         private void ShowCommand(){//生成命令行
             strKcptunCommand = (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe")
                                         + " -r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\""
-                                        + " -l \"0.0.0.0:" + Properties.Settings.Default.setKcptunConfig_LocalPort + "\""
+                                        + " -l \"0.0.0.0:" + Properties.Settings.Default.setKcptunConfig_LocalPort.ToString() + "\""
                                         + " -mode " + Properties.Settings.Default.setKcptunConfig_Mode
                                         + (Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp")
                                         ;
+            Console.WriteLine(strKcptunCommand);
             this.MainWindow_KcptunCommand.Text = strKcptunCommand;
         }
     }

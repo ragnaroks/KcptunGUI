@@ -49,7 +49,7 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1:3128")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.0.0.0:0")]
         public string setKcptunConfig_Server {
             get {
                 return ((string)(this["setKcptunConfig_Server"]));
@@ -61,7 +61,7 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8213")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public uint setKcptunConfig_LocalPort {
             get {
                 return ((uint)(this["setKcptunConfig_LocalPort"]));
