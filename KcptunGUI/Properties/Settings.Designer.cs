@@ -82,5 +82,17 @@ namespace KcptunGUI.Properties {
                 this["setKcptunConfig_Mode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public uint setKcptunConfig_Connects {
+            get {
+                return ((uint)(this["setKcptunConfig_Connects"]));
+            }
+            set {
+                this["setKcptunConfig_Connects"] = value;
+            }
+        }
     }
 }

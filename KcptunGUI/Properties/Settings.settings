@@ -17,5 +17,8 @@
     <Setting Name="setKcptunConfig_Mode" Type="System.String" Scope="User">
       <Value Profile="(Default)">fast2</Value>
     </Setting>
+    <Setting Name="setKcptunConfig_Connects" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
