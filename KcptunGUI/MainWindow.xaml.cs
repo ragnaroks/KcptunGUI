@@ -117,7 +117,7 @@ namespace KcptunGUI
 
         private void MainWindow_RunKcptun_Click(object sender, RoutedEventArgs e){
             cmdp = new Process();
-            cmdp.StartInfo.CreateNoWindow = false;
+            cmdp.StartInfo.CreateNoWindow = true;
             cmdp.StartInfo.FileName = Environment.CurrentDirectory +"\\"+ (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe");
             cmdp.StartInfo.Arguments = strKcptunArgvs;
             cmdp.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
