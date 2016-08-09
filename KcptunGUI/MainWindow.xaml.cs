@@ -20,6 +20,7 @@ namespace KcptunGUI
         public MainWindow(){
             InitializeComponent();
             this.StateChanged += MainWindow_StateChanged;
+            this.Closed += MainWindow_Closed;
             nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             nicon.Text = App.AppName; nicon.Visible = true; nicon.MouseClick += Nicon_MouseClick;
             this.MainWindow_LogsText.Text = "KcptunGUI  Version: " + App.AppVersion + "(" + App.AppVersionR+")";
@@ -27,6 +28,12 @@ namespace KcptunGUI
             this.KcptunConfig_Mode.SelectedIndex = 3;
             this.KcptunConfig_Compress.IsChecked = (true == Properties.Settings.Default.setKcptunConfig_Compress ? true : false);
         }
+
+        private void MainWindow_Closed(object sender, EventArgs e){
+            MainWindow_StopKcptun_Click(this,null);
+            nicon.Visible = false;
+        }
+
         // C函数声明
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern bool IsWindowVisible(IntPtr hWnd);
@@ -151,7 +158,8 @@ namespace KcptunGUI
         */
 
         private void MainWindow_StopKcptun_Click(object sender, RoutedEventArgs e){
-            cmdp.CancelOutputRead(); cmdp.Kill();
+            cmdp.CancelErrorRead();//cmdp.CancelOutputRead();
+            cmdp.Kill();
             this.MainWindow_LogsText.Text += "\nKcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放";
             nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放", System.Windows.Forms.ToolTipIcon.Info);
             this.MainWindow_RunKcptun.IsEnabled = true; this.MainWindow_StopKcptun.IsEnabled = false;
