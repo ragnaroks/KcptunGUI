@@ -125,21 +125,30 @@ namespace KcptunGUI
             cmdp.StartInfo.RedirectStandardInput = true;
             cmdp.StartInfo.RedirectStandardOutput = true;
             cmdp.StartInfo.RedirectStandardError = true;
-            cmdp.OutputDataReceived += Cmdp_OutputDataReceived;
+            //cmdp.OutputDataReceived += Cmdp_OutputDataReceived; //kcptun没有使用stdout
+            cmdp.ErrorDataReceived += Cmdp_ErrorDataReceived;
             cmdp.Start();
-            cmdp.BeginOutputReadLine();
+            //cmdp.BeginOutputReadLine(); //kcptun没有使用stdout
+            cmdp.BeginErrorReadLine();
 
-            this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口\n技术原因暂无法获得Kcptun的回显";
+            this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口";
             nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口", System.Windows.Forms.ToolTipIcon.Info);
             this.MainWindow_RunKcptun.IsEnabled = false; this.MainWindow_StopKcptun.IsEnabled = true;
         }
 
-        private void Cmdp_OutputDataReceived(object sender, DataReceivedEventArgs e)
-        {
+        private void Cmdp_ErrorDataReceived(object sender, DataReceivedEventArgs e){
             this.Dispatcher.Invoke(new Action(delegate {
                 this.MainWindow_LogsText.Text += "\n" + e.Data;
             }));
         }
+
+        /*
+        private void Cmdp_OutputDataReceived(object sender, DataReceivedEventArgs e){ //kcptun没有使用stdout
+            this.Dispatcher.Invoke(new Action(delegate {
+                this.MainWindow_LogsText.Text += "\n" + e.Data;
+            }));
+        }
+        */
 
         private void MainWindow_StopKcptun_Click(object sender, RoutedEventArgs e){
             cmdp.CancelOutputRead(); cmdp.Kill();
