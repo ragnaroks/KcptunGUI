@@ -30,7 +30,6 @@ namespace KcptunGUI
         }
 
         private void MainWindow_Closed(object sender, EventArgs e){
-            MainWindow_StopKcptun_Click(this,null);
             nicon.Visible = false;
         }
 
@@ -132,10 +131,8 @@ namespace KcptunGUI
             cmdp.StartInfo.RedirectStandardInput = true;
             cmdp.StartInfo.RedirectStandardOutput = true;
             cmdp.StartInfo.RedirectStandardError = true;
-            //cmdp.OutputDataReceived += Cmdp_OutputDataReceived; //kcptun没有使用stdout
             cmdp.ErrorDataReceived += Cmdp_ErrorDataReceived;
             cmdp.Start();
-            //cmdp.BeginOutputReadLine(); //kcptun没有使用stdout
             cmdp.BeginErrorReadLine();
 
             this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口";
@@ -148,14 +145,6 @@ namespace KcptunGUI
                 this.MainWindow_LogsText.Text += "\n" + e.Data;
             }));
         }
-
-        /*
-        private void Cmdp_OutputDataReceived(object sender, DataReceivedEventArgs e){ //kcptun没有使用stdout
-            this.Dispatcher.Invoke(new Action(delegate {
-                this.MainWindow_LogsText.Text += "\n" + e.Data;
-            }));
-        }
-        */
 
         private void MainWindow_StopKcptun_Click(object sender, RoutedEventArgs e){
             cmdp.CancelErrorRead();//cmdp.CancelOutputRead();
