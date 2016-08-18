@@ -49,7 +49,7 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.0.0.0:0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("server.kcptun.com:29900")]
         public string setKcptunConfig_Server {
             get {
                 return ((string)(this["setKcptunConfig_Server"]));
@@ -61,7 +61,7 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("12948")]
         public uint setKcptunConfig_LocalPort {
             get {
                 return ((uint)(this["setKcptunConfig_LocalPort"]));
@@ -104,6 +104,30 @@ namespace KcptunGUI.Properties {
             }
             set {
                 this["setKcptunConfig_DSCP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("www.ragnaroks.org")]
+        public string setKcptunConfig_Key {
+            get {
+                return ((string)(this["setKcptunConfig_Key"]));
+            }
+            set {
+                this["setKcptunConfig_Key"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public byte setKcptunConfig_Crypt {
+            get {
+                return ((byte)(this["setKcptunConfig_Crypt"]));
+            }
+            set {
+                this["setKcptunConfig_Crypt"] = value;
             }
         }
     }

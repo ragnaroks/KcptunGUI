@@ -11,7 +11,7 @@ namespace KcptunGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        String strKcptunArgvs,strKcptunArgvs2;
+        String strKcptunArgvs;//,strKcptunArgvs2;
         Regex KcptunConfig_LocalPort_Regex = new Regex(@"\D");
         System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();
         Process cmdp; Boolean cmdp_isRun = false;
@@ -35,17 +35,19 @@ namespace KcptunGUI
             String _a = Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe";//客户端版本
             String _b = " -r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\"";//远端地址
             String _c = " -l \":" + Properties.Settings.Default.setKcptunConfig_LocalPort + "\"";//本地监听端口
-            String _d = " -mode " +Class.Functions.GetModeStringFromUInt(Properties.Settings.Default.setKcptunConfig_Mode);//传输模式
+            String _d = " -mode " +Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode);//传输模式
             String _e = Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp";//是否启用压缩
             String _f = Properties.Settings.Default.setKcptunConfig_Connects.Equals(0) ? "" : " -conn " + Properties.Settings.Default.setKcptunConfig_Connects;//多链接
             String _g = Class.Functions.GetDscpStringFromString(Properties.Settings.Default.setKcptunConfig_DSCP);//DSCP
-            strKcptunArgvs = _b + _c + _d + _e + _f+_g;
+            String _h = Properties.Settings.Default.setKcptunConfig_Key.Equals("") ? "" : " -key " + Properties.Settings.Default.setKcptunConfig_Key;//密钥
+            String _i = Properties.Settings.Default.setKcptunConfig_Crypt.Equals(0) ? "" : " -crypt " + Class.Functions.GetCryptStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Crypt);
+            strKcptunArgvs = _b + _c + _d + _e + _f+_g+_h+_i;
             this.MainWindow_KcptunCommandLine.Text = _a + strKcptunArgvs;//客户端手动启动命令行
 
-            String _a2= Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "server_windows_386.exe" : "server_windows_amd64.exe";//服务端版本
-            String _b2=//转发目标端口
-            strKcptunArgvs2 = "";
-            this.MainWindow_KcptunCommandLine2.Text = _a2 + strKcptunArgvs2;//对应的服务端命令行
+            //String _a2= Properties.Settings.Default.setKcptunConfig_SystemBit2.Equals(0) ? "server_windows_386.exe" : "server_windows_amd64.exe";//服务端版本
+            //String _b2=//转发目标端口
+            //strKcptunArgvs2 = "";
+            //this.MainWindow_KcptunCommandLine2.Text = _a2 + strKcptunArgvs2;//对应的服务端命令行
         }
         private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
             CheckBox thisCheckBox = (CheckBox)sender; if (false==thisCheckBox.IsMouseOver) { return; }
@@ -88,6 +90,13 @@ namespace KcptunGUI
                 case "KcptunConfig_DSCP":
                     if (thisTextBox.Text.Length >2){ thisTextBox.Text = thisTextBox.Text.Substring(0, thisTextBox.Text.Length - 1); thisTextBox.SelectionStart = thisTextBox.Text.Length; }
                     Properties.Settings.Default.setKcptunConfig_DSCP = thisTextBox.Text.Length < 3 ? thisTextBox.Text : "";
+                    if (Properties.Settings.Default.setKcptunConfig_DSCP.Equals("")) { this.MainWindow_LogsText.Text += "\n已设置DSCP为默认"; }
+                    else { this.MainWindow_LogsText.Text += "\n已设置DSCP " + Properties.Settings.Default.setKcptunConfig_DSCP; }
+                    break;
+                case "KcptunConfig_Key":
+                    Properties.Settings.Default.setKcptunConfig_Key = thisTextBox.Text;
+                    if (Properties.Settings.Default.setKcptunConfig_Key.Length.Equals(0)) { this.MainWindow_LogsText.Text += "\n已取消Key设置"; }
+                    else{ this.MainWindow_LogsText.Text += "\n已设置Key: " + Properties.Settings.Default.setKcptunConfig_Key; }
                     break;
                 default:
                     break;
@@ -102,7 +111,10 @@ namespace KcptunGUI
                     this.MainWindow_LogsText.Text += "\n将使用" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64")+"版本"; break;
                 case "KcptunConfig_Mode":
                     Properties.Settings.Default.setKcptunConfig_Mode = (Byte)thisComboBox.SelectedIndex;
-                    this.MainWindow_LogsText.Text += "\n已选择" + Class.Functions.GetModeStringFromUInt(Properties.Settings.Default.setKcptunConfig_Mode) +"模式"; break;
+                    this.MainWindow_LogsText.Text += "\n已选择" + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode) +"传输模式"; break;
+                case "KcptunConfig_Crypt":
+                    Properties.Settings.Default.setKcptunConfig_Crypt=(Byte)thisComboBox.SelectedIndex;
+                    this.MainWindow_LogsText.Text += "\n已选择" + Class.Functions.GetCryptStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Crypt) + "加密"; break;
                 default:
                     break;
             }
