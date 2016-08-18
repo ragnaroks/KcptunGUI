@@ -26,9 +26,9 @@ namespace KcptunGUI.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public uint setKcptunConfig_SystemBit {
+        public byte setKcptunConfig_SystemBit {
             get {
-                return ((uint)(this["setKcptunConfig_SystemBit"]));
+                return ((byte)(this["setKcptunConfig_SystemBit"]));
             }
             set {
                 this["setKcptunConfig_SystemBit"] = value;
@@ -74,9 +74,9 @@ namespace KcptunGUI.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public uint setKcptunConfig_Mode {
+        public byte setKcptunConfig_Mode {
             get {
-                return ((uint)(this["setKcptunConfig_Mode"]));
+                return ((byte)(this["setKcptunConfig_Mode"]));
             }
             set {
                 this["setKcptunConfig_Mode"] = value;
@@ -86,9 +86,9 @@ namespace KcptunGUI.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public uint setKcptunConfig_Connects {
+        public byte setKcptunConfig_Connects {
             get {
-                return ((uint)(this["setKcptunConfig_Connects"]));
+                return ((byte)(this["setKcptunConfig_Connects"]));
             }
             set {
                 this["setKcptunConfig_Connects"] = value;

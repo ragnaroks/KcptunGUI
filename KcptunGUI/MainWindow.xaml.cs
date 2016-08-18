@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,8 +11,7 @@ namespace KcptunGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        String strKcptunCommand;
-        String strKcptunArgvs;
+        String strKcptunArgvs,strKcptunArgvs2;
         Regex KcptunConfig_LocalPort_Regex = new Regex(@"\D");
         System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();
         Process cmdp; Boolean cmdp_isRun = false;
@@ -26,23 +24,28 @@ namespace KcptunGUI
             this.MainWindow_LogsText.Text = "KcptunGUI  Version: " + App.AppVersion + "(" + App.AppVersionR+")";
             this.KcptunConfig_SystemBit.SelectedIndex = (Int32)Properties.Settings.Default.setKcptunConfig_SystemBit;
             this.KcptunConfig_Compress.IsChecked = (true == Properties.Settings.Default.setKcptunConfig_Compress ? true : false);
+            //
+            this.tabitemserver.IsEnabled = false;
         }
         //
         private void MainWindow_Closed(object sender, EventArgs e){//窗口已确定将关闭
-            if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);}
-            nicon.Visible = false;
+            if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);} nicon.Visible = false;
         }
         private void GenCommandLine(){//生成命令行
-            String _a = Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe";//版本
-            String _b = "-r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\"";//远端地址
+            String _a = Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe";//客户端版本
+            String _b = " -r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\"";//远端地址
             String _c = " -l \":" + Properties.Settings.Default.setKcptunConfig_LocalPort + "\"";//本地监听端口
             String _d = " -mode " +Class.Functions.GetModeStringFromUInt(Properties.Settings.Default.setKcptunConfig_Mode);//传输模式
             String _e = Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp";//是否启用压缩
             String _f = Properties.Settings.Default.setKcptunConfig_Connects.Equals(0) ? "" : " -conn " + Properties.Settings.Default.setKcptunConfig_Connects;//多链接
             String _g = Class.Functions.GetDscpStringFromString(Properties.Settings.Default.setKcptunConfig_DSCP);//DSCP
             strKcptunArgvs = _b + _c + _d + _e + _f+_g;
-            strKcptunCommand = _a + strKcptunArgvs;//客户端手动启动命令行
-            this.MainWindow_KcptunCommandLine.Text = strKcptunCommand;
+            this.MainWindow_KcptunCommandLine.Text = _a + strKcptunArgvs;//客户端手动启动命令行
+
+            String _a2= Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "server_windows_386.exe" : "server_windows_amd64.exe";//服务端版本
+            String _b2=//转发目标端口
+            strKcptunArgvs2 = "";
+            this.MainWindow_KcptunCommandLine2.Text = _a2 + strKcptunArgvs2;//对应的服务端命令行
         }
         private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
             CheckBox thisCheckBox = (CheckBox)sender; if (false==thisCheckBox.IsMouseOver) { return; }
@@ -73,12 +76,12 @@ namespace KcptunGUI
                     Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text; break;
                 case "KcptunConfig_LocalPort":
                     thisTextBox.Text=KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text,""); if (thisTextBox.Text.Length >= 5) { thisTextBox.Text=thisTextBox.Text.Substring(0, 5); }
-                    thisTextBox.SelectionStart = thisTextBox.Text.Length; if (thisTextBox.Text.Length > 1) { Properties.Settings.Default.setKcptunConfig_LocalPort = UInt32.Parse(thisTextBox.Text); } break;
+                    thisTextBox.SelectionStart = thisTextBox.Text.Length; if (thisTextBox.Text.Length > 1) { Properties.Settings.Default.setKcptunConfig_LocalPort = UInt16.Parse(thisTextBox.Text); } break;
                 case "KcptunConfig_Connects":
                     thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, ""); if (thisTextBox.Text.Length >= 3) { thisTextBox.Text = thisTextBox.Text.Substring(0, 3); }
                     thisTextBox.SelectionStart = thisTextBox.Text.Length;
                     if (thisTextBox.Text.Length > 0){
-                        Properties.Settings.Default.setKcptunConfig_Connects = UInt32.Parse(thisTextBox.Text);
+                        Properties.Settings.Default.setKcptunConfig_Connects = Byte.Parse(thisTextBox.Text);
                         if (thisTextBox.Text.Equals("0")) { this.MainWindow_LogsText.Text += "\n使用默认链接线程设定"; }
                         else{ this.MainWindow_LogsText.Text += "\n已设置为" + Properties.Settings.Default.setKcptunConfig_Connects + "个链接线程"; }
                     }break;
@@ -95,10 +98,10 @@ namespace KcptunGUI
             ComboBox thisComboBox = (ComboBox)sender;
             switch (thisComboBox.Name) {
                 case "KcptunConfig_SystemBit":
-                    Properties.Settings.Default.setKcptunConfig_SystemBit = (UInt32)thisComboBox.SelectedIndex;
+                    Properties.Settings.Default.setKcptunConfig_SystemBit = (Byte)thisComboBox.SelectedIndex;
                     this.MainWindow_LogsText.Text += "\n将使用" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64")+"版本"; break;
                 case "KcptunConfig_Mode":
-                    Properties.Settings.Default.setKcptunConfig_Mode = (UInt32)thisComboBox.SelectedIndex;
+                    Properties.Settings.Default.setKcptunConfig_Mode = (Byte)thisComboBox.SelectedIndex;
                     this.MainWindow_LogsText.Text += "\n已选择" + Class.Functions.GetModeStringFromUInt(Properties.Settings.Default.setKcptunConfig_Mode) +"模式"; break;
                 default:
                     break;
