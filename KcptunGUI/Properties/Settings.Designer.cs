@@ -97,10 +97,10 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public int setKcptunConfig_DSCP {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string setKcptunConfig_DSCP {
             get {
-                return ((int)(this["setKcptunConfig_DSCP"]));
+                return ((string)(this["setKcptunConfig_DSCP"]));
             }
             set {
                 this["setKcptunConfig_DSCP"] = value;

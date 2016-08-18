@@ -34,7 +34,7 @@
                         <TextBlock HorizontalAlignment="Left" Margin="4,2,0,0" TextWrapping="Wrap" Text="连接数:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0"/>
                         <TextBox x:Name="KcptunConfig_Connects" HorizontalAlignment="Left" Height="20" Margin="54,2,0,0" TextWrapping="Wrap" Text="{Binding setKcptunConfig_Connects}" VerticalAlignment="Top" Width="32" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" TextChanged="TextBox_TextChanged" AllowDrop="False"/>
                         <TextBlock HorizontalAlignment="Left" Margin="91,2,0,0" TextWrapping="Wrap" Text="DSCP:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0"/>
-                        <TextBox x:Name="KcptunConfig_DSCP" HorizontalAlignment="Left" Height="20" Margin="136,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" TextChanged="TextBox_TextChanged" ToolTip="&quot;-1&quot;为使用默认DSCP设置" AllowDrop="False" Text="{Binding setKcptunConfig_DSCP}" />
+                        <TextBox x:Name="KcptunConfig_DSCP" HorizontalAlignment="Left" Height="20" Margin="136,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" TextChanged="TextBox_TextChanged" AllowDrop="False" Text="{Binding setKcptunConfig_DSCP}" />
                     </Grid>
                 </GroupBox>
             </Grid>
