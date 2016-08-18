@@ -130,5 +130,17 @@ namespace KcptunGUI.Properties {
                 this["setKcptunConfig_Crypt"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public uint setKcptunConfig_MTU {
+            get {
+                return ((uint)(this["setKcptunConfig_MTU"]));
+            }
+            set {
+                this["setKcptunConfig_MTU"] = value;
+            }
+        }
     }
 }

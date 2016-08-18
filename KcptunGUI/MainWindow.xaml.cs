@@ -41,7 +41,8 @@ namespace KcptunGUI
             String _g = Class.Functions.GetDscpStringFromString(Properties.Settings.Default.setKcptunConfig_DSCP);//DSCP
             String _h = Properties.Settings.Default.setKcptunConfig_Key.Equals("") ? "" : " -key " + Properties.Settings.Default.setKcptunConfig_Key;//密钥
             String _i = Properties.Settings.Default.setKcptunConfig_Crypt.Equals(0) ? "" : " -crypt " + Class.Functions.GetCryptStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Crypt);
-            strKcptunArgvs = _b + _c + _d + _e + _f+_g+_h+_i;
+            String _j = Properties.Settings.Default.setKcptunConfig_MTU.Equals(0) ? "" : " -mtu " + Properties.Settings.Default.setKcptunConfig_MTU;
+            strKcptunArgvs = _b + _c + _d + _e + _f+_g+_h+_i+_j;
             this.MainWindow_KcptunCommandLine.Text = _a + strKcptunArgvs;//客户端手动启动命令行
 
             //String _a2= Properties.Settings.Default.setKcptunConfig_SystemBit2.Equals(0) ? "server_windows_386.exe" : "server_windows_amd64.exe";//服务端版本
@@ -77,26 +78,40 @@ namespace KcptunGUI
                 case "KcptunConfig_Server":
                     Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text; break;
                 case "KcptunConfig_LocalPort":
-                    thisTextBox.Text=KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text,""); if (thisTextBox.Text.Length >= 5) { thisTextBox.Text=thisTextBox.Text.Substring(0, 5); }
-                    thisTextBox.SelectionStart = thisTextBox.Text.Length; if (thisTextBox.Text.Length > 1) { Properties.Settings.Default.setKcptunConfig_LocalPort = UInt16.Parse(thisTextBox.Text); } break;
+                    thisTextBox.Text=KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text,"");
+                    if (thisTextBox.Text.Length >=5 ) { thisTextBox.Text=thisTextBox.Text.Substring(0, 5); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 1) { Properties.Settings.Default.setKcptunConfig_LocalPort = UInt16.Parse(thisTextBox.Text); }
+                    break;
                 case "KcptunConfig_Connects":
-                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, ""); if (thisTextBox.Text.Length >= 3) { thisTextBox.Text = thisTextBox.Text.Substring(0, 3); }
-                    thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
+                    if (thisTextBox.Text.Length >= 3) { thisTextBox.Text = thisTextBox.Text.Substring(0, 3); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
                     if (thisTextBox.Text.Length > 0){
                         Properties.Settings.Default.setKcptunConfig_Connects = Byte.Parse(thisTextBox.Text);
                         if (thisTextBox.Text.Equals("0")) { this.MainWindow_LogsText.Text += "\n使用默认链接线程设定"; }
                         else{ this.MainWindow_LogsText.Text += "\n已设置为" + Properties.Settings.Default.setKcptunConfig_Connects + "个链接线程"; }
                     }break;
                 case "KcptunConfig_DSCP":
-                    if (thisTextBox.Text.Length >2){ thisTextBox.Text = thisTextBox.Text.Substring(0, thisTextBox.Text.Length - 1); thisTextBox.SelectionStart = thisTextBox.Text.Length; }
-                    Properties.Settings.Default.setKcptunConfig_DSCP = thisTextBox.Text.Length < 3 ? thisTextBox.Text : "";
-                    if (Properties.Settings.Default.setKcptunConfig_DSCP.Equals("")) { this.MainWindow_LogsText.Text += "\n已设置DSCP为默认"; }
-                    else { this.MainWindow_LogsText.Text += "\n已设置DSCP " + Properties.Settings.Default.setKcptunConfig_DSCP; }
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
+                    if (thisTextBox.Text.Length >2){ thisTextBox.Text = thisTextBox.Text.Substring(0, 2);} thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    Properties.Settings.Default.setKcptunConfig_DSCP = thisTextBox.Text;
+                    if (thisTextBox.Text.Length > 0){this.MainWindow_LogsText.Text += "\n已设置DSCP " + Properties.Settings.Default.setKcptunConfig_DSCP;}
+                    else {this.MainWindow_LogsText.Text += "\n已设置DSCP为默认";}
                     break;
                 case "KcptunConfig_Key":
                     Properties.Settings.Default.setKcptunConfig_Key = thisTextBox.Text;
                     if (Properties.Settings.Default.setKcptunConfig_Key.Length.Equals(0)) { this.MainWindow_LogsText.Text += "\n已取消Key设置"; }
                     else{ this.MainWindow_LogsText.Text += "\n已设置Key: " + Properties.Settings.Default.setKcptunConfig_Key; }
+                    break;
+                case "KcptunConfig_MTU":
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text,"");
+                    if (thisTextBox.Text.Length >= 4) { thisTextBox.Text = thisTextBox.Text.Substring(0,4); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 0) {
+                        Properties.Settings.Default.setKcptunConfig_MTU = UInt16.Parse(thisTextBox.Text);
+                        if (Properties.Settings.Default.setKcptunConfig_MTU.Equals(0)) { this.MainWindow_LogsText.Text += "\n已设置MTU为默认值"; }
+                        else { this.MainWindow_LogsText.Text += "\n已设置MTU: " + Properties.Settings.Default.setKcptunConfig_MTU; }
+                    }else{
+                        Properties.Settings.Default.setKcptunConfig_MTU = 0; this.MainWindow_LogsText.Text += "\n已设置MTU为默认值";
+                    }
                     break;
                 default:
                     break;
@@ -119,6 +134,15 @@ namespace KcptunGUI
                     break;
             }
             Properties.Settings.Default.Save(); GenCommandLine();
+        }
+        private void TextBox_LostKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e){//输入框丢失键盘焦点
+            TextBox thisTextBox = (TextBox)sender;
+            switch (thisTextBox.Name) {
+                case "KcptunConfig_MTU":
+                    if (thisTextBox.Text.Length.Equals(0)) { thisTextBox.Text = "0"; }
+                    break;
+                default:break;
+            }
         }
         private void MainWindow_StateChanged(object sender, EventArgs e){
             if (this.WindowState.Equals(WindowState.Minimized) && Class.Functions.IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle)) { this.Hide();}
