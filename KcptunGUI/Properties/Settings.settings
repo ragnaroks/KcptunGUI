@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KcptunGUI.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="setKcptunConfig_SystemBit" Type="System.Int32" Scope="User">
+    <Setting Name="setKcptunConfig_SystemBit" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="setKcptunConfig_Compress" Type="System.Boolean" Scope="User">
@@ -14,11 +14,14 @@
     <Setting Name="setKcptunConfig_LocalPort" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="setKcptunConfig_Mode" Type="System.String" Scope="User">
-      <Value Profile="(Default)">fast2</Value>
+    <Setting Name="setKcptunConfig_Mode" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="setKcptunConfig_Connects" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_DSCP" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

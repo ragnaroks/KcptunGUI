@@ -24,38 +24,37 @@ namespace KcptunGUI
             nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             nicon.Text = App.AppName; nicon.Visible = true; nicon.MouseClick += Nicon_MouseClick;
             this.MainWindow_LogsText.Text = "KcptunGUI  Version: " + App.AppVersion + "(" + App.AppVersionR+")";
-            this.KcptunConfig_SystemBit.SelectedIndex = Properties.Settings.Default.setKcptunConfig_SystemBit;
-            this.KcptunConfig_Mode.SelectedIndex = 3;
+            this.KcptunConfig_SystemBit.SelectedIndex = (Int32)Properties.Settings.Default.setKcptunConfig_SystemBit;
             this.KcptunConfig_Compress.IsChecked = (true == Properties.Settings.Default.setKcptunConfig_Compress ? true : false);
         }
 
-        private void MainWindow_Closed(object sender, EventArgs e){
+        private void MainWindow_Closed(object sender, EventArgs e){//窗口已确定将关闭
             nicon.Visible = false;
         }
 
         // C函数声明
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern bool IsWindowVisible(IntPtr hWnd);
+        public static extern Boolean IsWindowVisible(IntPtr hWnd);//当前窗体是否显示
 
 
         //
+        private String GetModeStringFromInt(UInt32 _intMode){
+            switch (_intMode){
+                case 0:return "default"; case 1:return "normal"; case 2:return "fast"; case 3:return "fast2"; case 4:return "fast3"; default:return "fast2";
+            }
+        }
         private void GenCommandLine(){//生成命令行
-            strKcptunCommand = (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe")
-                                        + " -r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\""
-                                        + " -l \"0.0.0.0:" + Properties.Settings.Default.setKcptunConfig_LocalPort.ToString() + "\""
-                                        + " -mode " + Properties.Settings.Default.setKcptunConfig_Mode
-                                        + (Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp")
-                                        + (Properties.Settings.Default.setKcptunConfig_Connects.Equals(0) ? "" : " -conn "+ Properties.Settings.Default.setKcptunConfig_Connects)
-                                        ;
-            strKcptunArgvs= " -r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\""
-                                        + " -l \"0.0.0.0:" + Properties.Settings.Default.setKcptunConfig_LocalPort.ToString() + "\""
-                                        + " -mode " + Properties.Settings.Default.setKcptunConfig_Mode
-                                        + (Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp")
-                                        + (Properties.Settings.Default.setKcptunConfig_Connects.Equals(0) ? "" : " -conn " + Properties.Settings.Default.setKcptunConfig_Connects)
-                                        ;
+            String _a = Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe";//版本
+            String _b = "-r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\"";//远端地址
+            String _c = " -l \":" + Properties.Settings.Default.setKcptunConfig_LocalPort + "\"";//本地监听端口
+            String _d = " -mode " + GetModeStringFromInt(Properties.Settings.Default.setKcptunConfig_Mode);//传输模式
+            String _e = Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp";//是否启用压缩
+            String _f = Properties.Settings.Default.setKcptunConfig_Connects.Equals(0) ? "" : " -conn " + Properties.Settings.Default.setKcptunConfig_Connects;
+            strKcptunArgvs = _b + _c + _d + _e + _f;
+            strKcptunCommand = _a + strKcptunArgvs;//客户端手动启动命令行
             this.MainWindow_KcptunCommandLine.Text = strKcptunCommand;
         }
-        private void CheckBox_Checked(object sender, RoutedEventArgs e){//选择框选择事件
+        private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
             CheckBox thisCheckBox = (CheckBox)sender; if (false==thisCheckBox.IsMouseOver) { return; }
             switch (thisCheckBox.Name) {
                 case "KcptunConfig_Compress":
@@ -65,7 +64,7 @@ namespace KcptunGUI
             }
             Properties.Settings.Default.Save(); GenCommandLine();
         }
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e){//选择框取消选择事件
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e){//单选框取消选择事件
             CheckBox thisCheckBox = (CheckBox)sender; if (false == thisCheckBox.IsMouseOver) { return; }
             switch (thisCheckBox.Name){
                 case "KcptunConfig_Compress":
@@ -76,7 +75,7 @@ namespace KcptunGUI
             Properties.Settings.Default.Save(); GenCommandLine();
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e){//输入框变动事件
-            TextBox thisTextBox = (TextBox)sender; //if (false == thisTextBox.IsKeyboardFocused) { return; }
+            TextBox thisTextBox = (TextBox)sender;
             switch (thisTextBox.Name) {
                 case "MainWindow_LogsText":
                     this.MainWindow_LogsView.ScrollToBottom(); break;
@@ -102,11 +101,11 @@ namespace KcptunGUI
             ComboBox thisComboBox = (ComboBox)sender;
             switch (thisComboBox.Name) {
                 case "KcptunConfig_SystemBit":
-                    Properties.Settings.Default.setKcptunConfig_SystemBit = thisComboBox.SelectedIndex;
+                    Properties.Settings.Default.setKcptunConfig_SystemBit = (UInt32)thisComboBox.SelectedIndex;
                     this.MainWindow_LogsText.Text += "\n将使用" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64")+"版本"; break;
                 case "KcptunConfig_Mode":
-                    ComboBoxItem _cbi = (ComboBoxItem)thisComboBox.SelectedItem; Properties.Settings.Default.setKcptunConfig_Mode = _cbi.Content.ToString();
-                    this.MainWindow_LogsText.Text += "\n已选择" + (Properties.Settings.Default.setKcptunConfig_Mode)+"模式"; break;
+                    Properties.Settings.Default.setKcptunConfig_Mode = (UInt32)thisComboBox.SelectedIndex;
+                    this.MainWindow_LogsText.Text += "\n已选择" + GetModeStringFromInt(Properties.Settings.Default.setKcptunConfig_Mode) +"模式"; break;
                 default:
                     break;
             }
