@@ -33,16 +33,22 @@ namespace KcptunGUI
         }
         private void GenCommandLine(){//生成命令行
             String _a = Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe";//客户端版本
-            String _b = " -r \"" + Properties.Settings.Default.setKcptunConfig_Server + "\"";//远端地址
-            String _c = " -l \":" + Properties.Settings.Default.setKcptunConfig_LocalPort + "\"";//本地监听端口
-            String _d = " -mode " +Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode);//传输模式
+            String _b = " -r " + Properties.Settings.Default.setKcptunConfig_Server;//远端地址
+            String _c = " -l :" + Properties.Settings.Default.setKcptunConfig_LocalPort;//本地监听端口
+                String _d_1 = Properties.Settings.Default.setKcptunConfig_NoDelay == true ? " -nodelay 1" : " -nodelay 0";//是否启用NoDelay
+                String _d_2 = " -resend " + Properties.Settings.Default.setKcptunConfig_ReSend;//ReSend
+                String _d_3 = Properties.Settings.Default.setKcptunConfig_NC == true ? " -nc 1" : " -nc 0";//是否启用流量控制
+                String _d_4 = " -interval " + Properties.Settings.Default.setKcptunConfig_Interval;//Interval
+            String _d = Properties.Settings.Default.setKcptunConfig_Mode.Equals(4)? " -mode " + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode) +_d_1+_d_2+_d_3+_d_4: " -mode " + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode);//传输模式
             String _e = Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp";//是否启用压缩
-            String _f = Properties.Settings.Default.setKcptunConfig_Connects.Equals(0) ? "" : " -conn " + Properties.Settings.Default.setKcptunConfig_Connects;//多链接
+            String _f = Properties.Settings.Default.setKcptunConfig_Connects.Equals("") ? "" : " -conn " + Properties.Settings.Default.setKcptunConfig_Connects;//多链接
             String _g = Class.Functions.GetDscpStringFromString(Properties.Settings.Default.setKcptunConfig_DSCP);//DSCP
             String _h = Properties.Settings.Default.setKcptunConfig_Key.Equals("") ? "" : " -key " + Properties.Settings.Default.setKcptunConfig_Key;//密钥
             String _i = Properties.Settings.Default.setKcptunConfig_Crypt.Equals(0) ? "" : " -crypt " + Class.Functions.GetCryptStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Crypt);
             String _j = Properties.Settings.Default.setKcptunConfig_MTU.Equals(0) ? "" : " -mtu " + Properties.Settings.Default.setKcptunConfig_MTU;
-            strKcptunArgvs = _b + _c + _d + _e + _f+_g+_h+_i+_j;
+            String _k = Properties.Settings.Default.setKcptunConfig_ParityShard.Equals(3) ? "" : " -parityshard " + Properties.Settings.Default.setKcptunConfig_ParityShard;
+            String _l = Properties.Settings.Default.setKcptunConfig_DataShard.Equals(10) ? "" : " -datashard " + Properties.Settings.Default.setKcptunConfig_DataShard;
+            strKcptunArgvs = _b + _c + _d + _e + _f + _g + _h + _i + _j + _k + _l;
             this.MainWindow_KcptunCommandLine.Text = _a + strKcptunArgvs;//客户端手动启动命令行
 
             //String _a2= Properties.Settings.Default.setKcptunConfig_SystemBit2.Equals(0) ? "server_windows_386.exe" : "server_windows_amd64.exe";//服务端版本
@@ -51,10 +57,14 @@ namespace KcptunGUI
             //this.MainWindow_KcptunCommandLine2.Text = _a2 + strKcptunArgvs2;//对应的服务端命令行
         }
         private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
-            CheckBox thisCheckBox = (CheckBox)sender; if (false==thisCheckBox.IsMouseOver) { return; }
+            CheckBox thisCheckBox = (CheckBox)sender;
             switch (thisCheckBox.Name) {
                 case "KcptunConfig_Compress":
                     Properties.Settings.Default.setKcptunConfig_Compress = true; this.MainWindow_LogsText.Text += "\n已启用数据压缩"; break;
+                case "KcptunConfig_NoDelay":
+                    Properties.Settings.Default.setKcptunConfig_NoDelay = true; this.MainWindow_LogsText.Text += "\n已启用NoDelay"; break;
+                case "KcptunConfig_NC":
+                    Properties.Settings.Default.setKcptunConfig_NC = true; this.MainWindow_LogsText.Text += "\n已启用流量控制"; break;
                 default:
                     break;
             }
@@ -65,6 +75,10 @@ namespace KcptunGUI
             switch (thisCheckBox.Name){
                 case "KcptunConfig_Compress":
                     Properties.Settings.Default.setKcptunConfig_Compress = false; this.MainWindow_LogsText.Text += "\n已停用数据压缩"; break;
+                case "KcptunConfig_NoDelay":
+                    Properties.Settings.Default.setKcptunConfig_NoDelay = false; this.MainWindow_LogsText.Text += "\n已关闭NoDelay"; break;
+                case "KcptunConfig_NC":
+                    Properties.Settings.Default.setKcptunConfig_NC = false; this.MainWindow_LogsText.Text += "\n已关闭流量控制"; break;
                 default:
                     break;
             }
@@ -85,6 +99,7 @@ namespace KcptunGUI
                 case "KcptunConfig_Connects":
                     thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
                     if (thisTextBox.Text.Length >= 3) { thisTextBox.Text = thisTextBox.Text.Substring(0, 3); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text == "0") { return; }
                     Properties.Settings.Default.setKcptunConfig_Connects = thisTextBox.Text;
                     if (thisTextBox.Text.Length > 0){this.MainWindow_LogsText.Text += "\n已设置为" + Properties.Settings.Default.setKcptunConfig_Connects + "个链接线程";}
                     else { this.MainWindow_LogsText.Text += "\n使用默认链接线程设定"; }
@@ -110,8 +125,35 @@ namespace KcptunGUI
                         else { this.MainWindow_LogsText.Text += "\n已设置MTU: " + Properties.Settings.Default.setKcptunConfig_MTU; }
                     }else{
                         Properties.Settings.Default.setKcptunConfig_MTU = 0; this.MainWindow_LogsText.Text += "\n已设置MTU为默认值";
-                    }
+                    }break;
+                case "KcptunConfig_ParityShard":
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
+                    if (thisTextBox.Text.Length > 2) { thisTextBox.Text = thisTextBox.Text.Substring(0,2); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 0){Properties.Settings.Default.setKcptunConfig_ParityShard = Byte.Parse(thisTextBox.Text);}
+                    else {Properties.Settings.Default.setKcptunConfig_ParityShard = 3;}
+                    this.MainWindow_LogsText.Text += "\n已设置前向纠错: " + Properties.Settings.Default.setKcptunConfig_ParityShard + "/" + Properties.Settings.Default.setKcptunConfig_DataShard;
                     break;
+                case "KcptunConfig_DataShard":
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
+                    if (thisTextBox.Text.Length > 2) { thisTextBox.Text = thisTextBox.Text.Substring(0, 2); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 0) { Properties.Settings.Default.setKcptunConfig_DataShard = Byte.Parse(thisTextBox.Text); }
+                    else { Properties.Settings.Default.setKcptunConfig_DataShard = 10; }
+                    this.MainWindow_LogsText.Text += "\n已设置前向纠错: " + Properties.Settings.Default.setKcptunConfig_ParityShard + "/" + Properties.Settings.Default.setKcptunConfig_DataShard;
+                    break;
+                case "KcptunConfig_ReSend":
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
+                    if (thisTextBox.Text.Length > 1) { thisTextBox.Text = thisTextBox.Text.Substring(0,1); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 0){
+                        Properties.Settings.Default.setKcptunConfig_ReSend = Byte.Parse(thisTextBox.Text);
+                        this.MainWindow_LogsText.Text += "\n已设置ReSend为"+ Properties.Settings.Default.setKcptunConfig_ReSend;
+                    }break;
+                case "KcptunConfig_Interval":
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
+                    if (thisTextBox.Text.Length > 3) { thisTextBox.Text = thisTextBox.Text.Substring(0, 3); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 0){
+                        Properties.Settings.Default.setKcptunConfig_Interval = UInt16.Parse(thisTextBox.Text);
+                        this.MainWindow_LogsText.Text += "\n已设置Interval为" + Properties.Settings.Default.setKcptunConfig_Interval;
+                    }break;
                 default:
                     break;
             }
@@ -180,9 +222,7 @@ namespace KcptunGUI
         }
 
         private void MainWindow_StopKcptun_Click(object sender, RoutedEventArgs e){
-            cmdp.CancelErrorRead();//cmdp.CancelOutputRead();
-            cmdp.Kill();
-            cmdp_isRun = false;
+            cmdp.CancelErrorRead(); cmdp.Kill(); cmdp_isRun = false;
             this.MainWindow_LogsText.Text += "\nKcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放";
             nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放", System.Windows.Forms.ToolTipIcon.Info);
             this.MainWindow_RunKcptun.IsEnabled = true; this.MainWindow_StopKcptun.IsEnabled = false;

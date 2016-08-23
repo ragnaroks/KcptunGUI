@@ -49,7 +49,7 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("server.kcptun.com:29900")]
+        [global::System.Configuration.DefaultSettingValueAttribute("server.kcptun.com:8000")]
         public string setKcptunConfig_Server {
             get {
                 return ((string)(this["setKcptunConfig_Server"]));
@@ -61,7 +61,7 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("12948")]
+        [global::System.Configuration.DefaultSettingValueAttribute("12450")]
         public uint setKcptunConfig_LocalPort {
             get {
                 return ((uint)(this["setKcptunConfig_LocalPort"]));
@@ -182,9 +182,9 @@ namespace KcptunGUI.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public string setKcptunConfig_Interval {
+        public ushort setKcptunConfig_Interval {
             get {
-                return ((string)(this["setKcptunConfig_Interval"]));
+                return ((ushort)(this["setKcptunConfig_Interval"]));
             }
             set {
                 this["setKcptunConfig_Interval"] = value;
@@ -193,10 +193,10 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string setKcptunConfig_RcvWnd {
+        [global::System.Configuration.DefaultSettingValueAttribute("1024")]
+        public ushort setKcptunConfig_RcvWnd {
             get {
-                return ((string)(this["setKcptunConfig_RcvWnd"]));
+                return ((ushort)(this["setKcptunConfig_RcvWnd"]));
             }
             set {
                 this["setKcptunConfig_RcvWnd"] = value;
@@ -205,13 +205,37 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string setKcptunConfig_SndWnd {
+        [global::System.Configuration.DefaultSettingValueAttribute("128")]
+        public ushort setKcptunConfig_SndWnd {
             get {
-                return ((string)(this["setKcptunConfig_SndWnd"]));
+                return ((ushort)(this["setKcptunConfig_SndWnd"]));
             }
             set {
                 this["setKcptunConfig_SndWnd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public byte setKcptunConfig_DataShard {
+            get {
+                return ((byte)(this["setKcptunConfig_DataShard"]));
+            }
+            set {
+                this["setKcptunConfig_DataShard"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public byte setKcptunConfig_ParityShard {
+            get {
+                return ((byte)(this["setKcptunConfig_ParityShard"]));
+            }
+            set {
+                this["setKcptunConfig_ParityShard"] = value;
             }
         }
     }

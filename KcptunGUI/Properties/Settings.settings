@@ -9,10 +9,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="setKcptunConfig_Server" Type="System.String" Scope="User">
-      <Value Profile="(Default)">server.kcptun.com:29900</Value>
+      <Value Profile="(Default)">server.kcptun.com:8000</Value>
     </Setting>
     <Setting Name="setKcptunConfig_LocalPort" Type="System.UInt32" Scope="User">
-      <Value Profile="(Default)">12948</Value>
+      <Value Profile="(Default)">12450</Value>
     </Setting>
     <Setting Name="setKcptunConfig_Mode" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">3</Value>
@@ -41,14 +41,20 @@
     <Setting Name="setKcptunConfig_NC" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="setKcptunConfig_Interval" Type="System.String" Scope="User">
+    <Setting Name="setKcptunConfig_Interval" Type="System.UInt16" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="setKcptunConfig_RcvWnd" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="setKcptunConfig_RcvWnd" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">1024</Value>
     </Setting>
-    <Setting Name="setKcptunConfig_SndWnd" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="setKcptunConfig_SndWnd" Type="System.UInt16" Scope="User">
+      <Value Profile="(Default)">128</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_DataShard" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_ParityShard" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">3</Value>
     </Setting>
   </Settings>
 </SettingsFile>
