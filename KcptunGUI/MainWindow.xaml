@@ -6,12 +6,12 @@
         <TabControl>
             <TabItem Height="20" Header="客户端模式">
                 <Grid>
-                    <GroupBox x:Name="MainWindow_Logs" Header="日志" Margin="10,0,10,31" Height="132" VerticalAlignment="Bottom">
+                    <GroupBox x:Name="MainWindow_Logs" Header="日志" Margin="0" Height="132" VerticalAlignment="Bottom">
                         <ScrollViewer x:Name="MainWindow_LogsView" Margin="0" VerticalAlignment="Bottom" Height="110">
                             <TextBox x:Name="MainWindow_LogsText" IsTabStop="False" AllowDrop="False" IsReadOnly="True" IsUndoEnabled="False" TextWrapping="Wrap" TextChanged="TextBox_TextChanged"/>
                         </ScrollViewer>
                     </GroupBox>
-                    <GroupBox x:Name="MainWindow_Prarms" Header="参数设定" Margin="10,10,10,0" VerticalAlignment="Top" Height="136">
+                    <GroupBox x:Name="MainWindow_Prarms" Header="参数设定" Margin="0" VerticalAlignment="Top" Height="174">
                         <Grid Margin="0,0,-2,3">
                             <TextBlock Text="服务器及端口:" Height="20" Margin="120,10,0,0" FontSize="14" Width="87" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
                             <TextBox x:Name="KcptunConfig_Server" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="20" Margin="213,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Text="{Binding setKcptunConfig_Server}"/>
@@ -31,7 +31,7 @@
                                 <ComboBoxItem Content="x86"/>
                                 <ComboBoxItem Content="x86_64"/>
                             </ComboBox>
-                            <TextBox x:Name="MainWindow_KcptunCommandLine" Margin="10,87,10,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" AllowDrop="False" IsTabStop="False" ToolTip="客户端手动启动参数"/>
+                            <TextBox x:Name="MainWindow_KcptunCommandLine" Margin="4,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Bottom" AllowDrop="False" IsTabStop="False" ToolTip="客户端手动启动参数"/>
                             <TextBlock HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="连接数:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0"/>
                             <TextBox x:Name="KcptunConfig_Connects" HorizontalAlignment="Left" Height="20" Margin="60,35,0,0" TextWrapping="Wrap" Text="{Binding setKcptunConfig_Connects}" VerticalAlignment="Top" Width="32" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" TextChanged="TextBox_TextChanged" AllowDrop="False"/>
                             <TextBlock HorizontalAlignment="Left" Margin="97,35,0,0" TextWrapping="Wrap" Text="DSCP:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0"/>
@@ -56,11 +56,25 @@
                             </ComboBox>
                             <TextBlock HorizontalAlignment="Left" Margin="528,35,0,0" TextWrapping="Wrap" Text="MTU:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0"/>
                             <TextBox x:Name="KcptunConfig_MTU" HorizontalAlignment="Left" Height="20" Margin="569,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" AllowDrop="False" ToolTip="默认1350" Text="{Binding setKcptunConfig_MTU}" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" LostKeyboardFocus="TextBox_LostKeyboardFocus"/>
-                            
+                            <GroupBox x:Name="GroupBox_KcptunManualConfigs" Header="手动参数" VerticalAlignment="Top" Margin="0,82,0,0" Height="42" IsEnabled="False">
+                                <StackPanel Orientation="Horizontal" Margin="4,0,0,0">
+                                    <CheckBox x:Name="KcptunConfig_NoDelay" Content="是否启用NoDelay" HorizontalAlignment="Left" Margin="4,4,0,0" VerticalAlignment="Top" ToolTip="是否启用 nodelay模式" IsChecked="{Binding setKcptunConfig_NoDelay}" Cursor="Help"/>
+                                    <TextBlock Text="|" Margin="4,2,4,0" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Interval:" Height="16" Margin="0,4,0,0" ToolTip="协议内部工作的 interval，单位毫秒，比如 10ms或者 20ms" Cursor="Help"/>
+                                    <TextBox x:Name="KcptunConfig_Interval" ToolTip="协议内部工作的interval，单位ms，比如10ms或者20ms" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="0,3,0,0" Width="24" Text="{Binding setKcptunConfig_Interval}" Padding="1,-1,1,1" />
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="ms" Height="16" Margin="0,4,0,0"/>
+                                    <TextBlock Text="|" Margin="4,2,4,0" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                    <TextBlock Text="ReSend:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="16" Margin="0,4,0,0" ToolTip="快速重传模式，默认0关闭，可以设置2（2次ACK跨越将会直接重传）" Cursor="Help"/>
+                                    <TextBox x:Name="KcptunConfig_ReSend" ToolTip="快速重传模式，默认0关闭，可以设置2（2次ACK跨越将会直接重传）" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="0,3,0,0" Width="18" Text="{Binding setKcptunConfig_ReSend}" Padding="1,-1,1,1" />
+                                    <TextBlock Text="|" Margin="4,2,4,0" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                    <TextBlock Text="NC:" Margin="0,4,0,0" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="是否关闭流控，默认是关闭"/>
+                                    <CheckBox x:Name="KcptunConfig_NC" Content="是否关闭流控" HorizontalAlignment="Left" Margin="4,4,0,0" VerticalAlignment="Top" ToolTip="是否关闭流控，默认是关闭" IsChecked="{Binding setKcptunConfig_NC}" Cursor="Help"/>
+                                </StackPanel>
+                            </GroupBox>
                         </Grid>
                     </GroupBox>
-                    <Button x:Name="MainWindow_RunKcptun" Content="运行Kcptun客户端" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top" Width="108" Height="24" Click="MainWindow_RunKcptun_Click" IsTabStop="False" Focusable="False"/>
-                    <Button x:Name="MainWindow_StopKcptun" Content="停止Kcptun客户端" HorizontalAlignment="Left" Margin="123,151,0,0" VerticalAlignment="Top" Width="108" Height="24" IsTabStop="False" Focusable="False" Click="MainWindow_StopKcptun_Click" IsEnabled="False"/>
+                    <Button x:Name="MainWindow_RunKcptun" Content="运行Kcptun客户端" HorizontalAlignment="Left" Margin="0,179,0,0" VerticalAlignment="Top" Width="108" Height="24" Click="MainWindow_RunKcptun_Click" IsTabStop="False" Focusable="False"/>
+                    <Button x:Name="MainWindow_StopKcptun" Content="停止Kcptun客户端" HorizontalAlignment="Left" Margin="113,179,0,0" VerticalAlignment="Top" Width="108" Height="24" IsTabStop="False" Focusable="False" Click="MainWindow_StopKcptun_Click" IsEnabled="False"/>
                 </Grid>
             </TabItem>
             <TabItem Header="服务端模式" x:Name="tabitemserver">
@@ -104,6 +118,7 @@
             <TabItem Header="杂项">
                 <TextBlock>服务端功能调试中,暂不可用,尽快上线</TextBlock>
             </TabItem>
+            <GroupBox x:Name="groupBox" Header="GroupBox" Height="100" Width="100"/>
         </TabControl>
         <Grid.DataContext>
             <Properties:Settings/>

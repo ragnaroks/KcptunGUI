@@ -32,5 +32,23 @@
     <Setting Name="setKcptunConfig_MTU" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="setKcptunConfig_NoDelay" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_ReSend" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_NC" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_Interval" Type="System.String" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="setKcptunConfig_RcvWnd" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="setKcptunConfig_SndWnd" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

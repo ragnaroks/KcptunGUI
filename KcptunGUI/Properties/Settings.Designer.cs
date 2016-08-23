@@ -142,5 +142,77 @@ namespace KcptunGUI.Properties {
                 this["setKcptunConfig_MTU"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setKcptunConfig_NoDelay {
+            get {
+                return ((bool)(this["setKcptunConfig_NoDelay"]));
+            }
+            set {
+                this["setKcptunConfig_NoDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte setKcptunConfig_ReSend {
+            get {
+                return ((byte)(this["setKcptunConfig_ReSend"]));
+            }
+            set {
+                this["setKcptunConfig_ReSend"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool setKcptunConfig_NC {
+            get {
+                return ((bool)(this["setKcptunConfig_NC"]));
+            }
+            set {
+                this["setKcptunConfig_NC"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public string setKcptunConfig_Interval {
+            get {
+                return ((string)(this["setKcptunConfig_Interval"]));
+            }
+            set {
+                this["setKcptunConfig_Interval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string setKcptunConfig_RcvWnd {
+            get {
+                return ((string)(this["setKcptunConfig_RcvWnd"]));
+            }
+            set {
+                this["setKcptunConfig_RcvWnd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string setKcptunConfig_SndWnd {
+            get {
+                return ((string)(this["setKcptunConfig_SndWnd"]));
+            }
+            set {
+                this["setKcptunConfig_SndWnd"] = value;
+            }
+        }
     }
 }

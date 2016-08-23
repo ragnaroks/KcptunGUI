@@ -125,7 +125,9 @@ namespace KcptunGUI
                     this.MainWindow_LogsText.Text += "\n将使用" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64")+"版本"; break;
                 case "KcptunConfig_Mode":
                     Properties.Settings.Default.setKcptunConfig_Mode = (Byte)thisComboBox.SelectedIndex;
-                    this.MainWindow_LogsText.Text += "\n已选择" + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode) +"传输模式"; break;
+                    this.MainWindow_LogsText.Text += "\n已选择" + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode) +"传输模式";
+                    if (Properties.Settings.Default.setKcptunConfig_Mode.Equals(4)) { this.GroupBox_KcptunManualConfigs.IsEnabled = true; } else { this.GroupBox_KcptunManualConfigs.IsEnabled = false; }
+                    break;
                 case "KcptunConfig_Crypt":
                     Properties.Settings.Default.setKcptunConfig_Crypt=(Byte)thisComboBox.SelectedIndex;
                     this.MainWindow_LogsText.Text += "\n已选择" + Class.Functions.GetCryptStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Crypt) + "加密"; break;
