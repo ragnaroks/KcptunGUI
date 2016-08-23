@@ -48,7 +48,9 @@ namespace KcptunGUI
             String _j = Properties.Settings.Default.setKcptunConfig_MTU.Equals(0) ? "" : " -mtu " + Properties.Settings.Default.setKcptunConfig_MTU;
             String _k = Properties.Settings.Default.setKcptunConfig_ParityShard.Equals(3) ? "" : " -parityshard " + Properties.Settings.Default.setKcptunConfig_ParityShard;
             String _l = Properties.Settings.Default.setKcptunConfig_DataShard.Equals(10) ? "" : " -datashard " + Properties.Settings.Default.setKcptunConfig_DataShard;
-            strKcptunArgvs = _b + _c + _d + _e + _f + _g + _h + _i + _j + _k + _l;
+            String _m = Properties.Settings.Default.setKcptunConfig_SndWnd.Equals(128) ? "" : " -sndwnd " + Properties.Settings.Default.setKcptunConfig_SndWnd;
+            String _n = Properties.Settings.Default.setKcptunConfig_RcvWnd.Equals(1024) ? "" : " -rcvwnd " + Properties.Settings.Default.setKcptunConfig_RcvWnd;
+            strKcptunArgvs = _b + _c + _d + _e + _f + _g + _h + _i + _j + _k + _l + _m + _n;
             this.MainWindow_KcptunCommandLine.Text = _a + strKcptunArgvs;//客户端手动启动命令行
 
             //String _a2= Properties.Settings.Default.setKcptunConfig_SystemBit2.Equals(0) ? "server_windows_386.exe" : "server_windows_amd64.exe";//服务端版本
@@ -118,7 +120,7 @@ namespace KcptunGUI
                     break;
                 case "KcptunConfig_MTU":
                     thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text,"");
-                    if (thisTextBox.Text.Length >= 4) { thisTextBox.Text = thisTextBox.Text.Substring(0,4); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 4) { thisTextBox.Text = thisTextBox.Text.Substring(0,4); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
                     if (thisTextBox.Text.Length > 0) {
                         Properties.Settings.Default.setKcptunConfig_MTU = UInt16.Parse(thisTextBox.Text);
                         if (Properties.Settings.Default.setKcptunConfig_MTU.Equals(0)) { this.MainWindow_LogsText.Text += "\n已设置MTU为默认值"; }
@@ -154,6 +156,21 @@ namespace KcptunGUI
                         Properties.Settings.Default.setKcptunConfig_Interval = UInt16.Parse(thisTextBox.Text);
                         this.MainWindow_LogsText.Text += "\n已设置Interval为" + Properties.Settings.Default.setKcptunConfig_Interval;
                     }break;
+                case "KcptunConfig_SndWnd":
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
+                    if (thisTextBox.Text.Length > 4) { thisTextBox.Text = thisTextBox.Text.Substring(0, 4); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 0){
+                        Properties.Settings.Default.setKcptunConfig_SndWnd = UInt16.Parse(thisTextBox.Text);
+                        this.MainWindow_LogsText.Text += "\n已设置发送窗口为" + Properties.Settings.Default.setKcptunConfig_SndWnd;
+                    }break;
+                case "KcptunConfig_RcvWnd":
+                    thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
+                    if (thisTextBox.Text.Length > 4) { thisTextBox.Text = thisTextBox.Text.Substring(0, 4); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
+                    if (thisTextBox.Text.Length > 0){
+                        Properties.Settings.Default.setKcptunConfig_RcvWnd = UInt16.Parse(thisTextBox.Text);
+                        this.MainWindow_LogsText.Text += "\n已设置接收窗口为" + Properties.Settings.Default.setKcptunConfig_RcvWnd;
+                    }
+                    break;
                 default:
                     break;
             }
