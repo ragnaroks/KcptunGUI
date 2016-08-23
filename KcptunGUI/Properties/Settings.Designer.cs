@@ -85,10 +85,10 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public byte setKcptunConfig_Connects {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string setKcptunConfig_Connects {
             get {
-                return ((byte)(this["setKcptunConfig_Connects"]));
+                return ((string)(this["setKcptunConfig_Connects"]));
             }
             set {
                 this["setKcptunConfig_Connects"] = value;

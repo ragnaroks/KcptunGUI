@@ -17,8 +17,8 @@
     <Setting Name="setKcptunConfig_Mode" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="setKcptunConfig_Connects" Type="System.Byte" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="setKcptunConfig_Connects" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="setKcptunConfig_DSCP" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

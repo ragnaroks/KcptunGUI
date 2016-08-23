@@ -85,11 +85,10 @@ namespace KcptunGUI
                 case "KcptunConfig_Connects":
                     thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
                     if (thisTextBox.Text.Length >= 3) { thisTextBox.Text = thisTextBox.Text.Substring(0, 3); } thisTextBox.SelectionStart = thisTextBox.Text.Length;
-                    if (thisTextBox.Text.Length > 0){
-                        Properties.Settings.Default.setKcptunConfig_Connects = Byte.Parse(thisTextBox.Text);
-                        if (thisTextBox.Text.Equals("0")) { this.MainWindow_LogsText.Text += "\n使用默认链接线程设定"; }
-                        else{ this.MainWindow_LogsText.Text += "\n已设置为" + Properties.Settings.Default.setKcptunConfig_Connects + "个链接线程"; }
-                    }break;
+                    Properties.Settings.Default.setKcptunConfig_Connects = thisTextBox.Text;
+                    if (thisTextBox.Text.Length > 0){this.MainWindow_LogsText.Text += "\n已设置为" + Properties.Settings.Default.setKcptunConfig_Connects + "个链接线程";}
+                    else { this.MainWindow_LogsText.Text += "\n使用默认链接线程设定"; }
+                    break;
                 case "KcptunConfig_DSCP":
                     thisTextBox.Text = KcptunConfig_LocalPort_Regex.Replace(thisTextBox.Text, "");
                     if (thisTextBox.Text.Length >2){ thisTextBox.Text = thisTextBox.Text.Substring(0, 2);} thisTextBox.SelectionStart = thisTextBox.Text.Length;
