@@ -39,7 +39,9 @@ namespace KcptunGUI
                 String _d_2 = " -resend " + Properties.Settings.Default.setKcptunConfig_ReSend;//ReSend
                 String _d_3 = Properties.Settings.Default.setKcptunConfig_NC == true ? " -nc 1" : " -nc 0";//是否启用流量控制
                 String _d_4 = " -interval " + Properties.Settings.Default.setKcptunConfig_Interval;//Interval
-            String _d = Properties.Settings.Default.setKcptunConfig_Mode.Equals(4)? " -mode " + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode) +_d_1+_d_2+_d_3+_d_4: " -mode " + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode);//传输模式
+                String _d_5 = Properties.Settings.Default.setKcptunConfig_SndWnd.Equals(128) ? "" : " -sndwnd " + Properties.Settings.Default.setKcptunConfig_SndWnd;
+                String _d_6 = Properties.Settings.Default.setKcptunConfig_RcvWnd.Equals(1024) ? "" : " -rcvwnd " + Properties.Settings.Default.setKcptunConfig_RcvWnd;
+            String _d = Properties.Settings.Default.setKcptunConfig_Mode.Equals(4)? " -mode " + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode) +_d_1+_d_2+_d_3+_d_4+_d_5+_d_6: " -mode " + Class.Functions.GetModeStringFromSelectedIndex(Properties.Settings.Default.setKcptunConfig_Mode);//传输模式
             String _e = Properties.Settings.Default.setKcptunConfig_Compress ? "" : " -nocomp";//是否启用压缩
             String _f = Properties.Settings.Default.setKcptunConfig_Connects.Equals("") ? "" : " -conn " + Properties.Settings.Default.setKcptunConfig_Connects;//多链接
             String _g = Class.Functions.GetDscpStringFromString(Properties.Settings.Default.setKcptunConfig_DSCP);//DSCP
@@ -48,9 +50,8 @@ namespace KcptunGUI
             String _j = Properties.Settings.Default.setKcptunConfig_MTU.Equals(0) ? "" : " -mtu " + Properties.Settings.Default.setKcptunConfig_MTU;
             String _k = Properties.Settings.Default.setKcptunConfig_ParityShard.Equals(3) ? "" : " -parityshard " + Properties.Settings.Default.setKcptunConfig_ParityShard;
             String _l = Properties.Settings.Default.setKcptunConfig_DataShard.Equals(10) ? "" : " -datashard " + Properties.Settings.Default.setKcptunConfig_DataShard;
-            String _m = Properties.Settings.Default.setKcptunConfig_SndWnd.Equals(128) ? "" : " -sndwnd " + Properties.Settings.Default.setKcptunConfig_SndWnd;
-            String _n = Properties.Settings.Default.setKcptunConfig_RcvWnd.Equals(1024) ? "" : " -rcvwnd " + Properties.Settings.Default.setKcptunConfig_RcvWnd;
-            strKcptunArgvs = _b + _c + _d + _e + _f + _g + _h + _i + _j + _k + _l + _m + _n;
+
+            strKcptunArgvs = _b + _c + _d + _e + _f + _g + _h + _i + _j + _k + _l;
             this.MainWindow_KcptunCommandLine.Text = _a + strKcptunArgvs;//客户端手动启动命令行
 
             //String _a2= Properties.Settings.Default.setKcptunConfig_SystemBit2.Equals(0) ? "server_windows_386.exe" : "server_windows_amd64.exe";//服务端版本
