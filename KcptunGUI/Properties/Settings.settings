@@ -27,7 +27,7 @@
       <Value Profile="(Default)">www.ragnaroks.org</Value>
     </Setting>
     <Setting Name="setKcptunConfig_Crypt" Type="System.Byte" Scope="User">
-      <Value Profile="(Default)">4</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="setKcptunConfig_MTU" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">0</Value>

@@ -19,11 +19,11 @@
                             <TextBox x:Name="KcptunConfig_LocalPort" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="20" Margin="495,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="46" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" ToolTip="至少2位数的端口" Text="{Binding setKcptunConfig_LocalPort}"/>
                             <TextBlock Text="模式:" Height="20" Margin="547,10,0,0" FontSize="14" Width="31" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" ToolTip="务必和服务端一致" />
                             <ComboBox x:Name="KcptunConfig_Mode" Margin="583,10,0,0" VerticalAlignment="Top" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="20" Padding="6,2,5,3" IsTabStop="False" HorizontalAlignment="Left" Width="72" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_Mode}" ToolTip="务必和服务端一致">
-                                <ComboBoxItem Content="default"/>
                                 <ComboBoxItem Content="normal"/>
                                 <ComboBoxItem Content="fast"/>
                                 <ComboBoxItem Content="fast2"/>
                                 <ComboBoxItem Content="fast3"/>
+                                <ComboBoxItem Content="manual"/>
                             </ComboBox>
                             <CheckBox x:Name="KcptunConfig_Compress" Content="启用压缩" Margin="660,10,0,0" FontSize="14" IsHitTestVisible="True" IsTabStop="False" ToolTip="关闭压缩可能会降低延迟,务必和服务端一致" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" IsChecked="{Binding setKcptunConfig_Compress}"/>
                             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="版本:" VerticalAlignment="Top" FontSize="14" Padding="0,1,0,0" Height="20"/>
@@ -40,13 +40,19 @@
                             <TextBox x:Name="KcptunConfig_Key" HorizontalAlignment="Left" Height="20" Margin="213,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="185" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" TextChanged="TextBox_TextChanged" AllowDrop="False" Text="{Binding setKcptunConfig_Key}" ToolTip="务必和服务端一致" />
                             <TextBlock HorizontalAlignment="Left" Margin="403,35,0,0" TextWrapping="Wrap" Text="加密:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0" ToolTip="务必和服务端一致"/>
                             <ComboBox x:Name="KcptunConfig_Crypt" HorizontalAlignment="Left" Margin="439,35,0,0" VerticalAlignment="Top" Width="84" Height="20" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Padding="6,2,5,3" IsTabStop="False" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_Crypt}" ToolTip="务必和服务端一致">
-                                <ComboBoxItem Content="nonuse"/>
-                                <ComboBoxItem Content="none"/>
-                                <ComboBoxItem Content="xor"/>
-                                <ComboBoxItem Content="tea"/>
-                                <ComboBoxItem Content="aes"/>
-                                <ComboBoxItem Content="aes-128"/>
+                                <ComboBoxItem Content="默认"/>
+                                <ComboBoxItem Content="aes-256"/>
                                 <ComboBoxItem Content="aes-192"/>
+                                <ComboBoxItem Content="aes-128"/>
+                                <ComboBoxItem Content="salsa20"/>
+                                <ComboBoxItem Content="blowfish"/>
+                                <ComboBoxItem Content="twofish"/>
+                                <ComboBoxItem Content="cast5"/>
+                                <ComboBoxItem Content="3des"/>
+                                <ComboBoxItem Content="xtea"/>
+                                <ComboBoxItem Content="tea"/>
+                                <ComboBoxItem Content="xor"/>
+                                <ComboBoxItem Content="none"/>
                             </ComboBox>
                             <TextBlock HorizontalAlignment="Left" Margin="528,35,0,0" TextWrapping="Wrap" Text="MTU:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0"/>
                             <TextBox x:Name="KcptunConfig_MTU" HorizontalAlignment="Left" Height="20" Margin="569,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" AllowDrop="False" ToolTip="默认1350" Text="{Binding setKcptunConfig_MTU}" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" LostKeyboardFocus="TextBox_LostKeyboardFocus"/>

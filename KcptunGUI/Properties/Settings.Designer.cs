@@ -121,7 +121,7 @@ namespace KcptunGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public byte setKcptunConfig_Crypt {
             get {
                 return ((byte)(this["setKcptunConfig_Crypt"]));
