@@ -3,6 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"></Setter>
+            <Setter Property="VerticalScrollBarVisibility" Value="Disabled"></Setter>
+            <Setter Property="AllowDrop" Value="False"></Setter>
+            <Setter Property="Padding" Value="0,-2,0,0"></Setter>
+            <Setter Property="MinWidth" Value="24"></Setter>
+            
+        </Style>
     </Application.Resources>
 </Application>

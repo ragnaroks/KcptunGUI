@@ -243,5 +243,16 @@ namespace KcptunGUI
             nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放", System.Windows.Forms.ToolTipIcon.Info);
             this.MainWindow_RunKcptun.IsEnabled = true; this.MainWindow_StopKcptun.IsEnabled = false;
         }
+
+        private void Canvas_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e){//鼠标离开Canvas
+            Canvas thisCanvas = (Canvas)sender;
+            if (!thisCanvas.IsMouseOver) { return; }
+            switch (thisCanvas.Name) {
+                case "Canvas_VRW":
+                    System.Diagnostics.Process.Start("http://www.ragnaroks.org/");
+                    break;
+                default:break;
+            }
+        }
     }
 }
