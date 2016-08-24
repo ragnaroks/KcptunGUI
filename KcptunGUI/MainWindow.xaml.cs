@@ -24,8 +24,6 @@ namespace KcptunGUI
             this.MainWindow_LogsText.Text = "KcptunGUI  Version: " + App.AppVersion + "(" + App.AppVersionR+")";
             this.KcptunConfig_SystemBit.SelectedIndex = (Int32)Properties.Settings.Default.setKcptunConfig_SystemBit;
             this.KcptunConfig_Compress.IsChecked = (true == Properties.Settings.Default.setKcptunConfig_Compress ? true : false);
-            //
-            this.tabitemserver.IsEnabled = false;
         }
         //
         private void MainWindow_Closed(object sender, EventArgs e){//窗口已确定将关闭

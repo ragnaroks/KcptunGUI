@@ -1,87 +1,85 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Properties="clr-namespace:KcptunGUI.Properties" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Configuration="clr-namespace:System.Configuration;assembly=System" xmlns:CompilerServices="clr-namespace:System.Runtime.CompilerServices;assembly=mscorlib" xmlns:Compiler="clr-namespace:System.CodeDom.Compiler;assembly=System" xmlns:Diagnostics="clr-namespace:System.Diagnostics;assembly=mscorlib" x:Class="KcptunGUI.MainWindow"
-        Height="400" Width="640" ResizeMode="CanMinimize" Title="KcptunGUI" WindowStartupLocation="CenterScreen">
+        Height="400" Width="640" ResizeMode="CanMinimize" Title="KcptunGUI" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display">
     <Grid>
         <TabControl>
-            <TabItem Height="20" Header="客户端模式">
+            <TabItem Header="客户端模式" x:Name="tabitemclient">
                 <Grid>
                     <GroupBox x:Name="MainWindow_Prarms" Header="参数设定" Margin="0" VerticalAlignment="Top" Height="174">
-                        <ScrollViewer>
-                            <Grid>
-                                <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top">
-                                    <TextBlock Text="服务端及端口:" Height="16" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBox x:Name="KcptunConfig_Server" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="18" Margin="4,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Text="{Binding setKcptunConfig_Server}" MinWidth="18"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top" Margin="0,24,0,0">
-                                    <TextBlock Text="本地监听端口:" Height="16" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBox x:Name="KcptunConfig_LocalPort" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" TextChanged="TextBox_TextChanged" ToolTip="至少2位数的端口" Text="{Binding setKcptunConfig_LocalPort}" MinWidth="18"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="连接数:" VerticalAlignment="Top" Height="16" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBox x:Name="KcptunConfig_Connects" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" Text="{Binding setKcptunConfig_Connects}" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" MinWidth="18"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="DSCP:" VerticalAlignment="Top" Height="16" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBox x:Name="KcptunConfig_DSCP" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" Text="{Binding setKcptunConfig_DSCP}" MinWidth="18" />
-                                    <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="MTU:" VerticalAlignment="Top" Height="16" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBox x:Name="KcptunConfig_MTU" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" ToolTip="默认1350" Text="{Binding setKcptunConfig_MTU}" LostKeyboardFocus="TextBox_LostKeyboardFocus" MinWidth="18"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="Key:" VerticalAlignment="Top" Height="16" FontSize="14" ToolTip="务必和服务端一致" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBox x:Name="KcptunConfig_Key" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" Text="{Binding setKcptunConfig_Key}" ToolTip="务必和服务端一致" MinWidth="18" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,48,0,0" Height="20" VerticalAlignment="Top">
-                                    <TextBlock HorizontalAlignment="Left" Text="版本:" VerticalAlignment="Top" FontSize="14" Height="16"/>
-                                    <ComboBox x:Name="KcptunConfig_SystemBit" HorizontalAlignment="Left" Margin="4,0,0,0" VerticalAlignment="Top" Height="20" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Padding="6,2,5,3" IsTabStop="False" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_SystemBit}">
-                                        <ComboBoxItem Content="x86"/>
-                                        <ComboBoxItem Content="x86_64"/>
-                                    </ComboBox>
-                                    <TextBlock Text="模式:" Height="16" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="务必和服务端一致" Margin="8,0,0,0" />
-                                    <ComboBox x:Name="KcptunConfig_Mode" Margin="4,0,0,0" VerticalAlignment="Top" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="20" Padding="6,2,5,3" IsTabStop="False" HorizontalAlignment="Left" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_Mode}" ToolTip="务必和服务端一致">
-                                        <ComboBoxItem Content="normal"/>
-                                        <ComboBoxItem Content="fast"/>
-                                        <ComboBoxItem Content="fast2"/>
-                                        <ComboBoxItem Content="fast3"/>
-                                        <ComboBoxItem Content="manual"/>
-                                    </ComboBox>
-                                    <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" Text="加密:" VerticalAlignment="Top" Height="16" FontSize="14" ToolTip="务必和服务端一致"/>
-                                    <ComboBox x:Name="KcptunConfig_Crypt" HorizontalAlignment="Left" Margin="4,0,0,0" VerticalAlignment="Top" Height="20" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" IsTabStop="False" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_Crypt}" ToolTip="务必和服务端一致">
-                                        <ComboBoxItem Content="默认"/>
-                                        <ComboBoxItem Content="aes-256"/>
-                                        <ComboBoxItem Content="aes-192"/>
-                                        <ComboBoxItem Content="aes-128"/>
-                                        <ComboBoxItem Content="salsa20"/>
-                                        <ComboBoxItem Content="blowfish"/>
-                                        <ComboBoxItem Content="twofish"/>
-                                        <ComboBoxItem Content="cast5"/>
-                                        <ComboBoxItem Content="3des"/>
-                                        <ComboBoxItem Content="xtea"/>
-                                        <ComboBoxItem Content="tea"/>
-                                        <ComboBoxItem Content="xor"/>
-                                        <ComboBoxItem Content="none"/>
-                                    </ComboBox>
-                                    <CheckBox x:Name="KcptunConfig_Compress" Content="启用压缩" Margin="8,2,0,0" IsHitTestVisible="True" IsTabStop="False" ToolTip="关闭压缩可能会降低延迟,务必和服务端一致" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Height="16" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="{Binding setKcptunConfig_Compress}" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="前向纠错:" VerticalAlignment="Top" Height="16" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBox x:Name="KcptunConfig_ParityShard" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" ToolTip="此处填写前向纠错的ParityShard值" Text="{Binding setKcptunConfig_ParityShard}" MinWidth="18"/>
-                                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="/" VerticalAlignment="Top" Height="16" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                    <TextBox x:Name="KcptunConfig_DataShard" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" ToolTip="此处填写前向纠错的DataShard值" Text="{Binding setKcptunConfig_DataShard}" MinWidth="18"/>
-                                </StackPanel>
-                                <StackPanel VerticalAlignment="Top" Margin="0,72,0,0">
-                                    <GroupBox x:Name="GroupBox_KcptunManualConfigs" Header="手动参数" VerticalAlignment="Top" Margin="0" Height="42" IsEnabled="False">
-                                        <StackPanel Orientation="Horizontal" Margin="0" Height="20">
-                                            <CheckBox x:Name="KcptunConfig_NoDelay" Content="NoDelay" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" ToolTip="是否启用nodelay模式" IsChecked="{Binding setKcptunConfig_NoDelay}" Cursor="Help" Height="16" ScrollViewer.VerticalScrollBarVisibility="Disabled" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-                                            <CheckBox x:Name="KcptunConfig_NC" Content="流量控制" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Top" ToolTip="是否启用流量控制" IsChecked="{Binding setKcptunConfig_NC}" Cursor="Help" Height="16" ScrollViewer.VerticalScrollBarVisibility="Disabled" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-                                            <TextBlock Text="ReSend:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="16" Margin="8,0,0,0" ToolTip="快速重传模式，默认0关闭，可以设置2（2次ACK跨越将会直接重传）" Cursor="Help" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                            <TextBox x:Name="KcptunConfig_ReSend" ToolTip="快速重传模式，默认0关闭，可以设置2（2次ACK跨越将会直接重传）" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="4,0,0,0" Text="{Binding setKcptunConfig_ReSend}" MinWidth="18" TextChanged="TextBox_TextChanged"/>
-                                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Interval:" Height="16" Margin="8,0,0,0" ToolTip="协议内部工作的 interval，单位毫秒，比如 10ms或者 20ms" Cursor="Help" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                            <TextBox x:Name="KcptunConfig_Interval" ToolTip="协议内部工作的interval，单位ms，比如10ms或者20ms" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="4,0,0,0" Text="{Binding setKcptunConfig_Interval}" MinWidth="18"  TextChanged="TextBox_TextChanged"/>
-                                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="发送窗口/接收窗口:" Height="16" Margin="8,0,0,0" ToolTip="发送窗口/接受窗口,客户端默认128/1024,单位packets" Cursor="Help" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                            <TextBox x:Name="KcptunConfig_SndWnd" ToolTip="发送窗口大小,客户端默认128,单位packets" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="4,0,0,0" Text="{Binding setKcptunConfig_SndWnd}" MinWidth="18"  TextChanged="TextBox_TextChanged"/>
-                                            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="/" Height="16" Margin="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-                                            <TextBox x:Name="KcptunConfig_RcvWnd" ToolTip="发送窗口大小,客户端默认1024,单位packets" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="0" Text="{Binding setKcptunConfig_RcvWnd}" MinWidth="18"  TextChanged="TextBox_TextChanged"/>
-                                        </StackPanel>
-                                    </GroupBox>
-                                </StackPanel>
-                                <StackPanel Height="36" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,116,0,0">
-                                    <TextBox x:Name="MainWindow_KcptunCommandLine" AllowDrop="False" IsTabStop="False" ToolTip="客户端手动启动参数" MinWidth="598" Margin="0" AutoWordSelection="True" IsUndoEnabled="False" IsReadOnly="True" MaxWidth="598" TextWrapping="Wrap" Width="598" />
-                                </StackPanel>
-                            </Grid>
-                        </ScrollViewer>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top">
+                                <TextBlock Text="服务端及端口:" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBox x:Name="KcptunConfig_Server" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="18" Margin="4,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Text="{Binding setKcptunConfig_Server}" MinWidth="18" Padding="0" MinHeight="16" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top" Margin="0,24,0,0">
+                                <TextBlock Text="本地监听端口:" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBox x:Name="KcptunConfig_LocalPort" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" TextChanged="TextBox_TextChanged" ToolTip="至少2位数的端口" Text="{Binding setKcptunConfig_LocalPort}" MinWidth="18" TextOptions.TextFormattingMode="Display" Padding="0"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="连接数:" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBox x:Name="KcptunConfig_Connects" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" Text="{Binding setKcptunConfig_Connects}" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" MinWidth="18" Padding="0"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="DSCP:" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBox x:Name="KcptunConfig_DSCP" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" Text="{Binding setKcptunConfig_DSCP}" MinWidth="18" Padding="0" />
+                                <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="MTU:" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBox x:Name="KcptunConfig_MTU" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" ToolTip="默认1350" Text="{Binding setKcptunConfig_MTU}" LostKeyboardFocus="TextBox_LostKeyboardFocus" MinWidth="18" Padding="0"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="Key:" VerticalAlignment="Top" FontSize="14" ToolTip="务必和服务端一致" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBox x:Name="KcptunConfig_Key" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" Text="{Binding setKcptunConfig_Key}" ToolTip="务必和服务端一致" MinWidth="18" Padding="0" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,48,0,0" Height="20" VerticalAlignment="Top">
+                                <TextBlock HorizontalAlignment="Left" Text="版本:" VerticalAlignment="Top" FontSize="14"/>
+                                <ComboBox x:Name="KcptunConfig_SystemBit" HorizontalAlignment="Left" Margin="4,0,0,0" VerticalAlignment="Top" Height="20" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Padding="6,2,5,3" IsTabStop="False" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_SystemBit}">
+                                    <ComboBoxItem Content="x86"/>
+                                    <ComboBoxItem Content="x86_64"/>
+                                </ComboBox>
+                                <TextBlock Text="模式:" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top" ToolTip="务必和服务端一致" Margin="8,0,0,0" />
+                                <ComboBox x:Name="KcptunConfig_Mode" Margin="4,0,0,0" VerticalAlignment="Top" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="20" Padding="6,2,5,3" IsTabStop="False" HorizontalAlignment="Left" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_Mode}" ToolTip="务必和服务端一致">
+                                    <ComboBoxItem Content="normal"/>
+                                    <ComboBoxItem Content="fast"/>
+                                    <ComboBoxItem Content="fast2"/>
+                                    <ComboBoxItem Content="fast3"/>
+                                    <ComboBoxItem Content="manual"/>
+                                </ComboBox>
+                                <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" Text="加密:" VerticalAlignment="Top" FontSize="14" ToolTip="务必和服务端一致"/>
+                                <ComboBox x:Name="KcptunConfig_Crypt" HorizontalAlignment="Left" Margin="4,0,0,0" VerticalAlignment="Top" Height="20" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" IsTabStop="False" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_Crypt}" ToolTip="务必和服务端一致">
+                                    <ComboBoxItem Content="默认"/>
+                                    <ComboBoxItem Content="aes-256"/>
+                                    <ComboBoxItem Content="aes-192"/>
+                                    <ComboBoxItem Content="aes-128"/>
+                                    <ComboBoxItem Content="salsa20"/>
+                                    <ComboBoxItem Content="blowfish"/>
+                                    <ComboBoxItem Content="twofish"/>
+                                    <ComboBoxItem Content="cast5"/>
+                                    <ComboBoxItem Content="3des"/>
+                                    <ComboBoxItem Content="xtea"/>
+                                    <ComboBoxItem Content="tea"/>
+                                    <ComboBoxItem Content="xor"/>
+                                    <ComboBoxItem Content="none"/>
+                                </ComboBox>
+                                <CheckBox x:Name="KcptunConfig_Compress" Content="启用压缩" Margin="8,0,0,0" IsHitTestVisible="True" IsTabStop="False" ToolTip="关闭压缩可能会降低延迟,务必和服务端一致" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" VerticalAlignment="Top" HorizontalAlignment="Left" IsChecked="{Binding setKcptunConfig_Compress}" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBlock HorizontalAlignment="Left" Margin="8,0,0,0" TextWrapping="Wrap" Text="前向纠错:" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBox x:Name="KcptunConfig_ParityShard" HorizontalAlignment="Left" Height="18" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" ToolTip="此处填写前向纠错的ParityShard值" Text="{Binding setKcptunConfig_ParityShard}" MinWidth="18" Padding="0"/>
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="/" VerticalAlignment="Top" FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                <TextBox x:Name="KcptunConfig_DataShard" HorizontalAlignment="Left" Height="18" Margin="4,0,0,0" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" AllowDrop="False" ToolTip="此处填写前向纠错的DataShard值" Text="{Binding setKcptunConfig_DataShard}" MinWidth="18" Padding="0"/>
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Top" Margin="0,72,0,0">
+                                <GroupBox x:Name="GroupBox_KcptunManualConfigs" Header="手动参数" VerticalAlignment="Top" Margin="0" Height="42" IsEnabled="False">
+                                    <StackPanel Orientation="Horizontal" Margin="0" Height="20">
+                                        <CheckBox x:Name="KcptunConfig_NoDelay" Content="NoDelay" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" ToolTip="是否启用nodelay模式" IsChecked="{Binding setKcptunConfig_NoDelay}" Cursor="Help" Height="16" ScrollViewer.VerticalScrollBarVisibility="Disabled" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                                        <CheckBox x:Name="KcptunConfig_NC" Content="流量控制" HorizontalAlignment="Left" Margin="8,0,0,0" VerticalAlignment="Top" ToolTip="是否启用流量控制" IsChecked="{Binding setKcptunConfig_NC}" Cursor="Help" Height="16" ScrollViewer.VerticalScrollBarVisibility="Disabled" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                                        <TextBlock Text="ReSend:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="16" Margin="8,0,0,0" ToolTip="快速重传模式，默认0关闭，可以设置2（2次ACK跨越将会直接重传）" Cursor="Help" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                        <TextBox x:Name="KcptunConfig_ReSend" ToolTip="快速重传模式，默认0关闭，可以设置2（2次ACK跨越将会直接重传）" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="4,0,0,0" Text="{Binding setKcptunConfig_ReSend}" MinWidth="18" TextChanged="TextBox_TextChanged" Padding="0"/>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="Interval:" Height="16" Margin="8,0,0,0" ToolTip="协议内部工作的 interval，单位毫秒，比如 10ms或者 20ms" Cursor="Help" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                        <TextBox x:Name="KcptunConfig_Interval" ToolTip="协议内部工作的interval，单位ms，比如10ms或者20ms" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="4,0,0,0" Text="{Binding setKcptunConfig_Interval}" MinWidth="18"  TextChanged="TextBox_TextChanged" Padding="0"/>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="发送窗口/接收窗口:" Margin="8,0,0,0" ToolTip="发送窗口/接受窗口,客户端默认128/1024,单位packets" Cursor="Help" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="16"/>
+                                        <TextBox x:Name="KcptunConfig_SndWnd" ToolTip="发送窗口大小,客户端默认128,单位packets" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="4,0,0,0" Text="{Binding setKcptunConfig_SndWnd}" MinWidth="18"  TextChanged="TextBox_TextChanged" Padding="0"/>
+                                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Text="/" Height="16" Margin="0,0,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+                                        <TextBox x:Name="KcptunConfig_RcvWnd" ToolTip="发送窗口大小,客户端默认1024,单位packets" HorizontalAlignment="Left" VerticalAlignment="Top" Height="18" Margin="0" Text="{Binding setKcptunConfig_RcvWnd}" MinWidth="18"  TextChanged="TextBox_TextChanged" Padding="0"/>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                            <StackPanel Height="36" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,116,0,0">
+                                <TextBox x:Name="MainWindow_KcptunCommandLine" AllowDrop="False" IsTabStop="False" ToolTip="客户端手动启动参数" Margin="0" AutoWordSelection="True" IsUndoEnabled="False" IsReadOnly="True" TextWrapping="Wrap" MinWidth="612" MaxWidth="612" />
+                            </StackPanel>
+                        </Grid>
                     </GroupBox>
                     <StackPanel Height="24" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,176,0,0">
                         <Button x:Name="MainWindow_RunKcptun" Content="运行Kcptun客户端" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top" Height="24" Click="MainWindow_RunKcptun_Click" IsTabStop="False" Focusable="False"/>
@@ -89,51 +87,16 @@
                     </StackPanel>
                     <GroupBox x:Name="MainWindow_Logs" Header="日志" Margin="0,204,0,0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                         <ScrollViewer x:Name="MainWindow_LogsView" Margin="0">
-                            <TextBox x:Name="MainWindow_LogsText" IsTabStop="False" AllowDrop="False" IsReadOnly="True" IsUndoEnabled="False" TextWrapping="Wrap" TextChanged="TextBox_TextChanged"/>
+                            <TextBox x:Name="MainWindow_LogsText" IsTabStop="False" AllowDrop="False" IsReadOnly="True" IsUndoEnabled="False" TextWrapping="Wrap" TextChanged="TextBox_TextChanged" VerticalScrollBarVisibility="Disabled"/>
                         </ScrollViewer>
                     </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="服务端模式" x:Name="tabitemserver">
-                <Grid>
-                    <GroupBox x:Name="MainWindow_Logs2" Header="服务端日志" Margin="10,0,10,10" Height="132" VerticalAlignment="Bottom">
-                        <ScrollViewer x:Name="MainWindow_LogsView2" Margin="0" VerticalAlignment="Bottom" Height="110">
-                            <TextBox x:Name="MainWindow_LogsText2" IsTabStop="False" AllowDrop="False" IsReadOnly="True" IsUndoEnabled="False" TextWrapping="Wrap" TextChanged="TextBox_TextChanged"/>
-                        </ScrollViewer>
-                    </GroupBox>
-                    <GroupBox x:Name="MainWindow_Prarms2" Header="服务端参数设定" Margin="10,10,10,0" VerticalAlignment="Top" Height="136">
-                        <Grid Margin="0,0,-2,3">
-                            <TextBlock Text="数据转发目标:" Height="20" Margin="120,10,0,0" FontSize="14" Width="87" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
-                            <TextBox x:Name="KcptunConfig_Server2" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="20" Margin="213,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="185" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" Text="{Binding setKcptunConfig_Server}"/>
-                            <TextBlock Text="监听本地端口:" Height="20" Margin="402,10,0,0" FontSize="14" Width="87" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0"/>
-                            <TextBox x:Name="KcptunConfig_LocalPort2" InputMethod.IsInputMethodEnabled="False" AllowDrop="False" Height="20" Margin="495,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="46" Padding="0,1,0,0" TextChanged="TextBox_TextChanged" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" ToolTip="至少2位数的端口" Text="{Binding setKcptunConfig_LocalPort}"/>
-                            <TextBlock Text="模式:" Height="20" Margin="547,10,0,0" FontSize="14" Width="31" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,1,0,0" />
-                            <ComboBox x:Name="KcptunConfig_Mode2" Margin="583,10,0,0" VerticalAlignment="Top" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" Height="20" Padding="6,2,5,3" IsTabStop="False" HorizontalAlignment="Left" Width="72" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_Mode}">
-                                <ComboBoxItem Content="default"/>
-                                <ComboBoxItem Content="normal"/>
-                                <ComboBoxItem Content="fast"/>
-                                <ComboBoxItem Content="fast2"/>
-                                <ComboBoxItem Content="fast3"/>
-                            </ComboBox>
-                            <CheckBox x:Name="KcptunConfig_Compress2" Content="压缩" Margin="0,12,10,0" FontSize="14" IsHitTestVisible="True" IsTabStop="False" ToolTip="关闭压缩可能会降低延迟" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Height="16" VerticalAlignment="Top" HorizontalAlignment="Right" Width="48" IsChecked="{Binding setKcptunConfig_Compress}"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="版本:" VerticalAlignment="Top" FontSize="14" Padding="0,1,0,0" Height="20"/>
-                            <ComboBox x:Name="KcptunConfig_SystemBit2" HorizontalAlignment="Left" Margin="46,10,0,0" VerticalAlignment="Top" Width="68" Height="20" IsReadOnly="True" IsSynchronizedWithCurrentItem="False" Padding="6,2,5,3" IsTabStop="False" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="{Binding setKcptunConfig_SystemBit}">
-                                <ComboBoxItem Content="x86"/>
-                                <ComboBoxItem Content="x86_64"/>
-                            </ComboBox>
-                            <TextBox x:Name="MainWindow_KcptunCommandLine2" Margin="10,87,10,0" TextWrapping="Wrap" Height="20" VerticalAlignment="Top" AllowDrop="False" IsTabStop="False" ToolTip="客户端手动启动参数"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" Text="连接数:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0"/>
-                            <TextBox x:Name="KcptunConfig_Connects2" HorizontalAlignment="Left" Height="20" Margin="60,35,0,0" TextWrapping="Wrap" Text="{Binding setKcptunConfig_Connects}" VerticalAlignment="Top" Width="32" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" TextChanged="TextBox_TextChanged" AllowDrop="False"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="97,35,0,0" TextWrapping="Wrap" Text="DSCP:" VerticalAlignment="Top" Height="20" FontSize="14" Padding="0,1,0,0"/>
-                            <TextBox x:Name="KcptunConfig_DSCP2" HorizontalAlignment="Left" Height="20" Margin="142,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32" Padding="0,1,0,0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" TextChanged="TextBox_TextChanged" AllowDrop="False" Text="{Binding setKcptunConfig_DSCP}" />
-                        </Grid>
-                    </GroupBox>
-                    <Button x:Name="MainWindow_RunKcptun2" Content="运行Kcptun服务端" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top" Width="108" Height="24" Click="MainWindow_RunKcptun_Click" IsTabStop="False" Focusable="False"/>
-                    <Button x:Name="MainWindow_StopKcptun2" Content="停止Kcptun服务端" HorizontalAlignment="Left" Margin="123,151,0,0" VerticalAlignment="Top" Width="108" Height="24" IsTabStop="False" Focusable="False" Click="MainWindow_StopKcptun_Click" IsEnabled="False"/>
-                </Grid>
+                <TextBlock>服务端功能调试中,暂不可用,尽快上线</TextBlock>
             </TabItem>
             <TabItem Header="杂项">
-                <TextBlock>服务端功能调试中,暂不可用,尽快上线</TextBlock>
+                
             </TabItem>
         </TabControl>
         <Grid.DataContext>
