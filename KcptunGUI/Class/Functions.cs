@@ -5,8 +5,10 @@ namespace KcptunGUI.Class
 {
     class Functions
     {
-        static public String GetModeStringFromSelectedIndex(UInt16 _SelectedIndex){
-            switch (_SelectedIndex){
+        static public String GetModeStringFromSelectedIndex(UInt16 _SelectedIndex)
+        {
+            switch (_SelectedIndex)
+            {
                 case 0: return "normal";
                 case 1: return "fast";
                 default:
@@ -15,14 +17,17 @@ namespace KcptunGUI.Class
                 case 4: return "manual";
             }
         }
-        static public String GetDscpStringFromString(String _strDscp){//DSCP的值只能是整数 0~63
+        static public String GetDscpStringFromString(String _strDscp)
+        {//DSCP的值只能是整数 0~63
             if (_strDscp.Length == 0) { return ""; }
             else { Byte a; if (Byte.TryParse(_strDscp, out a) && a < 64) { return " -dscp " + a; } else { return ""; } }
         }
-        static public String GetCryptStringFromSelectedIndex(UInt16 _SelectedIndex){
-            switch (_SelectedIndex){
+        static public String GetCryptStringFromSelectedIndex(UInt16 _SelectedIndex)
+        {
+            switch (_SelectedIndex)
+            {
                 default:
-                case 0:return "默认";
+                case 0: return "默认";
                 case 1: return "aes-256";
                 case 2: return "aes-192";
                 case 3: return "aes-128";
