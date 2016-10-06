@@ -27,7 +27,7 @@ namespace KcptunGUI
         public string ClientType { get; set; } = "x86";
         public string ServerType { get; set; } = "x86";
         private bool isClientRunning = false;
-        private bool IsClientRunning
+        public bool IsClientRunning
         {
             get { return this.isClientRunning; }
             set { this.isClientRunning = value; RaisePropertyChanged(nameof(ButtonClientRun)); }
@@ -37,7 +37,7 @@ namespace KcptunGUI
             get { return this.isClientRunning ? "Stop Kcptun Client" : "Run Kcptun Client"; }
         }
         private bool isServerRunning = false;
-        private bool IsServerRunning
+        public bool IsServerRunning
         {
             get { return this.isServerRunning; }
             set { this.isServerRunning = value; RaisePropertyChanged(nameof(ButtonServerRun)); }

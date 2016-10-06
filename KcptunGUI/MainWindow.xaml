@@ -15,7 +15,7 @@
     TextOptions.TextFormattingMode="Display"
     Icon="kcptun.ico"
     MinHeight="480"
-    MaxWidth="800">
+    MinWidth="800">
     <Grid
         Margin="5">
         <TabControl>
@@ -294,7 +294,8 @@
                         <Button
                             Content="{Binding ButtonClientRun}"
                             Margin="5"
-                            Height="27" />
+                            Height="27"
+                            Click="ButtonRunClient_Click" />
                         <Button
                             Content="Export Config File"
                             Margin="5"
@@ -317,7 +318,7 @@
                             x:Name="TextBoxClientLog"
                             IsReadOnly="True"
                             IsUndoEnabled="False"
-                            Margin="5"
+                            Margin="3"
                             VerticalScrollBarVisibility="Auto"
                             HorizontalScrollBarVisibility="Auto" />
                     </GroupBox>
@@ -590,7 +591,8 @@
                         <Button
                             Content="{Binding ButtonServerRun}"
                             Margin="5"
-                            Height="27" />
+                            Height="27"
+                            Click="ButtonRunServer_Click" />
                         <Button
                             Content="Export Config File"
                             Margin="5"
@@ -613,7 +615,7 @@
                             x:Name="TextBoxServerLog"
                             IsReadOnly="True"
                             IsUndoEnabled="False"
-                            Margin="5"
+                            Margin="3"
                             VerticalScrollBarVisibility="Auto"
                             HorizontalScrollBarVisibility="Auto" />
                     </GroupBox>

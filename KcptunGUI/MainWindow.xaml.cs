@@ -17,9 +17,11 @@ namespace KcptunGUI
     public partial class MainWindow : Window
     {
         private System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();
-        private Process cmdp;
-        private bool cmdp_isRun = false;
+        private Process clientP, serverP;
         private MainWindowViewModel view;
+        private static readonly string DefaultClientConfigFile = "_client.json";
+        private static readonly string DefaultServerConfigFile = "_server.json";
+        private static readonly string KcptunFolder = "kcptun";
         public MainWindow()
         {
             this.view = new MainWindowViewModel();
@@ -37,7 +39,7 @@ namespace KcptunGUI
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(file, false, Encoding.UTF8))
+                using (StreamWriter sw = new StreamWriter(file, false, Encoding.Default))
                 {
                     string config = JsonConvert.SerializeObject(target, Formatting.Indented,
                         new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
@@ -56,7 +58,7 @@ namespace KcptunGUI
         {
             try
             {
-                using (StreamReader sr = new StreamReader(file, Encoding.UTF8))
+                using (StreamReader sr = new StreamReader(file, Encoding.Default))
                 {
                     string json = sr.ReadToEnd();
                     sr.Close();
@@ -71,9 +73,13 @@ namespace KcptunGUI
 
         private void MainWindow_Closed(object sender, EventArgs e)
         {
-            if (cmdp_isRun == true)
+            if (this.view.IsClientRunning)
             {
-                MainWindow_StopKcptun_Click(null, null);
+                ButtonRunClient_Click(null, null);
+            }
+            if (this.view.IsServerRunning)
+            {
+                ButtonRunServer_Click(null, null);
             }
             nicon.Visible = false;
         }
@@ -100,45 +106,8 @@ namespace KcptunGUI
             }
         }
 
-        private void MainWindow_RunKcptun_Click(object sender, RoutedEventArgs e)
-        {
-            cmdp = new Process();
-            cmdp.StartInfo.CreateNoWindow = true;
-            //cmdp.StartInfo.FileName = Environment.CurrentDirectory + "\\" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe");
-            //cmdp.StartInfo.Arguments = strKcptunArgvs;
-            cmdp.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-            cmdp.StartInfo.UseShellExecute = false;
-            cmdp.StartInfo.RedirectStandardInput = true;
-            cmdp.StartInfo.RedirectStandardOutput = true;
-            cmdp.StartInfo.RedirectStandardError = true;
-            cmdp.ErrorDataReceived += Cmdp_ErrorDataReceived;
-            cmdp.Start();
-            cmdp.BeginErrorReadLine();
-            cmdp_isRun = true;
-            //this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口";
-            //nicon.ShowBalloonTip(1500, "Kcptun GUI" + "  " + App.AppVersion, "Kcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口", System.Windows.Forms.ToolTipIcon.Info);
-            //this.MainWindow_RunKcptun.IsEnabled = false; this.MainWindow_StopKcptun.IsEnabled = true;
-        }
-
-        private void Cmdp_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            this.Dispatcher.Invoke(new Action(delegate
-            {
-                //this.MainWindow_LogsText.Text += "\n" + e.Data;
-            }));
-        }
-
-        private void MainWindow_StopKcptun_Click(object sender, RoutedEventArgs e)
-        {
-            cmdp.CancelErrorRead(); cmdp.Kill();
-            cmdp_isRun = false;
-            //this.MainWindow_LogsText.Text += "\nKcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放";
-            //nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已停止运行," + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口已释放", System.Windows.Forms.ToolTipIcon.Info);
-            //this.MainWindow_RunKcptun.IsEnabled = true; this.MainWindow_StopKcptun.IsEnabled = false;
-        }
-
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern Boolean IsWindowVisible(IntPtr hWnd);
+        public static extern bool IsWindowVisible(IntPtr hWnd);
 
         private void ButtonExportClientConfig_Click(object sender, RoutedEventArgs e)
         {
@@ -193,6 +162,96 @@ namespace KcptunGUI
                 {
                     this.view.Server = o as KcpServerModel;
                 }
+            }
+        }
+
+        private void ButtonRunClient_Click(object sender, RoutedEventArgs e)
+        {
+            if (!this.view.IsClientRunning)
+            {
+                ExportConfigFile(this.view.Client, Path.Combine(KcptunFolder, DefaultClientConfigFile));
+                this.clientP = new Process();
+                this.clientP.StartInfo.CreateNoWindow = true;
+                this.clientP.StartInfo.FileName = Path.Combine(KcptunFolder, this.view.ClientType == "x86" ? "client_windows_386.exe" : "client_windows_amd64.exe");
+                this.clientP.StartInfo.Arguments = "-c " + DefaultClientConfigFile;
+                this.clientP.StartInfo.WorkingDirectory = Path.Combine(Environment.CurrentDirectory, KcptunFolder);
+                this.clientP.StartInfo.UseShellExecute = false;
+                this.clientP.StartInfo.RedirectStandardOutput = true;
+                this.clientP.StartInfo.RedirectStandardError = true;
+                this.clientP.OutputDataReceived +=
+                    async (_sender, _e) => await this.Dispatcher.BeginInvoke(
+                        new Action(() =>
+                        {
+                            this.TextBoxClientLog.AppendText(_e.Data + Environment.NewLine);
+                            this.TextBoxClientLog.ScrollToEnd();
+                        }));
+                this.clientP.ErrorDataReceived +=
+                    async (_sender, _e) => await this.Dispatcher.BeginInvoke(
+                        new Action(() =>
+                        {
+                            this.TextBoxClientLog.AppendText(_e.Data + Environment.NewLine);
+                            this.TextBoxClientLog.ScrollToEnd();
+                        }));
+                this.clientP.Start();
+                this.clientP.BeginOutputReadLine();
+                this.clientP.BeginErrorReadLine();
+                this.view.IsClientRunning = true;
+            }
+            else
+            {
+                this.clientP.CancelOutputRead();
+                this.clientP.CancelErrorRead();
+                if (this.clientP != null && !this.clientP.HasExited)
+                {
+                    this.clientP.Kill();
+                }
+                this.clientP.Dispose();
+                this.view.IsClientRunning = false;
+            }
+        }
+
+        private void ButtonRunServer_Click(object sender, RoutedEventArgs e)
+        {
+            if (!this.view.IsServerRunning)
+            {
+                ExportConfigFile(this.view.Server, Path.Combine(KcptunFolder, DefaultServerConfigFile));
+                this.serverP = new Process();
+                this.serverP.StartInfo.CreateNoWindow = true;
+                this.serverP.StartInfo.FileName = Path.Combine(KcptunFolder, this.view.ClientType == "x86" ? "client_windows_386.exe" : "client_windows_amd64.exe");
+                this.serverP.StartInfo.Arguments = "-c " + DefaultServerConfigFile;
+                this.serverP.StartInfo.WorkingDirectory = Path.Combine(Environment.CurrentDirectory, KcptunFolder);
+                this.serverP.StartInfo.UseShellExecute = false;
+                this.serverP.StartInfo.RedirectStandardOutput = true;
+                this.serverP.StartInfo.RedirectStandardError = true;
+                this.serverP.OutputDataReceived +=
+                    async (_sender, _e) => await this.Dispatcher.BeginInvoke(
+                        new Action(() =>
+                        {
+                            this.TextBoxServerLog.AppendText(_e.Data + Environment.NewLine);
+                            this.TextBoxServerLog.ScrollToEnd();
+                        }));
+                this.serverP.ErrorDataReceived +=
+                    async (_sender, _e) => await this.Dispatcher.BeginInvoke(
+                        new Action(() =>
+                        {
+                            this.TextBoxServerLog.AppendText(_e.Data + Environment.NewLine);
+                            this.TextBoxServerLog.ScrollToEnd();
+                        }));
+                this.serverP.Start();
+                this.serverP.BeginOutputReadLine();
+                this.serverP.BeginErrorReadLine();
+                this.view.IsServerRunning = true;
+            }
+            else
+            {
+                this.serverP.CancelOutputRead();
+                this.serverP.CancelErrorRead();
+                if (this.serverP != null && !this.serverP.HasExited)
+                {
+                    this.serverP.Kill();
+                }
+                this.serverP.Dispose();
+                this.view.IsServerRunning = false;
             }
         }
     }
