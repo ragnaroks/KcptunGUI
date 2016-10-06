@@ -298,11 +298,13 @@
                         <Button
                             Content="Export Config File"
                             Margin="5"
-                            Height="27" />
+                            Height="27"
+                            Click="ButtonExportClientConfig_Click" />
                         <Button
                             Content="Import Config File"
                             Margin="5"
-                            Height="27" />
+                            Height="27"
+                            Click="ButtonImportClientConfig_Click" />
                         <Button
                             Content="Clear Log"
                             Margin="5"
@@ -592,11 +594,13 @@
                         <Button
                             Content="Export Config File"
                             Margin="5"
-                            Height="27" />
+                            Height="27"
+                            Click="ButtonExportServerConfig_Click" />
                         <Button
                             Content="Import Config File"
                             Margin="5"
-                            Height="27" />
+                            Height="27"
+                            Click="ButtonImportServerConfig_Click" />
                         <Button
                             Content="Clear Log"
                             Margin="5"

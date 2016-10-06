@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Dynamic;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +31,42 @@ namespace KcptunGUI
             nicon.Text = "Kcptun GUI";
             nicon.Visible = true;
             nicon.MouseClick += Nicon_MouseClick;
+        }
+
+        private bool ExportConfigFile(object target, string file)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(file, false, Encoding.UTF8))
+                {
+                    string config = JsonConvert.SerializeObject(target, Formatting.Indented,
+                        new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore });
+                    sw.Write(config);
+                    sw.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private object ImportConfigFile(Type type, string file)
+        {
+            try
+            {
+                using (StreamReader sr = new StreamReader(file, Encoding.UTF8))
+                {
+                    string json = sr.ReadToEnd();
+                    sr.Close();
+                    return JsonConvert.DeserializeObject(json, type);
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
@@ -100,5 +139,61 @@ namespace KcptunGUI
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern Boolean IsWindowVisible(IntPtr hWnd);
+
+        private void ButtonExportClientConfig_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog fileDialog = new Microsoft.Win32.SaveFileDialog();
+            fileDialog.Title = "Export Config File";
+            fileDialog.Filter = "JSON File (*.json)|*.json";
+            if (fileDialog.ShowDialog() == true)
+            {
+                ExportConfigFile(this.view.Client, fileDialog.FileName);
+            }
+        }
+
+        private void ButtonImportClientConfig_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
+            fileDialog.Multiselect = false;
+            fileDialog.Title = "Import Config File";
+            fileDialog.Filter = "JSON File (*.json)|*.json";
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                object o = ImportConfigFile(typeof(KcpClientModel), fileDialog.FileName);
+                if (o != null)
+                {
+                    this.view.Client = o as KcpClientModel;
+                }
+            }
+        }
+
+        private void ButtonExportServerConfig_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog fileDialog = new Microsoft.Win32.SaveFileDialog();
+            fileDialog.Title = "Export Config File";
+            fileDialog.Filter = "JSON File (*.json)|*.json";
+            if (fileDialog.ShowDialog() == true)
+            {
+                ExportConfigFile(this.view.Server, fileDialog.FileName);
+            }
+        }
+
+        private void ButtonImportServerConfig_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog fileDialog = new Microsoft.Win32.OpenFileDialog();
+            fileDialog.Multiselect = false;
+            fileDialog.Title = "Import Config File";
+            fileDialog.Filter = "JSON File (*.json)|*.json";
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                object o = ImportConfigFile(typeof(KcpServerModel), fileDialog.FileName);
+                if (o != null)
+                {
+                    this.view.Server = o as KcpServerModel;
+                }
+            }
+        }
     }
 }

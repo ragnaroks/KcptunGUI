@@ -9,8 +9,18 @@ namespace KcptunGUI
 {
     class MainWindowViewModel : INotifyPropertyChanged
     {
-        public KcpClientModel Client { get; } = new KcpClientModel();
-        public KcpServerModel Server { get; } = new KcpServerModel();
+        private KcpClientModel client = new KcpClientModel();
+        private KcpServerModel server = new KcpServerModel();
+        public KcpClientModel Client
+        {
+            get { return this.client; }
+            set { this.client = value; RaisePropertyChanged(nameof(Client)); }
+        }
+        public KcpServerModel Server
+        {
+            get { return this.server; }
+            set { this.server = value; RaisePropertyChanged(nameof(Server)); }
+        }
         public Collection<KcpMode> KcpModeList { get; private set; }
         public Collection<KcpCrypt> KcpCryptList { get; private set; }
         public Collection<KcpType> KcpTypeList { get; private set; }
