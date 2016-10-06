@@ -627,8 +627,8 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
                     <Canvas
-                        Width="200"
-                        Height="200">
+                        Width="150"
+                        Height="150">
                         <Canvas.Background>
                             <ImageBrush
                                 ImageSource="kcptun.ico" />
@@ -637,39 +637,64 @@
                     <Label
                         Content="Kcptun GUI"
                         HorizontalAlignment="Center"
-                        FontSize="48"
+                        FontSize="36"
                         FontWeight="Bold" />
                     <DockPanel
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Center"
+                        Margin="3">
                         <Label
-                            Content="Author:"
-                            FontWeight="Bold" />
+                            Content="Version: "
+                            Padding="0" />
+                        <Label
+                            Content="{Binding Version}"
+                            Padding="0" />
+                    </DockPanel>
+                    <DockPanel
+                        HorizontalAlignment="Center"
+                        Margin="3">
+                        <Label
+                            Content="Author: "
+                            FontWeight="Bold"
+                            Padding="0" />
                         <Label
                             Content="Meng Hang"
-                            FontWeight="Bold" />
+                            FontWeight="Bold"
+                            Padding="0" />
                     </DockPanel>
                     <DockPanel
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Center"
+                        Margin="3">
                         <Label
-                            Content="Source Code:" />
+                            Content="Source Code: "
+                            Padding="0" />
                         <Label
-                            Content="https://github.com/menghang/KcptunGUI.git" />
+                            Content="https://github.com/menghang/KcptunGUI.git"
+                            Padding="0"
+                            PreviewMouseDown="Label_MySRCPreviewMouseDown" />
                     </DockPanel>
                     <DockPanel
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Center"
+                        Margin="3">
                         <Label
-                            Content="Original Author:"
-                            FontWeight="Bold" />
+                            Content="Original Author: "
+                            FontWeight="Bold"
+                            Padding="0" />
                         <Label
                             Content="诸神的黄昏"
-                            FontWeight="Bold" />
+                            FontWeight="Bold"
+                            Padding="0"
+                            PreviewMouseDown="Label_OrigAuthorPreviewMouseDown" />
                     </DockPanel>
                     <DockPanel
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Center"
+                        Margin="3">
                         <Label
-                            Content="Original Source Code:" />
+                            Content="Original Source Code: "
+                            Padding="0" />
                         <Label
-                            Content="https://git.oschina.net/ragnaroks/KcptunGUI.git" />
+                            Content="https://git.oschina.net/ragnaroks/KcptunGUI.git"
+                            Padding="0"
+                            PreviewMouseDown="Label_OrigSRCPreviewMouseDown" />
                     </DockPanel>
                 </StackPanel>
             </TabItem>

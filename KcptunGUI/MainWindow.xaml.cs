@@ -210,6 +210,21 @@ namespace KcptunGUI
             }
         }
 
+        private void Label_MySRCPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("https://github.com/menghang/KcptunGUI");
+        }
+
+        private void Label_OrigAuthorPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("http://www.ragnaroks.org");
+        }
+
+        private void Label_OrigSRCPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("http://git.oschina.net/ragnaroks/KcptunGUI");
+        }
+
         private void ButtonRunServer_Click(object sender, RoutedEventArgs e)
         {
             if (!this.view.IsServerRunning)

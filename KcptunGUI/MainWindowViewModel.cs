@@ -46,6 +46,7 @@ namespace KcptunGUI
         {
             get { return this.isServerRunning ? "Stop Kcptun Server" : "Run Kcptun Server"; }
         }
+        public string Version { get; private set; }
 
         public MainWindowViewModel()
         {
@@ -59,6 +60,7 @@ namespace KcptunGUI
                 new KcpMode("normal"), new KcpMode("manual") };
             this.KcpTypeList = new Collection<KcpType>() {
                 new KcpType("x86"), new KcpType("x64") };
+            this.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
