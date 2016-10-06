@@ -23,8 +23,8 @@ namespace KcptunGUI
         public int autoexpire { get; set; } = 0;
         [DefaultValue(1350)]
         public int mtu { get; set; } = 1350;
-        [DefaultValue(128)]
-        public int sndwnd { get; set; } = 128;
+        [DefaultValue(1024)]
+        public int sndwnd { get; set; } = 1024;
         [DefaultValue(1024)]
         public int rcvwnd { get; set; } = 1024;
         [DefaultValue(10)]
