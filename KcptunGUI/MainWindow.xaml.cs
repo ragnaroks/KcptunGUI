@@ -225,6 +225,16 @@ namespace KcptunGUI
             Process.Start("http://git.oschina.net/ragnaroks/KcptunGUI");
         }
 
+        private void ButtonClearClientLog_Click(object sender, RoutedEventArgs e)
+        {
+            this.TextBoxClientLog.Clear();
+        }
+
+        private void ButtonClearServerLog_Click(object sender, RoutedEventArgs e)
+        {
+            this.TextBoxServerLog.Clear();
+        }
+
         private void ButtonRunServer_Click(object sender, RoutedEventArgs e)
         {
             if (!this.view.IsServerRunning)
@@ -232,7 +242,7 @@ namespace KcptunGUI
                 ExportConfigFile(this.view.Server, Path.Combine(KcptunFolder, DefaultServerConfigFile));
                 this.serverP = new Process();
                 this.serverP.StartInfo.CreateNoWindow = true;
-                this.serverP.StartInfo.FileName = Path.Combine(KcptunFolder, this.view.ClientType == "x86" ? "client_windows_386.exe" : "client_windows_amd64.exe");
+                this.serverP.StartInfo.FileName = Path.Combine(KcptunFolder, this.view.ClientType == "x86" ? "server_windows_386.exe" : "server_windows_amd64.exe");
                 this.serverP.StartInfo.Arguments = "-c " + DefaultServerConfigFile;
                 this.serverP.StartInfo.WorkingDirectory = Path.Combine(Environment.CurrentDirectory, KcptunFolder);
                 this.serverP.StartInfo.UseShellExecute = false;

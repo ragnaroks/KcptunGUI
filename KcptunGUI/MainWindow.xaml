@@ -309,7 +309,8 @@
                         <Button
                             Content="Clear Log"
                             Margin="5"
-                            Height="27" />
+                            Height="27"
+                            Click="ButtonClearClientLog_Click" />
                     </UniformGrid>
                     <GroupBox
                         Header="Log"
@@ -606,7 +607,8 @@
                         <Button
                             Content="Clear Log"
                             Margin="5"
-                            Height="27" />
+                            Height="27"
+                            Click="ButtonClearServerLog_Click" />
                     </UniformGrid>
                     <GroupBox
                         Header="Log"
