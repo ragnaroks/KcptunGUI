@@ -292,7 +292,7 @@
                                 Height="27" />
                         </DockPanel>
                         <Button
-                            Content="Run Kcptun Client"
+                            Content="{Binding ButtonClientRun}"
                             Margin="5"
                             Height="27" />
                         <Button
@@ -586,7 +586,7 @@
                                 Height="27" />
                         </DockPanel>
                         <Button
-                            Content="Run Kcptun Server"
+                            Content="{Binding ButtonServerRun}"
                             Margin="5"
                             Height="27" />
                         <Button

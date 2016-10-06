@@ -16,6 +16,26 @@ namespace KcptunGUI
         public Collection<KcpType> KcpTypeList { get; private set; }
         public string ClientType { get; set; } = "x86";
         public string ServerType { get; set; } = "x86";
+        private bool isClientRunning = false;
+        private bool IsClientRunning
+        {
+            get { return this.isClientRunning; }
+            set { this.isClientRunning = value; RaisePropertyChanged(nameof(ButtonClientRun)); }
+        }
+        public string ButtonClientRun
+        {
+            get { return this.isClientRunning ? "Stop Kcptun Client" : "Run Kcptun Client"; }
+        }
+        private bool isServerRunning = false;
+        private bool IsServerRunning
+        {
+            get { return this.isServerRunning; }
+            set { this.isServerRunning = value; RaisePropertyChanged(nameof(ButtonServerRun)); }
+        }
+        public string ButtonServerRun
+        {
+            get { return this.isServerRunning ? "Stop Kcptun Server" : "Run Kcptun Server"; }
+        }
 
         public MainWindowViewModel()
         {
