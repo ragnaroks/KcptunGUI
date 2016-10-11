@@ -26,8 +26,14 @@ namespace KcptunGUI
         public bool IsClientRunning
         {
             get { return this.isClientRunning; }
-            set { this.isClientRunning = value; RaisePropertyChanged(nameof(ButtonClientRun)); }
+            set
+            {
+                this.isClientRunning = value;
+                RaisePropertyChanged(nameof(ButtonClientRun));
+                RaisePropertyChanged(nameof(ClientEnableSelection));
+            }
         }
+        public bool ClientEnableSelection { get { return !this.isClientRunning; } }
         public string ButtonClientRun
         {
             get { return this.isClientRunning ? "Stop Kcptun Client" : "Run Kcptun Client"; }
@@ -36,8 +42,14 @@ namespace KcptunGUI
         public bool IsServerRunning
         {
             get { return this.isServerRunning; }
-            set { this.isServerRunning = value; RaisePropertyChanged(nameof(ButtonServerRun)); }
+            set
+            {
+                this.isServerRunning = value;
+                RaisePropertyChanged(nameof(ButtonServerRun));
+                RaisePropertyChanged(nameof(ServerEnableSelection));
+            }
         }
+        public bool ServerEnableSelection { get { return !this.isServerRunning; } }
         public string ButtonServerRun
         {
             get { return this.isServerRunning ? "Stop Kcptun Server" : "Run Kcptun Server"; }

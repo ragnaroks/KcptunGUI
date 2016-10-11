@@ -292,7 +292,8 @@
                                 SelectedValuePath="Type"
                                 IsReadOnly="True"
                                 VerticalContentAlignment="Center"
-                                Height="27" />
+                                Height="27"
+                                IsEnabled="{Binding ClientEnableSelection}"/>
                         </DockPanel>
                         <Button
                             Content="{Binding ButtonClientRun}"
@@ -590,7 +591,8 @@
                                 SelectedValuePath="Type"
                                 IsReadOnly="True"
                                 VerticalContentAlignment="Center"
-                                Height="27" />
+                                Height="27"
+                                IsEnabled="{Binding ServerEnableSelection}" />
                         </DockPanel>
                         <Button
                             Content="{Binding ButtonServerRun}"
