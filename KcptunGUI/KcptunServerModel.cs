@@ -14,7 +14,7 @@ namespace KcptunGUI
         public string crypt { get; set; } = "aes";
         [DefaultValue("fast")]
         public string mode { get; set; } = "fast";
-        [DefaultValue("0")]
+        [DefaultValue(0)]
         public int autoexpire { get; set; } = 0;
         [DefaultValue(1350)]
         public int mtu { get; set; } = 1350;
