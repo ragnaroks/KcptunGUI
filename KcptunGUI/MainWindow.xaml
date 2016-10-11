@@ -15,7 +15,8 @@
     TextOptions.TextFormattingMode="Display"
     Icon="kcptun.ico"
     MinHeight="480"
-    MinWidth="800">
+    MinWidth="800"
+    Loaded="Window_Loaded">
     <Grid
         Margin="5">
         <TabControl>
