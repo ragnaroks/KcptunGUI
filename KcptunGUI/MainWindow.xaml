@@ -293,7 +293,8 @@
                                 IsReadOnly="True"
                                 VerticalContentAlignment="Center"
                                 Height="27"
-                                IsEnabled="{Binding ClientEnableSelection}"/>
+                                IsEnabled="{Binding ClientEnableSelection}"
+                                ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" />
                         </DockPanel>
                         <Button
                             Content="{Binding ButtonClientRun}"
@@ -592,7 +593,8 @@
                                 IsReadOnly="True"
                                 VerticalContentAlignment="Center"
                                 Height="27"
-                                IsEnabled="{Binding ServerEnableSelection}" />
+                                IsEnabled="{Binding ServerEnableSelection}"
+                                ItemContainerStyle="{DynamicResource ComboBoxItemStyle}" />
                         </DockPanel>
                         <Button
                             Content="{Binding ButtonServerRun}"
@@ -707,4 +709,13 @@
             </TabItem>
         </TabControl>
     </Grid>
+    <Window.Resources>
+        <Style
+            x:Key="ComboBoxItemStyle"
+            TargetType="ComboBoxItem">
+            <Setter
+                Property="Visibility"
+                Value="{Binding Show}" />
+        </Style>
+    </Window.Resources>
 </Window>

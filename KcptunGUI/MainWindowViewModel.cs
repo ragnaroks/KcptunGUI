@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 
 namespace KcptunGUI
 {
@@ -67,7 +69,7 @@ namespace KcptunGUI
                 new KcpMode("fast3"), new KcpMode("fast2"), new KcpMode("fast"),
                 new KcpMode("normal"), new KcpMode("manual") };
             this.KcpTypeList = new Collection<KcpType>() {
-                new KcpType("x86"), new KcpType("x64") };
+                new KcpType("x86",true), new KcpType("x64",Environment.Is64BitOperatingSystem) };
             this.Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
 
@@ -98,9 +100,19 @@ namespace KcptunGUI
         public class KcpType
         {
             public string Type { get; }
-            public KcpType(string _type)
+            private bool enable;
+            public Visibility Show
+            {
+                get
+                {
+                    if (this.enable) { return Visibility.Visible; }
+                    else { return Visibility.Collapsed; }
+                }
+            }
+            public KcpType(string _type, bool _enable)
             {
                 this.Type = _type;
+                this.enable = _enable;
             }
         }
     }
