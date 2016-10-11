@@ -159,12 +159,18 @@ namespace KcptunGUI
                 foreach (var item in downloadList)
                 {
                     tasks.Add(Task.Run(
-                        new Action(
-                        () => ExtractKcptunFile(Path.Combine(KcptunPath, "tmp", item.Key), Path.Combine(KcptunPath, "tmp")))));
+                        () => ExtractKcptunFile(Path.Combine(KcptunPath, "tmp", item.Key), Path.Combine(KcptunPath, "tmp"))));
                 }
                 await Task.WhenAll(tasks);
                 this.UpdateList = await CheckBinaryUpdate();
-                return true;
+                if (this.UpdateList.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception e)
             {
@@ -250,25 +256,25 @@ namespace KcptunGUI
             Dictionary<string, string> updateList = new Dictionary<string, string>();
             string downloaded = GetKcpBinaryFileName(Path.Combine(KcptunPath, "tmp"), "windows", "server", "386", "exe");
             string original = Path.Combine(KcptunPath, KcptunServer32);
-            if (!await CompareSha256(downloaded, original))
+            if (!await Task.Run(() => CompareSha256(downloaded, original)))
             {
                 updateList.Add(original, downloaded);
             }
             downloaded = GetKcpBinaryFileName(Path.Combine(KcptunPath, "tmp"), "windows", "server", "amd64", "exe");
             original = Path.Combine(KcptunPath, KcptunServer64);
-            if (!await CompareSha256(downloaded, original))
+            if (!!await Task.Run(() => CompareSha256(downloaded, original)))
             {
                 updateList.Add(original, downloaded);
             }
             downloaded = GetKcpBinaryFileName(Path.Combine(KcptunPath, "tmp"), "windows", "client", "386", "exe");
             original = Path.Combine(KcptunPath, KcptunClient32);
-            if (!await CompareSha256(downloaded, original))
+            if (!!await Task.Run(() => CompareSha256(downloaded, original)))
             {
                 updateList.Add(original, downloaded);
             }
             downloaded = GetKcpBinaryFileName(Path.Combine(KcptunPath, "tmp"), "windows", "client", "amd64", "exe");
             original = Path.Combine(KcptunPath, KcptunClient64);
-            if (!await CompareSha256(downloaded, original))
+            if (!!await Task.Run(() => CompareSha256(downloaded, original)))
             {
                 updateList.Add(original, downloaded);
             }
@@ -297,12 +303,12 @@ namespace KcptunGUI
             return null;
         }
 
-        private async Task<bool> CompareSha256(string file1, string file2)
+        private bool CompareSha256(string file1, string file2)
         {
-            string tmp = await Task.Run(() => GetSha256(file1));
+            string tmp = GetSha256(file1);
             if (tmp != null)
             {
-                return GetSha256(file1).Equals(await Task.Run(() => GetSha256(file2)));
+                return tmp.Equals(GetSha256(file2));
             }
             else
             {
@@ -316,11 +322,9 @@ namespace KcptunGUI
             {
                 using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
                 {
-                    byte[] buffer = new byte[fs.Length];
-                    fs.Read(buffer, 0, (int)fs.Length);
                     using (SHA256 sha256 = new SHA256Managed())
                     {
-                        byte[] tmpByte = sha256.ComputeHash(buffer);
+                        byte[] tmpByte = sha256.ComputeHash(fs);
                         sha256.Clear();
                         return Convert.ToBase64String(tmpByte);
                     }
