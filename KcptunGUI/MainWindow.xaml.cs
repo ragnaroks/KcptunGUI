@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
+using System.Threading.Tasks;
 
 namespace KcptunGUI
 {
@@ -191,6 +192,7 @@ namespace KcptunGUI
             if (this.clientP != null && !this.clientP.HasExited)
             {
                 this.clientP.Kill();
+                this.clientP.WaitForExit(3000);
             }
             this.clientP.Dispose();
         }
@@ -338,6 +340,7 @@ namespace KcptunGUI
             if (this.serverP != null && !this.serverP.HasExited)
             {
                 this.serverP.Kill();
+                this.serverP.WaitForExit(3000);
             }
             this.serverP.Dispose();
         }
