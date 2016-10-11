@@ -166,14 +166,14 @@ namespace KcptunGUI
             this.clientP.StartInfo.RedirectStandardOutput = true;
             this.clientP.StartInfo.RedirectStandardError = true;
             this.clientP.OutputDataReceived +=
-                async (_sender, _e) => await this.Dispatcher.BeginInvoke(
+                (_sender, _e) => this.Dispatcher.BeginInvoke(
                     new Action(() =>
                     {
                         this.TextBoxClientLog.AppendText(_e.Data + Environment.NewLine);
                         this.TextBoxClientLog.ScrollToEnd();
                     }));
             this.clientP.ErrorDataReceived +=
-                async (_sender, _e) => await this.Dispatcher.BeginInvoke(
+                (_sender, _e) => this.Dispatcher.BeginInvoke(
                     new Action(() =>
                     {
                         this.TextBoxClientLog.AppendText(_e.Data + Environment.NewLine);
@@ -291,14 +291,14 @@ namespace KcptunGUI
             this.serverP.StartInfo.RedirectStandardOutput = true;
             this.serverP.StartInfo.RedirectStandardError = true;
             this.serverP.OutputDataReceived +=
-                async (_sender, _e) => await this.Dispatcher.BeginInvoke(
+                (_sender, _e) => this.Dispatcher.BeginInvoke(
                     new Action(() =>
                     {
                         this.TextBoxServerLog.AppendText(_e.Data + Environment.NewLine);
                         this.TextBoxServerLog.ScrollToEnd();
                     }));
             this.serverP.ErrorDataReceived +=
-                async (_sender, _e) => await this.Dispatcher.BeginInvoke(
+                (_sender, _e) => this.Dispatcher.BeginInvoke(
                     new Action(() =>
                     {
                         this.TextBoxServerLog.AppendText(_e.Data + Environment.NewLine);
