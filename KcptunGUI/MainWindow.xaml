@@ -16,7 +16,9 @@
     Icon="kcptun.ico"
     MinHeight="480"
     MinWidth="800"
-    Loaded="Window_Loaded">
+    Loaded="Window_Loaded"
+    Closed="Window_Closed"
+    StateChanged="Window_StateChanged">
     <Grid
         Margin="5">
         <TabControl>

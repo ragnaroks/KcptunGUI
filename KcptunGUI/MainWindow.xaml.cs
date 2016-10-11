@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
-using System.Dynamic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Reflection;
 
 namespace KcptunGUI
 {
@@ -17,7 +13,7 @@ namespace KcptunGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();
+        private System.Windows.Forms.NotifyIcon notify = new System.Windows.Forms.NotifyIcon();
         private Process clientP, serverP;
         private MainWindowViewModel view;
         private static readonly string DefaultClientConfigFile = "_client.json";
@@ -29,13 +25,24 @@ namespace KcptunGUI
             this.view = new MainWindowViewModel();
             this.DataContext = this.view;
             InitializeComponent();
-            this.StateChanged += MainWindow_StateChanged;
-            this.Closed += MainWindow_Closed;
             this.kcptun = new KcptunUtils();
-            nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
-            nicon.Text = "Kcptun GUI";
-            nicon.Visible = true;
-            nicon.MouseClick += Nicon_MouseClick;
+            this.notify.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
+            this.notify.Text = "Kcptun GUI";
+            this.notify.Visible = true;
+            this.notify.MouseClick += Notify_MouseClick;
+        }
+
+        private void Notify_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle))
+            {
+                this.Hide();
+            }
+            else
+            {
+                this.Show();
+                this.WindowState = WindowState.Normal;
+            }
         }
 
         private bool ExportConfigFile(object target, string file)
@@ -71,41 +78,6 @@ namespace KcptunGUI
             catch
             {
                 return null;
-            }
-        }
-
-        private void MainWindow_Closed(object sender, EventArgs e)
-        {
-            if (this.view.IsClientRunning)
-            {
-                ButtonRunClient_Click(null, null);
-            }
-            if (this.view.IsServerRunning)
-            {
-                ButtonRunServer_Click(null, null);
-            }
-            nicon.Visible = false;
-        }
-
-        private void MainWindow_StateChanged(object sender, EventArgs e)
-        {
-            if (this.WindowState.Equals(WindowState.Minimized)
-                && IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle))
-            {
-                this.Hide();
-            }
-        }
-
-        private void Nicon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle))
-            {
-                this.Hide();
-            }
-            else
-            {
-                this.Show();
-                this.WindowState = WindowState.Normal;
             }
         }
 
@@ -335,6 +307,28 @@ namespace KcptunGUI
             this.serverP.Start();
             this.serverP.BeginOutputReadLine();
             this.serverP.BeginErrorReadLine();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            if (this.view.IsClientRunning)
+            {
+                StopKcptunClient();
+            }
+            if (this.view.IsServerRunning)
+            {
+                StopKcptunServer();
+            }
+            this.notify.Visible = false;
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState.Equals(WindowState.Minimized)
+                && IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle))
+            {
+                this.Hide();
+            }
         }
 
         private void StopKcptunServer()
