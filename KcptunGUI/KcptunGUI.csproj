@@ -101,8 +101,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="KcpClientModel.cs" />
-    <Compile Include="KcpServerModel.cs" />
+    <Compile Include="KcptunClientModel.cs" />
+    <Compile Include="KcptunServerModel.cs" />
     <Compile Include="KcptunUtils.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

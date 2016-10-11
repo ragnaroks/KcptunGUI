@@ -132,10 +132,10 @@ namespace KcptunGUI
 
             if (fileDialog.ShowDialog() == true)
             {
-                object o = ImportConfigFile(typeof(KcpClientModel), fileDialog.FileName);
+                object o = ImportConfigFile(typeof(KcptunClientModel), fileDialog.FileName);
                 if (o != null)
                 {
-                    this.view.Client = o as KcpClientModel;
+                    this.view.Client = o as KcptunClientModel;
                 }
             }
         }
@@ -160,10 +160,10 @@ namespace KcptunGUI
 
             if (fileDialog.ShowDialog() == true)
             {
-                object o = ImportConfigFile(typeof(KcpServerModel), fileDialog.FileName);
+                object o = ImportConfigFile(typeof(KcptunServerModel), fileDialog.FileName);
                 if (o != null)
                 {
-                    this.view.Server = o as KcpServerModel;
+                    this.view.Server = o as KcptunServerModel;
                 }
             }
         }
