@@ -1,7 +1,7 @@
 Kcptun GUI
 =======================
 
-[![Build status](https://ci.appveyor.com/api/projects/status/y74cs3q5oe4gd6yi?svg=true)](https://ci.appveyor.com/project/menghang/kcptungui)
+[![Build status](https://ci.appveyor.com/api/projects/status/ol8pcjtmalhuke8o?svg=true)](https://ci.appveyor.com/project/menghang/kcptungui)
 
 ### About KcptunGUI
 KcptunGUI provides a friendly user interface of kcptun in Windows platform. It helps users configure paramters and manage configuration files.

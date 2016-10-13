@@ -1,7 +1,7 @@
 Kcptun GUI
 =======================
 
-[![Build status](https://ci.appveyor.com/api/projects/status/y74cs3q5oe4gd6yi?svg=true)](https://ci.appveyor.com/project/menghang/kcptungui)
+[![Build status](https://ci.appveyor.com/api/projects/status/ol8pcjtmalhuke8o?svg=true)](https://ci.appveyor.com/project/menghang/kcptungui)
 
 ### KcptunGUI是什么?
 KcptunGUI是kcptun的Windows用户界面,用于帮助用户简易方便的配置参数以及管理服务.
