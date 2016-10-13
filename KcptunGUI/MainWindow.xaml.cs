@@ -5,7 +5,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
-using System.Threading.Tasks;
 
 namespace KcptunGUI
 {
@@ -166,6 +165,7 @@ namespace KcptunGUI
             this.clientP.StartInfo.UseShellExecute = false;
             this.clientP.StartInfo.RedirectStandardOutput = true;
             this.clientP.StartInfo.RedirectStandardError = true;
+            this.clientP.EnableRaisingEvents = true;
             this.clientP.OutputDataReceived +=
                 (_sender, _e) => this.Dispatcher.BeginInvoke(
                     new Action(() =>
@@ -180,6 +180,7 @@ namespace KcptunGUI
                         this.TextBoxClientLog.AppendText(_e.Data + Environment.NewLine);
                         this.TextBoxClientLog.ScrollToEnd();
                     }));
+            this.clientP.Exited += (_sender, _e) => this.view.IsClientRunning = false;
             this.clientP.Start();
             this.clientP.BeginOutputReadLine();
             this.clientP.BeginErrorReadLine();
@@ -235,6 +236,8 @@ namespace KcptunGUI
 
         private void Kcptun_UpdateAvailable(object sender, EventArgs e)
         {
+            bool clientNeedRestore = false;
+            bool serverNeedRestore = false;
             if (this.view.IsClientRunning || this.view.IsServerRunning)
             {
                 if (MessageBox.Show("Kcptun binary needs to be updated. "
@@ -244,11 +247,15 @@ namespace KcptunGUI
                 {
                     if (this.view.IsClientRunning)
                     {
+                        this.clientP.EnableRaisingEvents = false;
                         StopKcptunClient();
+                        clientNeedRestore = true;
                     }
                     if (this.view.IsServerRunning)
                     {
+                        this.serverP.EnableRaisingEvents = false;
                         StopKcptunServer();
+                        serverNeedRestore = true;
                     }
                 }
                 else
@@ -257,11 +264,11 @@ namespace KcptunGUI
                 }
             }
             this.kcptun.UpdateKcptunBinary();
-            if (this.view.IsClientRunning)
+            if (clientNeedRestore)
             {
                 RunKcptunClient();
             }
-            if (this.view.IsServerRunning)
+            if (serverNeedRestore)
             {
                 RunKcptunServer();
             }
@@ -292,6 +299,7 @@ namespace KcptunGUI
             this.serverP.StartInfo.UseShellExecute = false;
             this.serverP.StartInfo.RedirectStandardOutput = true;
             this.serverP.StartInfo.RedirectStandardError = true;
+            this.serverP.EnableRaisingEvents = true;
             this.serverP.OutputDataReceived +=
                 (_sender, _e) => this.Dispatcher.BeginInvoke(
                     new Action(() =>
@@ -306,6 +314,7 @@ namespace KcptunGUI
                         this.TextBoxServerLog.AppendText(_e.Data + Environment.NewLine);
                         this.TextBoxServerLog.ScrollToEnd();
                     }));
+            this.serverP.Exited += (_sender, _e) => this.view.IsServerRunning = false;
             this.serverP.Start();
             this.serverP.BeginOutputReadLine();
             this.serverP.BeginErrorReadLine();
