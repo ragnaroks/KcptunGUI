@@ -12,6 +12,10 @@ KcptunGUI provides a friendly user interface of kcptun in Windows platform. It h
 ### Kcptun Related
 - [kcptun](https://github.com/xtaci/kcptun)
 
+### Todo List
+- Compress kcptun binaries that are embedded to reduce the size of software.
+- Add detection to avoid duplicate instances, or make it handle multiple kcptun server / client.
+
 ### Source Code
 - [Github](https://github.com/menghang/kcptungui)
 
