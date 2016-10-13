@@ -701,7 +701,7 @@
                             Content="Original Source Code: "
                             Padding="0" />
                         <Label
-                            Content="https://github.com/ragnaroks/KcptunGUI"
+                            Content="https://github.com/ragnaroks/KcptunGUI.git"
                             Padding="0"
                             PreviewMouseDown="Label_OrigSRCPreviewMouseDown" />
                     </DockPanel>
