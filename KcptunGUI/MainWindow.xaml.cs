@@ -210,7 +210,7 @@ namespace KcptunGUI
 
         private void Label_OrigSRCPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Process.Start("http://git.oschina.net/ragnaroks/KcptunGUI");
+            Process.Start("https://github.com/ragnaroks/KcptunGUI");
         }
 
         private void ButtonClearClientLog_Click(object sender, RoutedEventArgs e)
