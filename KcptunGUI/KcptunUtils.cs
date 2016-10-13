@@ -262,19 +262,19 @@ namespace KcptunGUI
             }
             downloaded = GetKcpBinaryFileName(Path.Combine(KcptunPath, "tmp"), "windows", "server", "amd64", "exe");
             original = Path.Combine(KcptunPath, KcptunServer64);
-            if (!!await Task.Run(() => CompareSha256(downloaded, original)))
+            if (!await Task.Run(() => CompareSha256(downloaded, original)))
             {
                 updateList.Add(original, downloaded);
             }
             downloaded = GetKcpBinaryFileName(Path.Combine(KcptunPath, "tmp"), "windows", "client", "386", "exe");
             original = Path.Combine(KcptunPath, KcptunClient32);
-            if (!!await Task.Run(() => CompareSha256(downloaded, original)))
+            if (!await Task.Run(() => CompareSha256(downloaded, original)))
             {
                 updateList.Add(original, downloaded);
             }
             downloaded = GetKcpBinaryFileName(Path.Combine(KcptunPath, "tmp"), "windows", "client", "amd64", "exe");
             original = Path.Combine(KcptunPath, KcptunClient64);
-            if (!!await Task.Run(() => CompareSha256(downloaded, original)))
+            if (!await Task.Run(() => CompareSha256(downloaded, original)))
             {
                 updateList.Add(original, downloaded);
             }
