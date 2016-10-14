@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
 
 namespace KcptunGUI
 {
@@ -19,13 +20,19 @@ namespace KcptunGUI
         private static readonly string DefaultClientConfigFile = "_client.json";
         private static readonly string DefaultServerConfigFile = "_server.json";
         private KcptunUtils kcptun;
+        private LogUtils clientLog;
+        private LogUtils serverLog;
+        private LogUtils log;
 
         public MainWindow()
         {
             this.view = new MainWindowViewModel();
             this.DataContext = this.view;
             InitializeComponent();
-            this.kcptun = new KcptunUtils();
+            this.clientLog = new LogUtils(this.RichTextBoxClientLog);
+            this.serverLog = new LogUtils(this.RichTextBoxServerLog);
+            this.log = new LogUtils(this.RichTextBoxLog);
+            this.kcptun = new KcptunUtils(this.serverLog);
             this.notify.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             this.notify.Text = "Kcptun GUI";
             this.notify.Visible = true;
@@ -58,8 +65,9 @@ namespace KcptunGUI
                     return true;
                 }
             }
-            catch
+            catch (Exception e)
             {
+                this.log.AppendLog(e.ToString(), Colors.Red);
                 return false;
             }
         }
@@ -75,8 +83,9 @@ namespace KcptunGUI
                     return JsonConvert.DeserializeObject(json, type);
                 }
             }
-            catch
+            catch (Exception e)
             {
+                this.log.AppendLog(e.ToString(), Colors.Red);
                 return null;
             }
         }
@@ -146,56 +155,58 @@ namespace KcptunGUI
             {
                 ExportConfigFile(this.view.Client, Path.Combine(KcptunUtils.KcptunPath, DefaultClientConfigFile));
                 RunKcptunClient();
-                this.view.IsClientRunning = true;
             }
             else
             {
                 StopKcptunClient();
-                this.view.IsClientRunning = false;
             }
         }
 
         private void RunKcptunClient()
         {
-            this.clientP = new Process();
-            this.clientP.StartInfo.CreateNoWindow = true;
-            this.clientP.StartInfo.FileName = Path.Combine(KcptunUtils.KcptunPath, this.view.ClientType == "x86" ? KcptunUtils.KcptunClient32 : KcptunUtils.KcptunClient64);
-            this.clientP.StartInfo.Arguments = "-c " + DefaultClientConfigFile;
-            this.clientP.StartInfo.WorkingDirectory = KcptunUtils.KcptunPath;
-            this.clientP.StartInfo.UseShellExecute = false;
-            this.clientP.StartInfo.RedirectStandardOutput = true;
-            this.clientP.StartInfo.RedirectStandardError = true;
-            this.clientP.EnableRaisingEvents = true;
-            this.clientP.OutputDataReceived +=
-                (_sender, _e) => this.Dispatcher.BeginInvoke(
-                    new Action(() =>
-                    {
-                        this.TextBoxClientLog.AppendText(_e.Data + Environment.NewLine);
-                        this.TextBoxClientLog.ScrollToEnd();
-                    }));
-            this.clientP.ErrorDataReceived +=
-                (_sender, _e) => this.Dispatcher.BeginInvoke(
-                    new Action(() =>
-                    {
-                        this.TextBoxClientLog.AppendText(_e.Data + Environment.NewLine);
-                        this.TextBoxClientLog.ScrollToEnd();
-                    }));
-            this.clientP.Exited += (_sender, _e) => this.view.IsClientRunning = false;
-            this.clientP.Start();
-            this.clientP.BeginOutputReadLine();
-            this.clientP.BeginErrorReadLine();
+            try
+            {
+                this.clientP = new Process();
+                this.clientP.StartInfo.CreateNoWindow = true;
+                this.clientP.StartInfo.FileName = Path.Combine(KcptunUtils.KcptunPath, this.view.ClientType == "x86" ? KcptunUtils.KcptunClient32 : KcptunUtils.KcptunClient64);
+                this.clientP.StartInfo.Arguments = "-c " + DefaultClientConfigFile;
+                this.clientP.StartInfo.WorkingDirectory = KcptunUtils.KcptunPath;
+                this.clientP.StartInfo.UseShellExecute = false;
+                this.clientP.StartInfo.RedirectStandardOutput = true;
+                this.clientP.StartInfo.RedirectStandardError = true;
+                this.clientP.EnableRaisingEvents = true;
+                this.clientP.OutputDataReceived +=
+                    (_sender, _e) => this.clientLog.AppendLog(_e.Data, Colors.Black);
+                this.clientP.ErrorDataReceived +=
+                    (_sender, _e) => this.clientLog.AppendLog(_e.Data, Colors.Black);
+                this.clientP.Exited += (_sender, _e) =>
+                {
+                    this.view.IsClientRunning = false;
+                    this.clientLog.AppendLog("Kcptun client has exited abnormally.", Colors.Red, true);
+                };
+                this.clientP.Start();
+                this.clientP.BeginOutputReadLine();
+                this.clientP.BeginErrorReadLine();
+                this.view.IsClientRunning = true;
+            }
+            catch (Exception e)
+            {
+                this.clientLog.AppendLog(e.ToString(), Colors.Red);
+            }
         }
 
         private void StopKcptunClient()
         {
             this.clientP.CancelOutputRead();
             this.clientP.CancelErrorRead();
+            this.clientP.EnableRaisingEvents = false;
             if (this.clientP != null && !this.clientP.HasExited)
             {
                 this.clientP.Kill();
                 this.clientP.WaitForExit(3000);
             }
             this.clientP.Dispose();
+            this.view.IsClientRunning = false;
         }
 
         private void Label_MySRCPreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -215,19 +226,20 @@ namespace KcptunGUI
 
         private void ButtonClearClientLog_Click(object sender, RoutedEventArgs e)
         {
-            this.TextBoxClientLog.Clear();
+            this.clientLog.ClearLog();
         }
 
         private void ButtonClearServerLog_Click(object sender, RoutedEventArgs e)
         {
-            this.TextBoxServerLog.Clear();
+            this.serverLog.ClearLog();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (!this.kcptun.CreateKcptunFolder())
             {
-                return;
+                MessageBox.Show("Can not create kcptun folder in temp folder. Kcptun GUI will close.", "Kcptun GUI", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
             }
             this.kcptun.ExtractEmbeddedKcptunBinary();
             this.kcptun.UpdateAvailable += Kcptun_UpdateAvailable;
@@ -247,13 +259,11 @@ namespace KcptunGUI
                 {
                     if (this.view.IsClientRunning)
                     {
-                        this.clientP.EnableRaisingEvents = false;
                         StopKcptunClient();
                         clientNeedRestore = true;
                     }
                     if (this.view.IsServerRunning)
                     {
-                        this.serverP.EnableRaisingEvents = false;
                         StopKcptunServer();
                         serverNeedRestore = true;
                     }
@@ -280,44 +290,44 @@ namespace KcptunGUI
             {
                 ExportConfigFile(this.view.Server, Path.Combine(KcptunUtils.KcptunPath, DefaultServerConfigFile));
                 RunKcptunServer();
-                this.view.IsServerRunning = true;
             }
             else
             {
                 StopKcptunServer();
-                this.view.IsServerRunning = false;
             }
         }
 
         private void RunKcptunServer()
         {
-            this.serverP = new Process();
-            this.serverP.StartInfo.CreateNoWindow = true;
-            this.serverP.StartInfo.FileName = Path.Combine(KcptunUtils.KcptunPath, this.view.ClientType == "x86" ? KcptunUtils.KcptunServer32 : KcptunUtils.KcptunServer32);
-            this.serverP.StartInfo.Arguments = "-c " + DefaultServerConfigFile;
-            this.serverP.StartInfo.WorkingDirectory = KcptunUtils.KcptunPath;
-            this.serverP.StartInfo.UseShellExecute = false;
-            this.serverP.StartInfo.RedirectStandardOutput = true;
-            this.serverP.StartInfo.RedirectStandardError = true;
-            this.serverP.EnableRaisingEvents = true;
-            this.serverP.OutputDataReceived +=
-                (_sender, _e) => this.Dispatcher.BeginInvoke(
-                    new Action(() =>
-                    {
-                        this.TextBoxServerLog.AppendText(_e.Data + Environment.NewLine);
-                        this.TextBoxServerLog.ScrollToEnd();
-                    }));
-            this.serverP.ErrorDataReceived +=
-                (_sender, _e) => this.Dispatcher.BeginInvoke(
-                    new Action(() =>
-                    {
-                        this.TextBoxServerLog.AppendText(_e.Data + Environment.NewLine);
-                        this.TextBoxServerLog.ScrollToEnd();
-                    }));
-            this.serverP.Exited += (_sender, _e) => this.view.IsServerRunning = false;
-            this.serverP.Start();
-            this.serverP.BeginOutputReadLine();
-            this.serverP.BeginErrorReadLine();
+            try
+            {
+                this.serverP = new Process();
+                this.serverP.StartInfo.CreateNoWindow = true;
+                this.serverP.StartInfo.FileName = Path.Combine(KcptunUtils.KcptunPath, this.view.ClientType == "x86" ? KcptunUtils.KcptunServer32 : KcptunUtils.KcptunServer32);
+                this.serverP.StartInfo.Arguments = "-c " + DefaultServerConfigFile;
+                this.serverP.StartInfo.WorkingDirectory = KcptunUtils.KcptunPath;
+                this.serverP.StartInfo.UseShellExecute = false;
+                this.serverP.StartInfo.RedirectStandardOutput = true;
+                this.serverP.StartInfo.RedirectStandardError = true;
+                this.serverP.EnableRaisingEvents = true;
+                this.serverP.OutputDataReceived +=
+                    (_sender, _e) => this.serverLog.AppendLog(_e.Data, Colors.Black);
+                this.serverP.ErrorDataReceived +=
+                    (_sender, _e) => this.serverLog.AppendLog(_e.Data, Colors.Black);
+                this.serverP.Exited += (_sender, _e) =>
+                {
+                    this.view.IsServerRunning = false;
+                    this.serverLog.AppendLog("Kcptun server has exited abnormally.", Colors.Red, true);
+                };
+                this.serverP.Start();
+                this.serverP.BeginOutputReadLine();
+                this.serverP.BeginErrorReadLine();
+                this.view.IsServerRunning = true;
+            }
+            catch (Exception e)
+            {
+                this.serverLog.AppendLog(e.ToString(), Colors.Red);
+            }
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -346,12 +356,14 @@ namespace KcptunGUI
         {
             this.serverP.CancelOutputRead();
             this.serverP.CancelErrorRead();
+            this.serverP.EnableRaisingEvents = false;
             if (this.serverP != null && !this.serverP.HasExited)
             {
                 this.serverP.Kill();
                 this.serverP.WaitForExit(3000);
             }
             this.serverP.Dispose();
+            this.view.IsServerRunning = false;
         }
     }
 }

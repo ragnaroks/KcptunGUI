@@ -9,6 +9,7 @@ using System.Timers;
 using ICSharpCode.SharpZipLib.Tar;
 using ICSharpCode.SharpZipLib.GZip;
 using System.Reflection;
+using System.Windows.Media;
 
 namespace KcptunGUI
 {
@@ -21,9 +22,15 @@ namespace KcptunGUI
         public static readonly string KcptunServer32 = "kcptun_server_x86.exe";
         public static readonly string KcptunServer64 = "kcptun_server_x64.exe";
         private static readonly string UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.0 Safari/537.36";
+        private LogUtils log;
 
         public event EventHandler UpdateAvailable;
         public Dictionary<string, string> UpdateList { get; private set; }
+
+        public KcptunUtils(LogUtils _log)
+        {
+            this.log = _log;
+        }
 
         public void ExtractEmbeddedKcptunBinary()
         {
@@ -46,8 +53,9 @@ namespace KcptunGUI
                     ExtractEmbeddedKcptunBinary(KcptunServer64);
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
+                this.log.AppendLog(e.ToString(), Colors.Red);
             }
         }
 
@@ -95,6 +103,7 @@ namespace KcptunGUI
             }
             catch (Exception e)
             {
+                this.log.AppendLog(e.ToString(), Colors.Red);
                 return false;
             }
         }
@@ -107,11 +116,11 @@ namespace KcptunGUI
             timer.Enabled = true;
         }
 
-        public bool UpdateKcptunBinary()
+        public void UpdateKcptunBinary()
         {
             if (UpdateList.Count == 0)
             {
-                return false;
+                return;
             }
             try
             {
@@ -120,11 +129,11 @@ namespace KcptunGUI
                     File.Delete(item.Key);
                     File.Move(item.Value, item.Key);
                 }
-                return true;
+                return;
             }
             catch (Exception e)
             {
-                return false;
+                this.log.AppendLog(e.ToString(), Colors.Red);
             }
         }
 
@@ -174,6 +183,7 @@ namespace KcptunGUI
             }
             catch (Exception e)
             {
+                this.log.AppendLog(e.ToString(), Colors.Red);
                 return false;
             }
         }
@@ -213,6 +223,7 @@ namespace KcptunGUI
             }
             catch (Exception e)
             {
+                this.log.AppendLog(e.ToString(), Colors.Red);
                 return null;
             }
         }
@@ -247,6 +258,7 @@ namespace KcptunGUI
             }
             catch (Exception e)
             {
+                this.log.AppendLog(e.ToString(), Colors.Red);
                 return false;
             }
         }
@@ -332,6 +344,7 @@ namespace KcptunGUI
             }
             catch (Exception e)
             {
+                this.log.AppendLog(e.ToString(), Colors.Red);
                 return null;
             }
         }

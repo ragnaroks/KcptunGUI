@@ -21,7 +21,8 @@
     StateChanged="Window_StateChanged">
     <Grid
         Margin="5">
-        <TabControl>
+        <TabControl
+            Margin="3">
             <TabItem
                 Header="Kcptun Client">
                 <DockPanel>
@@ -318,10 +319,10 @@
                             Click="ButtonClearClientLog_Click" />
                     </UniformGrid>
                     <GroupBox
-                        Header="Log"
-                        Margin="5">
-                        <TextBox
-                            x:Name="TextBoxClientLog"
+                        Header="Client Log"
+                        Margin="3">
+                        <RichTextBox
+                            x:Name="RichTextBoxClientLog"
                             IsReadOnly="True"
                             IsUndoEnabled="False"
                             Margin="3"
@@ -618,10 +619,10 @@
                             Click="ButtonClearServerLog_Click" />
                     </UniformGrid>
                     <GroupBox
-                        Header="Log"
-                        Margin="5">
-                        <TextBox
-                            x:Name="TextBoxServerLog"
+                        Header="Server Log"
+                        Margin="3">
+                        <RichTextBox
+                            x:Name="RichTextBoxServerLog"
                             IsReadOnly="True"
                             IsUndoEnabled="False"
                             Margin="3"
@@ -629,6 +630,16 @@
                             HorizontalScrollBarVisibility="Auto" />
                     </GroupBox>
                 </DockPanel>
+            </TabItem>
+            <TabItem
+                Header="Kcptun GUI Log">
+                <RichTextBox
+                    x:Name="RichTextBoxLog"
+                    IsReadOnly="True"
+                    IsUndoEnabled="False"
+                    Margin="5"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Auto" />
             </TabItem>
             <TabItem
                 Header="About">

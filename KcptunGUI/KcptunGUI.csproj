@@ -104,6 +104,7 @@
     <Compile Include="KcptunClientModel.cs" />
     <Compile Include="KcptunServerModel.cs" />
     <Compile Include="KcptunUtils.cs" />
+    <Compile Include="LogUtils.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
