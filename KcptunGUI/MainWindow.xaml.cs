@@ -32,7 +32,7 @@ namespace KcptunGUI
             this.clientLog = new LogUtils(this.RichTextBoxClientLog);
             this.serverLog = new LogUtils(this.RichTextBoxServerLog);
             this.log = new LogUtils(this.RichTextBoxLog);
-            this.kcptun = new KcptunUtils(this.serverLog);
+            this.kcptun = new KcptunUtils(this.log);
             this.notify.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             this.notify.Text = "Kcptun GUI";
             this.notify.Visible = true;
