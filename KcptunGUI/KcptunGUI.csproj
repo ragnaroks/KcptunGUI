@@ -160,6 +160,10 @@
     <EmbeddedResource Include="kcptun\kcptun_server_x86.exe" />
     <EmbeddedResource Include="kcptun\kcptun_server_x64.exe" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="kcptun\socks5_server_x64.exe" />
+    <EmbeddedResource Include="kcptun\socks5_server_x86.exe" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

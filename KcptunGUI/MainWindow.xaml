@@ -573,6 +573,14 @@
                                             VerticalContentAlignment="Center"
                                             Height="27" />
                                     </DockPanel>
+                                    <Grid
+                                        Margin="3">
+                                        <CheckBox
+                                            Content="socks5 server"
+                                            VerticalAlignment="Center"
+                                            IsChecked="{Binding EnableSocks5Server}"
+                                            IsEnabled="{Binding ServerEnableSelection}"/>
+                                    </Grid>
                                 </UniformGrid>
                             </StackPanel>
                         </StackPanel>

@@ -21,6 +21,8 @@ namespace KcptunGUI
         public static readonly string KcptunClient64 = "kcptun_client_x64.exe";
         public static readonly string KcptunServer32 = "kcptun_server_x86.exe";
         public static readonly string KcptunServer64 = "kcptun_server_x64.exe";
+        public static readonly string Socks5Server32 = "socks5_server_x86.exe";
+        public static readonly string Socks5Server64 = "socks5_server_x64.exe";
         private static readonly string UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.0 Safari/537.36";
         private LogUtils log;
 
@@ -51,6 +53,14 @@ namespace KcptunGUI
                 if (!File.Exists(Path.Combine(KcptunPath, KcptunServer64)))
                 {
                     ExtractEmbeddedKcptunBinary(KcptunServer64);
+                }
+                if (!File.Exists(Path.Combine(KcptunPath, Socks5Server32)))
+                {
+                    ExtractEmbeddedKcptunBinary(Socks5Server32);
+                }
+                if (!File.Exists(Path.Combine(KcptunPath, Socks5Server64)))
+                {
+                    ExtractEmbeddedKcptunBinary(Socks5Server64);
                 }
             }
             catch (Exception e)

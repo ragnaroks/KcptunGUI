@@ -15,7 +15,7 @@ namespace KcptunGUI
     public partial class MainWindow : Window
     {
         private System.Windows.Forms.NotifyIcon notify = new System.Windows.Forms.NotifyIcon();
-        private Process clientP, serverP;
+        private Process clientP, serverP, serverSocks5P;
         private MainWindowViewModel view;
         private static readonly string DefaultClientConfigFile = "_client.json";
         private static readonly string DefaultServerConfigFile = "_server.json";
@@ -192,6 +192,7 @@ namespace KcptunGUI
             catch (Exception e)
             {
                 this.clientLog.AppendLog(e.ToString(), Colors.Red);
+                this.clientP = null;
             }
         }
 
@@ -264,6 +265,10 @@ namespace KcptunGUI
                     }
                     if (this.view.IsServerRunning)
                     {
+                        if (this.view.EnableSocks5Server)
+                        {
+                            StopSocks5Server();
+                        }
                         StopKcptunServer();
                         serverNeedRestore = true;
                     }
@@ -280,6 +285,10 @@ namespace KcptunGUI
             }
             if (serverNeedRestore)
             {
+                if (this.view.EnableSocks5Server)
+                {
+                    RunSocks5Server();
+                }
                 RunKcptunServer();
             }
         }
@@ -288,13 +297,71 @@ namespace KcptunGUI
         {
             if (!this.view.IsServerRunning)
             {
+                if (this.view.EnableSocks5Server)
+                {
+                    RunSocks5Server();
+                }
+                if (this.view.EnableSocks5Server && (this.serverSocks5P == null || this.serverSocks5P.HasExited))
+                {
+                    return;
+                }
                 ExportConfigFile(this.view.Server, Path.Combine(KcptunUtils.KcptunPath, DefaultServerConfigFile));
                 RunKcptunServer();
             }
             else
             {
+                if (this.view.EnableSocks5Server)
+                {
+                    StopSocks5Server();
+                }
                 StopKcptunServer();
             }
+        }
+
+        private void RunSocks5Server()
+        {
+            try
+            {
+                this.serverSocks5P = new Process();
+                this.serverSocks5P.StartInfo.CreateNoWindow = true;
+                this.serverSocks5P.StartInfo.FileName = Path.Combine(KcptunUtils.KcptunPath, this.view.ClientType == "x86" ? KcptunUtils.Socks5Server32 : KcptunUtils.Socks5Server32);
+                this.serverSocks5P.StartInfo.Arguments = this.view.Server.target;
+                this.serverSocks5P.StartInfo.WorkingDirectory = KcptunUtils.KcptunPath;
+                this.serverSocks5P.StartInfo.UseShellExecute = false;
+                this.serverSocks5P.StartInfo.RedirectStandardOutput = true;
+                this.serverSocks5P.StartInfo.RedirectStandardError = true;
+                this.serverSocks5P.EnableRaisingEvents = true;
+                this.serverSocks5P.OutputDataReceived +=
+                    (_sender, _e) => this.serverLog.AppendLog(_e.Data, Colors.Blue);
+                this.serverSocks5P.ErrorDataReceived +=
+                    (_sender, _e) => this.serverLog.AppendLog(_e.Data, Colors.Blue);
+                this.serverSocks5P.Exited += (_sender, _e) =>
+                {
+                    this.serverLog.AppendLog("Socks5 server has exited abnormally.", Colors.Red, true);
+                    StopKcptunServer();
+                };
+                this.serverSocks5P.Start();
+                this.serverSocks5P.BeginOutputReadLine();
+                this.serverSocks5P.BeginErrorReadLine();
+            }
+            catch (Exception e)
+            {
+                this.serverLog.AppendLog(e.ToString(), Colors.Red);
+                this.serverSocks5P = null;
+            }
+        }
+
+        private void StopSocks5Server()
+        {
+            this.serverSocks5P.CancelOutputRead();
+            this.serverSocks5P.CancelErrorRead();
+            this.serverSocks5P.EnableRaisingEvents = false;
+            if (this.serverSocks5P != null && !this.serverSocks5P.HasExited)
+            {
+                this.serverSocks5P.Kill();
+                this.serverSocks5P.WaitForExit(3000);
+            }
+            this.serverSocks5P.Dispose();
         }
 
         private void RunKcptunServer()
@@ -318,6 +385,10 @@ namespace KcptunGUI
                 {
                     this.view.IsServerRunning = false;
                     this.serverLog.AppendLog("Kcptun server has exited abnormally.", Colors.Red, true);
+                    if (this.view.EnableSocks5Server)
+                    {
+                        StopSocks5Server();
+                    }
                 };
                 this.serverP.Start();
                 this.serverP.BeginOutputReadLine();
@@ -327,6 +398,7 @@ namespace KcptunGUI
             catch (Exception e)
             {
                 this.serverLog.AppendLog(e.ToString(), Colors.Red);
+                this.serverP = null;
             }
         }
 

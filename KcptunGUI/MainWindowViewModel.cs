@@ -57,6 +57,7 @@ namespace KcptunGUI
             get { return this.isServerRunning ? "Stop Kcptun Server" : "Run Kcptun Server"; }
         }
         public string Version { get; private set; }
+        public bool EnableSocks5Server { get; set; } = false;
 
         public MainWindowViewModel()
         {
