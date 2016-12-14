@@ -27,13 +27,18 @@
     >
     <Grid>
         <TabControl>
-            <TabItem Header="I18N_Client"></TabItem>
-            <TabItem Header="I18N_Server"></TabItem>
-            <TabItem Header="I18N_Config">
+            <TabItem Header="I18N_ClientTab"></TabItem>
+            <TabItem Header="I18N_ServerTab"></TabItem>
+            <TabItem Header="I18N_ConfigTab">
                 <Grid/>
             </TabItem>
-            <TabItem Header="I18N_About">
+            <TabItem Header="I18N_AboutTab">
                 <Grid></Grid>
+            </TabItem>
+            <TabItem Header="I18N_DebugTab">
+                <Grid>
+                    <TextBox x:Name="logs"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

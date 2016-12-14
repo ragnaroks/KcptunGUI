@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text;
 
 namespace KcptunGUI {
     /// <summary>
@@ -21,11 +22,24 @@ namespace KcptunGUI {
         }
 
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
-            //this.Cursor = new System.Windows.Input.Cursor( App.AppPath+"\\Resx\\cursor.cur");
+            //NotifyIcon
             App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
             App.nicon.Text = App.AppSettings["AppName"].ToString() + App.AppSettings["AppVersion"].ToString();
             App.nicon.Visible = true;
             App.nicon.MouseClick += Nicon_MouseClick;
+            //Debug Logs
+            StringBuilder sb = new StringBuilder();
+            sb.Append( "AppName : " + App.AppSettings["AppName"].ToString()+"\n" );
+            sb.Append( "AppVersion : " + App.AppSettings["AppVersion"].ToString()+ "\n" );
+            sb.Append( "AppVersionR : " + App.AppSettings["AppVersionR"].ToString() + "\n" );
+            sb.Append( "AppPath : " + App.AppSettings["AppPath"].ToString() + "\n" );
+            sb.Append( "AppExecFilePath : " + App.AppSettings["AppExecFilePath"].ToString() + "\n" );
+            sb.Append( "AppConfigFilePath : " + App.AppSettings["AppConfigFilePath"].ToString() + "\n" );
+            this.logs.Text += sb;
+            var a = App.AppSettings["AppConfig"];
+            //Console.WriteLine( a["Language"] );
+            Console.Write( App.AppSettings["AppConfig"].ToString() );
+            //
         }
         private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {//窗口即将关闭,可取消
 
