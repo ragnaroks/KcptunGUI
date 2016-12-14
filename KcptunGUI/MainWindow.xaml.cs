@@ -36,9 +36,8 @@ namespace KcptunGUI {
             sb.Append( "AppExecFilePath : " + App.AppSettings["AppExecFilePath"].ToString() + "\n" );
             sb.Append( "AppConfigFilePath : " + App.AppSettings["AppConfigFilePath"].ToString() + "\n" );
             this.logs.Text += sb;
-            var a = App.AppSettings["AppConfig"];
-            //Console.WriteLine( a["Language"] );
-            Console.Write( App.AppSettings["AppConfig"].ToString() );
+            var o = new FadeJSON.StreamParser( App.AppSettings["AppConfigFilePath"].ToString() ).Parse();
+            Console.Write( o.Value );
             //
         }
         private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {//窗口即将关闭,可取消

@@ -19,12 +19,13 @@ namespace KcptunGUI
             App.AppSettings["AppExecFilePath"] = App.AppSettings["AppPath"]+ "\\"+App.AppSettings["AppName"]+".exe";
             App.AppSettings["AppConfigFilePath"]= App.AppSettings["AppPath"] + "\\Resx\\config.json";
             
-              App.AppSettings["AppConfig"] = new FadeJSON.JsonObject(true);
+            App.AppSettings["AppConfig"] = new FadeJSON.JsonObject(true);
             if( File.Exists( App.AppSettings["AppConfigFilePath"].ToString() ) ) {
                 App.AppSettings["AppConfig"] = new FadeJSON.StreamParser( App.AppSettings["AppPath"] + "\\Resx\\config.json" );//return json object
             }else {
                 MessageBox.Show( "not found config.json", App.AppSettings["AppName"].ToString() ); System.Environment.Exit( 0 );
             }
+
             App.AppSettings["AppI18N"] = new Object();
             base.OnStartup( e );
         }
