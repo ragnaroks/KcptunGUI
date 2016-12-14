@@ -11,5 +11,7 @@ namespace KcptunGUI
         public static String AppName = "KcptunGUI";
         public static String AppVersion = Application.ResourceAssembly.GetName().Version.Major.ToString() + "." + Application.ResourceAssembly.GetName().Version.Minor.ToString() + "." + Application.ResourceAssembly.GetName().Version.Build.ToString();
         public static String AppVersionR = Application.ResourceAssembly.GetName().Version.Revision.ToString();
+        public static String AppPath = Environment.CurrentDirectory;
+        public static String AppExecFilePath = Environment.CurrentDirectory + "KcptunGUI.exe";
     }
 }

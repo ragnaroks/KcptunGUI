@@ -1,7 +1,7 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Properties="clr-namespace:KcptunGUI.Properties" xmlns:System="clr-namespace:System;assembly=mscorlib" xmlns:Configuration="clr-namespace:System.Configuration;assembly=System" xmlns:CompilerServices="clr-namespace:System.Runtime.CompilerServices;assembly=mscorlib" xmlns:Compiler="clr-namespace:System.CodeDom.Compiler;assembly=System" xmlns:Diagnostics="clr-namespace:System.Diagnostics;assembly=mscorlib" x:Class="KcptunGUI.MainWindow"
-        Height="400" Width="640" ResizeMode="CanMinimize" Title="KcptunGUI" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display">
+        Height="400" Width="640" ResizeMode="CanMinimize" Title="KcptunGUI" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" SnapsToDevicePixels="True">
     <Grid>
         
     </Grid>
