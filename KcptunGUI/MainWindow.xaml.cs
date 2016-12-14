@@ -1,40 +1,40 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Diagnostics;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace KcptunGUI
-{
+namespace KcptunGUI {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window {
-        System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();
-
+    public partial class MainWindow : MetroWindow {
+        //
+        
         public MainWindow(){
             InitializeComponent();
-            nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
-            nicon.Text = App.AppSettings["AppName"] + App.AppSettings["AppVersion"];
             //this.StateChanged += MainWindow_StateChanged;
-
-
-            nicon.Visible = true; nicon.MouseClick += Nicon_MouseClick;
-            this.Loaded += MainWindow_Loaded;
-
+            this.Loaded += MainWindow_Loaded;//窗体加载完成
+            this.Closing += MainWindow_Closing;//窗口即将关闭,可取消
+            this.Closed += MainWindow_Closed;//窗口已确定将关闭
+            this.ShowSystemMenuOnRightClick = false;//不响应标题栏右键菜单
         }
 
-        private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {
+        private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
             //this.Cursor = new System.Windows.Input.Cursor( App.AppPath+"\\Resx\\cursor.cur");
-            
+            App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
+            App.nicon.Text = App.AppSettings["AppName"].ToString() + App.AppSettings["AppVersion"].ToString();
+            App.nicon.Visible = true;
+            App.nicon.MouseClick += Nicon_MouseClick;
+        }
+        private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {//窗口即将关闭,可取消
+
+        }
+        private void MainWindow_Closed( object sender , EventArgs e ) {//窗口已确定将关闭
+            App.nicon.Visible = false;
+            //if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);}
         }
         //
-        private void MainWindow_Closed(object sender, EventArgs e){//窗口已确定将关闭
-            //if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);} nicon.Visible = false;
-        }
-        private void GenCommandLine(){//生成命令行
-            
-        }
         private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
             CheckBox thisCheckBox = (CheckBox)sender;
             switch (thisCheckBox.Name) {
@@ -52,7 +52,6 @@ namespace KcptunGUI
                 default:
                     break;
             }
-            Properties.Settings.Default.Save(); GenCommandLine();
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e){//输入框变动事件
             TextBox thisTextBox = (TextBox)sender;
@@ -61,7 +60,7 @@ namespace KcptunGUI
                     //this.MainWindow_LogsView.ScrollToBottom(); 
                     break;
                 case "KcptunConfig_Server":
-                    Properties.Settings.Default.setKcptunConfig_Server = thisTextBox.Text; break;
+                    break;
                 default:
                     break;
             }
@@ -70,8 +69,6 @@ namespace KcptunGUI
             ComboBox thisComboBox = (ComboBox)sender;
             switch (thisComboBox.Name) {
                 case "KcptunConfig_SystemBit":
-                    Properties.Settings.Default.setKcptunConfig_SystemBit = (Byte)thisComboBox.SelectedIndex;
-                    //this.MainWindow_LogsText.Text += "\n将使用" + (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "x86" : "x86_64")+"版本";
                     break;
                 default:
                     break;
@@ -94,7 +91,7 @@ namespace KcptunGUI
         private void MainWindow_RunKcptun_Click(object sender, RoutedEventArgs e){
             var cmdp= new Process();
             cmdp.StartInfo.CreateNoWindow = true;
-            cmdp.StartInfo.FileName = Environment.CurrentDirectory +"\\"+ (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe");
+            //cmdp.StartInfo.FileName = Environment.CurrentDirectory +"\\"+ (Properties.Settings.Default.setKcptunConfig_SystemBit.Equals(0) ? "client_windows_386.exe" : "client_windows_amd64.exe");
             //cmdp.StartInfo.Arguments = strKcptunArgvs;
             cmdp.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
             cmdp.StartInfo.UseShellExecute = false;
