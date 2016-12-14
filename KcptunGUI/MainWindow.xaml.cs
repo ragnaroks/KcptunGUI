@@ -9,16 +9,17 @@ namespace KcptunGUI
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
-    {
+    public partial class MainWindow : Window {
         System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();
-        
+
         public MainWindow(){
             InitializeComponent();
+            nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
+            nicon.Text = App.AppSettings["AppName"] + App.AppSettings["AppVersion"];
             //this.StateChanged += MainWindow_StateChanged;
-            //this.Closed += MainWindow_Closed;
-            //nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
-            //nicon.Text = App.AppName; nicon.Visible = true; nicon.MouseClick += Nicon_MouseClick;
+
+
+            nicon.Visible = true; nicon.MouseClick += Nicon_MouseClick;
             this.Loaded += MainWindow_Loaded;
 
         }
@@ -26,15 +27,7 @@ namespace KcptunGUI
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {
             //this.Cursor = new System.Windows.Input.Cursor( App.AppPath+"\\Resx\\cursor.cur");
             
-            CefSharp.CefSettings g_cefconfig = new CefSharp.CefSettings();
-            CefSharp.Cef.Initialize( g_cefconfig );
-            CefSharp.Wpf.ChromiumWebBrowser cefBrowser = new CefSharp.Wpf.ChromiumWebBrowser();
-            this.Content = cefBrowser;
-            cefBrowser.Address = "http://www.codebye.com/chromiumwebbrowser-loadpageasync.html";
-
-            //throw new NotImplementedException();
         }
-
         //
         private void MainWindow_Closed(object sender, EventArgs e){//窗口已确定将关闭
             //if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);} nicon.Visible = false;
@@ -50,7 +43,6 @@ namespace KcptunGUI
                 default:
                     break;
             }
-            Properties.Settings.Default.Save(); GenCommandLine();
         }
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e){//单选框取消选择事件
             CheckBox thisCheckBox = (CheckBox)sender; if (false == thisCheckBox.IsMouseOver) { return; }
@@ -114,7 +106,7 @@ namespace KcptunGUI
             cmdp.BeginErrorReadLine();
             //cmdp_isRun = true;
             //this.MainWindow_LogsText.Text += "\nKcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口";
-            nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口", System.Windows.Forms.ToolTipIcon.Info);
+            //nicon.ShowBalloonTip(1500, App.AppName + "  " + App.AppVersion, "Kcptun已后台运行,监听本地" + Properties.Settings.Default.setKcptunConfig_LocalPort + "端口", System.Windows.Forms.ToolTipIcon.Info);
             //this.MainWindow_RunKcptun.IsEnabled = false; this.MainWindow_StopKcptun.IsEnabled = true;
         }
 
