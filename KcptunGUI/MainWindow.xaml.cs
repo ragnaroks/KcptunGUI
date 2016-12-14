@@ -19,7 +19,12 @@ namespace KcptunGUI
             this.Closed += MainWindow_Closed;
             nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             nicon.Text = App.AppName; nicon.Visible = true; nicon.MouseClick += Nicon_MouseClick;
-            
+
+            CefSharp.CefSettings g_cefconfig = new CefSharp.CefSettings();
+            CefSharp.Cef.Initialize( g_cefconfig );
+            CefSharp.Wpf.ChromiumWebBrowser cefBrowser = new CefSharp.Wpf.ChromiumWebBrowser();
+            this.Content = cefBrowser;
+            cefBrowser.Address = "https://www.ragnaroks.org/";
         }
         //
         private void MainWindow_Closed(object sender, EventArgs e){//窗口已确定将关闭
