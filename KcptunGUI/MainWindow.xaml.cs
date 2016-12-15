@@ -27,6 +27,13 @@ namespace KcptunGUI {
             App.nicon.Text = App.AppAttributes["AppName"].ToString() + App.AppAttributes["AppVersion"].ToString();
             App.nicon.Visible = true;
             App.nicon.MouseClick += Nicon_MouseClick;
+            App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            System.Windows.Forms.ToolStripMenuItem[] tsmi = new System.Windows.Forms.ToolStripMenuItem[1];
+            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem() {Text = "I18N_ExitApp" , Image = Properties.Resources.icons_niconMenuClose};
+            tsmi[0].Click += ( (Object _sender,EventArgs _e) => { this.Close(); } );
+            for(Byte i=0;i<tsmi.Length ;i++ ) {
+                App.nicon.ContextMenuStrip.Items.Insert( i , tsmi[i] );
+            }
             //Debug Logs
             StringBuilder sb = new StringBuilder();
             sb.Append( "AppName : " + App.AppAttributes["AppName"].ToString()+"\n" );
@@ -38,6 +45,7 @@ namespace KcptunGUI {
             this.logs.Text += sb;
             //
         }
+
         private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {//窗口即将关闭,可取消
 
         }
@@ -98,6 +106,7 @@ namespace KcptunGUI {
             switch( e.Button ) {
                 default:
                 case System.Windows.Forms.MouseButtons.Left: //按下鼠标左键,显示/隐藏窗口
+                    App.nicon.ContextMenuStrip.Hide();
                     if( Class.Functions.IsWindowVisible( new System.Windows.Interop.WindowInteropHelper( this ).Handle ) ) {
                         this.Hide();
                     } else {
@@ -106,8 +115,7 @@ namespace KcptunGUI {
                     }
                     break;
                 case System.Windows.Forms.MouseButtons.Right: //按下鼠标右键,显示菜单
-                    MessageBox.Show("rb");
-                    App.nicon.ContextMenu.Show(null,e.Location);
+                    App.nicon.ContextMenuStrip.Show();
                     break;
             }
             
@@ -158,7 +166,10 @@ namespace KcptunGUI {
                 default:break;
             }
         }
-        //
+
+        private void AppExit() {
+            System.Environment.Exit( 0 );
+        }
 
     }
 }

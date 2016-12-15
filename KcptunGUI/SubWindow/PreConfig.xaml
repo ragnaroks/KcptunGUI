@@ -1,0 +1,29 @@
+﻿<Controls:MetroWindow x:Class="KcptunGUI.SubWindow.PreConfig"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KcptunGUI.SubWindow"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="PreConfig" Height="300" Width="300" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" Icon="/KcptunGUI;component/favicon.ico" WindowStyle="None"
+        Background="{DynamicResource MaterialDesignPaper}" TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+>
+    <Grid>
+        <materialDesign:Card Padding="8,4" Margin="4">
+            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">PreConfig the Settings</TextBlock>
+        </materialDesign:Card>
+        <materialDesign:DialogHost x:Name="ClosingDialog">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Width="240" Height="160">
+                    <materialDesign:Card Padding="8,4" Margin="4">
+                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="Sure don't PreConfig and Exit? Settings will not save and applocation will exit." TextWrapping="Wrap"/>
+                    </materialDesign:Card>
+                    <Button x:Name="Button_SureDontSave" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,120,0,0" Content="Sure" Click="Button_OnClick"></Button>
+                    <Button x:Name="Button_ContinueSetting" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="76,120,0,0" Content="No" Click="Button_OnClick"></Button>
+                    <Button x:Name="Button_UseDefaultConfig" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,120,0,0" Content="Default" Click="Button_OnClick" ToolTip="Use Default Config and save."></Button>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</Controls:MetroWindow>
