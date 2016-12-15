@@ -24,20 +24,18 @@ namespace KcptunGUI {
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
             //NotifyIcon
             App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
-            App.nicon.Text = App.AppSettings["AppName"].ToString() + App.AppSettings["AppVersion"].ToString();
+            App.nicon.Text = App.AppAttributes["AppName"].ToString() + App.AppAttributes["AppVersion"].ToString();
             App.nicon.Visible = true;
             App.nicon.MouseClick += Nicon_MouseClick;
             //Debug Logs
             StringBuilder sb = new StringBuilder();
-            sb.Append( "AppName : " + App.AppSettings["AppName"].ToString()+"\n" );
-            sb.Append( "AppVersion : " + App.AppSettings["AppVersion"].ToString()+ "\n" );
-            sb.Append( "AppVersionR : " + App.AppSettings["AppVersionR"].ToString() + "\n" );
-            sb.Append( "AppPath : " + App.AppSettings["AppPath"].ToString() + "\n" );
-            sb.Append( "AppExecFilePath : " + App.AppSettings["AppExecFilePath"].ToString() + "\n" );
-            sb.Append( "AppConfigFilePath : " + App.AppSettings["AppConfigFilePath"].ToString() + "\n" );
+            sb.Append( "AppName : " + App.AppAttributes["AppName"].ToString()+"\n" );
+            sb.Append( "AppVersion : " + App.AppAttributes["AppVersion"].ToString()+ "\n" );
+            sb.Append( "AppVersionR : " + App.AppAttributes["AppVersionR"].ToString() + "\n" );
+            sb.Append( "AppPath : " + App.AppAttributes["AppPath"].ToString() + "\n" );
+            sb.Append( "AppExecFilePath : " + App.AppAttributes["AppExecFilePath"].ToString() + "\n" );
+            sb.Append( "AppConfigFilePath : " + App.AppAttributes["AppConfigFilePath"].ToString() + "\n" );
             this.logs.Text += sb;
-            var o = new FadeJSON.StreamParser( App.AppSettings["AppConfigFilePath"].ToString() ).Parse();
-            Console.Write( o.Value );
             //
         }
         private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {//窗口即将关闭,可取消
@@ -97,8 +95,23 @@ namespace KcptunGUI {
         }
         
         private void Nicon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e){
-            if(Class.Functions.IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle)) { this.Hide(); }
-            else { this.Show(); this.WindowState = WindowState.Normal; }
+            switch( e.Button ) {
+                default:
+                case System.Windows.Forms.MouseButtons.Left: //按下鼠标左键,显示/隐藏窗口
+                    if( Class.Functions.IsWindowVisible( new System.Windows.Interop.WindowInteropHelper( this ).Handle ) ) {
+                        this.Hide();
+                    } else {
+                        this.Show();
+                        this.WindowState = WindowState.Normal;
+                    }
+                    break;
+                case System.Windows.Forms.MouseButtons.Right: //按下鼠标右键,显示菜单
+                    MessageBox.Show("rb");
+                    App.nicon.ContextMenu.Show(null,e.Location);
+                    break;
+            }
+            
+            
         }
 
         private void MainWindow_RunKcptun_Click(object sender, RoutedEventArgs e){

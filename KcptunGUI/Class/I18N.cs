@@ -1,5 +1,4 @@
 ﻿using System;
-using FadeJSON;
 
 namespace KcptunGUI.Class {
     class I18N {
