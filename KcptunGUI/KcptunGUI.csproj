@@ -111,7 +111,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>KcptunGUI.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -203,7 +204,6 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="KcptunGUI.snk" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -230,7 +230,8 @@
     <Folder Include="Resx\I18N\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\close.png" />
+    <Resource Include="Resource\icon\icons_niconMenuClose.png" />
+    <Content Include="Resource\cursor\cursor_Arrow.cur" />
     <Content Include="ThirdLib\LitJson.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,6 +16,9 @@ namespace KcptunGUI.SubWindow {
         }
 
         #region 窗口事件
+        private void PreConfig_Loaded( object sender , System.Windows.RoutedEventArgs e ) {
+            this.Cursor = App.AppCursor[0];
+        }
         private void PreConfig_Closed( object sender , System.EventArgs e ) {
             this.DialogResult=initedConfig;
         }
@@ -23,10 +26,6 @@ namespace KcptunGUI.SubWindow {
         private void PreConfig_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {
             this.ClosingDialog.IsOpen = true;
 
-        }
-
-        private void PreConfig_Loaded( object sender , System.Windows.RoutedEventArgs e ) {
-            
         }
         #endregion
         private void Button_OnClick(object sender,System.Windows.RoutedEventArgs e) {

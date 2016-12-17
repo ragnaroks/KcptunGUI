@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
@@ -17,6 +18,25 @@ namespace KcptunGUI.Class
         /// <returns></returns>
         static public String TrimString(String _str,Boolean _all=false) {
             return _all ? Regex.Replace( _str.Trim() , @"\s" , "" ) : Regex.Replace( _str.Trim() , @" " , "" );
+        }
+        /// <summary>
+        /// 字节组转内存流
+        /// </summary>
+        /// <param name="_bytes">字节组</param>
+        /// <returns>内存流</returns>
+        static public Stream BytesToStream(Byte[] _bytes) {
+            return new MemoryStream( _bytes );
+        }
+        /// <summary>
+        /// 内存流转字节组
+        /// </summary>
+        /// <param name="_stream">内存流</param>
+        /// <returns>字节组</returns>
+        static public Byte[] StreamToBytes(Stream _stream) {
+            Byte[] bytes = new Byte[_stream.Length];
+            _stream.Read( bytes , 0 , bytes.Length );
+            _stream.Seek( 0 , SeekOrigin.Begin );
+            return bytes;
         }
     }
 }

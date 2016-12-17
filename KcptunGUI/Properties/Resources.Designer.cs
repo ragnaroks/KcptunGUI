@@ -61,6 +61,16 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        public static byte[] cursor_Arrow {
+            get {
+                object obj = ResourceManager.GetObject("cursor_Arrow", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Bitmap icons_niconMenuClose {
