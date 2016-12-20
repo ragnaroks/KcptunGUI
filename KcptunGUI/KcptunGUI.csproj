@@ -231,7 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\icon\icons_niconMenuClose.png" />
-    <Content Include="Resource\cursor\cursor_Arrow.cur" />
+    <Resource Include="Resource\cursor\cursor_Arrow.cur" />
     <Content Include="ThirdLib\LitJson.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

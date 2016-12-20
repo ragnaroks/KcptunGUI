@@ -31,8 +31,9 @@ namespace KcptunGUI
             App.AppCursor[0] = new Cursor( Class.Functions.BytesToStream( KcptunGUI.Properties.Resources.cursor_Arrow ) , false);//箭头
             //初始化首选项
             if( File.Exists( App.AppAttributes["ConfigFilePath"]) ) {//配置文件存在
-                String strConfig = Class.Functions.TrimString( File.OpenText( App.AppAttributes["ConfigFilePath"] ).ReadToEndAsync().Result , true );
-                MessageBox.Show(strConfig);
+                String strConfig = Class.Functions.TrimString( File.OpenText( App.AppAttributes["ConfigFilePath"] ).ReadToEnd() , true );
+                MessageBox.Show("json:\n"+strConfig);
+                Environment.Exit( 0 );
             } else {//配置文件不存在
                 MessageBox.Show( "配置文件不存在,将重新创建", App.AppAttributes["Name"] ,MessageBoxButton.OK,MessageBoxImage.Warning);
                 fsAppConfigFile = new FileStream( App.AppAttributes["ConfigFilePath"] ,FileMode.OpenOrCreate,FileAccess.ReadWrite,FileShare.None);

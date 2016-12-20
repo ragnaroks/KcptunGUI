@@ -11,34 +11,31 @@ namespace KcptunGUI.SubWindow {
         public PreConfig() {
             InitializeComponent();
             this.Loaded += PreConfig_Loaded;
-            this.Closing += PreConfig_Closing;
             this.Closed += PreConfig_Closed;
         }
 
         #region 窗口事件
         private void PreConfig_Loaded( object sender , System.Windows.RoutedEventArgs e ) {
             this.Cursor = App.AppCursor[0];
+            
         }
         private void PreConfig_Closed( object sender , System.EventArgs e ) {
             this.DialogResult=initedConfig;
-        }
-
-        private void PreConfig_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {
-            this.ClosingDialog.IsOpen = true;
-
         }
         #endregion
         private void Button_OnClick(object sender,System.Windows.RoutedEventArgs e) {
             System.Windows.Controls.Button thisButton = (System.Windows.Controls.Button)sender;
             switch( thisButton.Name ) {
-                case "Button_SureDontSave":
-                    initedConfig = false;
+                default:
+                case "Button_CancelConfig":
+                    if( MessageBoxResult.Yes== MessageBox.Show( "确定不进行配置并退出?" , App.AppAttributes["Name"] , MessageBoxButton.YesNo , MessageBoxImage.Question ) ) {
+                        initedConfig = false;
+                        this.Close();
+                    }
                     break;
-                case "Button_ContinueSetting":
+                case "Button_SaveConfig":
+                    
                     break;
-                case "Button_UseDefaultConfig":
-                    break;
-                default:return;
             }
         }
     }

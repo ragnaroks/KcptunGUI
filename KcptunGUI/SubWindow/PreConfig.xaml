@@ -6,24 +6,36 @@
         xmlns:local="clr-namespace:KcptunGUI.SubWindow"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="PreConfig" Height="300" Width="300" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" Icon="/KcptunGUI;component/favicon.ico" WindowStyle="None"
+        Title="PreConfig" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" Icon="/KcptunGUI;component/favicon.ico"
         Background="{DynamicResource MaterialDesignPaper}" TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Height="388" Width="486" ShowCloseButton="False"
 >
-    <Grid>
+    <StackPanel>
         <materialDesign:Card Padding="8,4" Margin="4">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">PreConfig the Settings</TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" HorizontalAlignment="Left">以下为初始项,务必进行配置</TextBlock>
+                <ComboBox IsSynchronizedWithCurrentItem="True" IsReadOnly="True" SelectedIndex="0" HorizontalAlignment="Left" Margin="32,0,0,0">
+                    <ComboBoxItem Content="zh_cn" IsSelected="True"></ComboBoxItem>
+                    <ComboBoxItem Content="zh_ha"></ComboBoxItem>
+                    <ComboBoxItem Content="en_us"></ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
         </materialDesign:Card>
-        <materialDesign:DialogHost x:Name="ClosingDialog">
-            <materialDesign:DialogHost.DialogContent>
-                <Grid Width="240" Height="160">
-                    <materialDesign:Card Padding="8,4" Margin="4">
-                        <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="Sure don't PreConfig and Exit? Settings will not save and applocation will exit." TextWrapping="Wrap"/>
-                    </materialDesign:Card>
-                    <Button x:Name="Button_SureDontSave" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,120,0,0" Content="Sure" Click="Button_OnClick"></Button>
-                    <Button x:Name="Button_ContinueSetting" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="76,120,0,0" Content="No" Click="Button_OnClick"></Button>
-                    <Button x:Name="Button_UseDefaultConfig" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,120,0,0" Content="Default" Click="Button_OnClick" ToolTip="Use Default Config and save."></Button>
-                </Grid>
-            </materialDesign:DialogHost.DialogContent>
-        </materialDesign:DialogHost>
-    </Grid>
+        <materialDesign:Card Padding="8,4" Margin="4">
+            <Grid>
+            </Grid>
+        </materialDesign:Card>
+        <Grid Margin="8,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="32"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Button_SaveConfig" Margin="0" Content="继续并保存" Click="Button_OnClick" Grid.Row="0" Grid.Column="0" IsDefault="True"/>
+            <Button x:Name="Button_CancelConfig" Margin="0" Content="取消并退出" Click="Button_OnClick" Grid.Row="0" Grid.Column="2" IsCancel="True"/>
+        </Grid>
+    </StackPanel>
 </Controls:MetroWindow>

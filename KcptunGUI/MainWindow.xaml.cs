@@ -22,6 +22,7 @@ namespace KcptunGUI {
         }
 
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
+            this.Cursor = App.AppCursor[0];
             //NotifyIcon
             App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
             App.nicon.Text = App.AppAttributes["AppName"].ToString() + App.AppAttributes["AppVersion"].ToString();
