@@ -37,10 +37,7 @@ namespace KcptunGUI
             } else {//配置文件不存在
                 MessageBox.Show( "配置文件不存在,将重新创建", App.AppAttributes["Name"] ,MessageBoxButton.OK,MessageBoxImage.Warning);
                 fsAppConfigFile = new FileStream( App.AppAttributes["ConfigFilePath"] ,FileMode.OpenOrCreate,FileAccess.ReadWrite,FileShare.None);
-                SubWindow.PreConfig pc = new SubWindow.PreConfig() {
-                    ShowActivated = true , ShowInTaskbar = false , ShowSystemMenuOnRightClick = false , ShowIconOnTitleBar = true ,
-                    TitleCharacterCasing = System.Windows.Controls.CharacterCasing.Normal
-                };
+                SubWindow.PreConfig pc = new SubWindow.PreConfig();
                 pc.ShowDialog();
                 if( pc.DialogResult == true ) {//成功配置
                     MessageBox.Show("配置成功");

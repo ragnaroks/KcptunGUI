@@ -6,7 +6,7 @@ namespace KcptunGUI.SubWindow {
     /// <summary>
     /// PreConfig.xaml 的交互逻辑
     /// </summary>
-    public partial class PreConfig :  MetroWindow{
+    public partial class PreConfig :  Window{
         Boolean initedConfig = false;
         public PreConfig() {
             InitializeComponent();
@@ -26,7 +26,6 @@ namespace KcptunGUI.SubWindow {
         private void Button_OnClick(object sender,System.Windows.RoutedEventArgs e) {
             System.Windows.Controls.Button thisButton = (System.Windows.Controls.Button)sender;
             switch( thisButton.Name ) {
-                default:
                 case "Button_CancelConfig":
                     if( MessageBoxResult.Yes== MessageBox.Show( "确定不进行配置并退出?" , App.AppAttributes["Name"] , MessageBoxButton.YesNo , MessageBoxImage.Question ) ) {
                         initedConfig = false;
@@ -34,9 +33,14 @@ namespace KcptunGUI.SubWindow {
                     }
                     break;
                 case "Button_SaveConfig":
-                    
+                    if( MessageBoxResult.Yes == MessageBox.Show( "确定不进行配置并退出?" , App.AppAttributes["Name"] , MessageBoxButton.YesNo , MessageBoxImage.Question ) ) {
+                        initedConfig = false;
+                        this.Close();
+                    }
                     break;
+                default:return;
             }
+            //
         }
     }
 }

@@ -172,9 +172,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Class\Functions.cs" />
+    <Compile Include="Resource\RagnaroksControls.cs" />
     <Compile Include="SubWindow\PreConfig.xaml.cs">
       <DependentUpon>PreConfig.xaml</DependentUpon>
     </Compile>
+    <Page Include="Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -182,6 +187,10 @@
     <Page Include="SubWindow\PreConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
