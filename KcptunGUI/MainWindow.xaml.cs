@@ -25,7 +25,7 @@ namespace KcptunGUI {
             this.Cursor = App.AppCursor[0];
             //NotifyIcon
             App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
-            App.nicon.Text = App.AppAttributes["AppName"].ToString() + App.AppAttributes["AppVersion"].ToString();
+            App.nicon.Text = App.AppAttributes["Name"].ToString() + App.AppAttributes["Version"].ToString();
             App.nicon.Visible = true;
             App.nicon.MouseClick += Nicon_MouseClick;
             App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
@@ -37,12 +37,12 @@ namespace KcptunGUI {
             }
             //Debug Logs
             StringBuilder sb = new StringBuilder();
-            sb.Append( "AppName : " + App.AppAttributes["AppName"].ToString()+"\n" );
-            sb.Append( "AppVersion : " + App.AppAttributes["AppVersion"].ToString()+ "\n" );
-            sb.Append( "AppVersionR : " + App.AppAttributes["AppVersionR"].ToString() + "\n" );
-            sb.Append( "AppPath : " + App.AppAttributes["AppPath"].ToString() + "\n" );
-            sb.Append( "AppExecFilePath : " + App.AppAttributes["AppExecFilePath"].ToString() + "\n" );
-            sb.Append( "AppConfigFilePath : " + App.AppAttributes["AppConfigFilePath"].ToString() + "\n" );
+            sb.Append( "AppName : " + App.AppAttributes["Name"].ToString()+"\n" );
+            sb.Append( "AppVersion : " + App.AppAttributes["Version"].ToString()+ "\n" );
+            sb.Append( "AppVersionR : " + App.AppAttributes["VersionR"].ToString() + "\n" );
+            sb.Append( "AppPath : " + App.AppAttributes["Path"].ToString() + "\n" );
+            sb.Append( "AppExecFilePath : " + App.AppAttributes["ExecFilePath"].ToString() + "\n" );
+            sb.Append( "AppConfigFilePath : " + App.AppAttributes["ConfigFilePath"].ToString() + "\n" );
             this.logs.Text += sb;
             //
         }
