@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +8,7 @@ namespace KcptunGUI {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : MetroWindow {
+    public partial class MainWindow : Window {
         //
         
         public MainWindow(){
@@ -18,7 +17,6 @@ namespace KcptunGUI {
             this.Loaded += MainWindow_Loaded;//窗体加载完成
             this.Closing += MainWindow_Closing;//窗口即将关闭,可取消
             this.Closed += MainWindow_Closed;//窗口已确定将关闭
-            this.ShowSystemMenuOnRightClick = false;//不响应标题栏右键菜单
         }
 
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成

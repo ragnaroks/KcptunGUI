@@ -4,21 +4,6 @@ using System.Collections.Generic;
 namespace KcptunGUI.Class {
     class LocalFunction {
         /// <summary>
-        /// JSON输出 , http://lbv.github.io/litjson/docs/quickstart.html
-        /// </summary>
-        /// <param name="_json">要格式化的json字符串</param>
-        public static void PrintJSON( String _json ) {
-            LitJson.JsonReader jr = new LitJson.JsonReader( _json ) { AllowComments = false , AllowSingleQuotedStrings = false , SkipNonMembers = false };
-            Console.WriteLine( "{0,14} {1,10} {2,16}" , "Token" , "Value" , "Type" );
-            Console.WriteLine( new String( '-' , 42 ) );
-            while( jr.Read() ) {// The Read() method returns false when there's nothing else to read
-                string type = jr.Value != null ?
-                    jr.Value.GetType().ToString() : "";
-                Console.WriteLine( "{0,14} {1,10} {2,16}" , jr.Token , jr.Value , type );
-            }
-            jr = null;
-        }
-        /// <summary>
         /// 验证JSON有效性 , http://lbv.github.io/litjson/docs/quickstart.html
         /// </summary>
         /// <param name="_JSON">待验证的JSON字符串</param>

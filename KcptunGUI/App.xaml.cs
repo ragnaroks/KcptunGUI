@@ -3,7 +3,7 @@ using System.Windows;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
-using LitJson;
+using Newtonsoft;
 
 namespace KcptunGUI
 {
@@ -19,12 +19,14 @@ namespace KcptunGUI
         public static Cursor[] AppCursor = new Cursor[2];
         public static System.Text.UTF8Encoding UTF8EncodingNoBom = new System.Text.UTF8Encoding( false,true);//无BOM编码
         public const String DefaultConfig = "{\"AutoConnect\":false,\"LCID\":2052,\"ClientNodes\":{}}";
+        /*
         public static readonly Dictionary<String,JsonType> ConfigFormat = new Dictionary<String,JsonType>(){
             { "AutoConnect" , JsonType.Boolean },
             { "LCID" , JsonType.Int },
-            { "ClientNodes" , JsonType.Object },//{ "ServerNodes" , JsonType.None }
+            { "ClientNodes1" , JsonType.Object },//{ "ServerNodes" , JsonType.None }
         };
         public static JsonData AppConfig;
+        */
 
         protected override void OnStartup( StartupEventArgs e ) {
             //应用属性
@@ -46,27 +48,26 @@ namespace KcptunGUI
             if( !App.ConfigStream.CanRead || !App.ConfigStream.CanWrite || !App.ConfigStream.CanSeek ) { throw new Exception( "无法操作配置文件" ); }
             App.ConfigWriter = new StreamWriter( App.ConfigStream , UTF8EncodingNoBom ) { AutoFlush = true };
             App.ConfigReader = new StreamReader( App.ConfigStream , UTF8EncodingNoBom , false );//强制UTF8读取
-            Int32 a = Class.LocalFunction.ValidateJSON( App.ConfigReader.ReadToEnd() , App.ConfigFormat );
-            switch( a ) {
+            //配置文件有效性验证
+            switch( Class.LocalFunction.ValidateJSON( App.ConfigReader.ReadToEnd() , App.ConfigFormat ) ) {
                 default:
                 case Int32.MaxValue:
-                    if( MessageBox.Show( "配置文件无效,是否重建配置文件?" , App.AppAttributes["Name"] , MessageBoxButton.YesNo , MessageBoxImage.Question ) == MessageBoxResult.Yes ) {
+                    if( MessageBox.Show( "配置文件无效,是否重建配置文件?\nConfigure file is invalid,resetup?" , App.AppAttributes["Name"] , MessageBoxButton.YesNo , MessageBoxImage.Question ) == MessageBoxResult.Yes ) {
                         App.ConfigWriter.Write(App.DefaultConfig); App.ConfigWriter.Flush();
-                    } else {
-                        Environment.Exit( 0 );
-                    }
+                    } else {Environment.Exit( 0 );}
                     break;
-                case 0:
-                    //none
-                    break;
+                case 0: break;
             }
-            App.AppConfig = JsonMapper.ToObject(new JsonReader( App.ConfigReader.ReadToEnd() ) );
+            
+            //System.Threading.Thread.Sleep( 99999 );
             //初始化语言文件
-            if( File.Exists( App.AppAttributes["I18NPath"] + App.AppConfig["LCID"].ToString() + ".json" ) ) {//语言文件存在
+            /*
+            if( File.Exists( App.AppAttributes["I18NPath"] + ( App.AppConfig["LCID"].IsInt ? App.AppConfig["LCID"].ToString() : "2052" ) + ".json" ) ) {//语言文件存在
                 MessageBox.Show( "语言文件存在" );
             }else {
                 MessageBox.Show( "语言文件不存在" );
             }
+            */
             base.OnStartup( e );
         }
 
