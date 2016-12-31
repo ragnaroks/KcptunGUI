@@ -5,29 +5,45 @@
     xmlns:Diagnostics="clr-namespace:System.Diagnostics;assembly=mscorlib"
     xmlns:MD="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
-    Title="MainWindow"
-    Background="{DynamicResource MaterialDesignPaper}"
-    FontFamily="Microsoft YaHei"
-    Icon="Resource/icon/favicon.ico"
-    ResizeMode="CanMinimize"
-    SizeToContent="WidthAndHeight"
-    SnapsToDevicePixels="True"
-    TextElement.FontSize="12"
-    TextElement.FontWeight="Regular"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    TextOptions.TextFormattingMode="Ideal"
-    TextOptions.TextRenderingMode="Auto"
-    WindowStartupLocation="CenterScreen">
-    <Grid>
-        <TabControl>
-            <TabItem x:Name="I18N_0" Header="I18N-Text-0" />
-            <TabItem x:Name="I18N_1" Header="I18N-Text-1" />
-            <TabItem x:Name="I18N_2" Header="I18N-Text-2">
-                <Grid />
-            </TabItem>
-            <TabItem x:Name="I18N_3" Header="I18N-Text-3">
-                <Grid />
-            </TabItem>
-        </TabControl>
-    </Grid>
+    Title="MainWindow" Background="{DynamicResource MaterialDesignPaper}" FontFamily="Microsoft YaHei" Icon="Resource/icon/favicon.ico"
+    ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" SnapsToDevicePixels="True" TextElement.FontSize="12" TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" 
+    WindowStartupLocation="CenterScreen" MinHeight="240" MinWidth="480"
+>
+    <MD:DialogHost>
+        <MD:DrawerHost IsLeftDrawerOpen="{Binding ElementName=Local_0, Path=IsChecked}">
+            <MD:DrawerHost.LeftDrawerContent>
+                <StackPanel MinWidth="128">
+                    <ToggleButton IsChecked="{Binding ElementName=Local_0, Path=IsChecked}" Style="{StaticResource ResourceKey=MaterialDesignHamburgerToggleButton}" />
+                    
+                </StackPanel>
+            </MD:DrawerHost.LeftDrawerContent>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <MD:ColorZone Grid.Row="0" Grid.ColumnSpan="2" Padding="8" MD:ShadowAssist.ShadowDepth="Depth1" Mode="Dark">
+                    <DockPanel>
+                        <ToggleButton DockPanel.Dock="Left" x:Name="Local_0" IsChecked="False" Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                        <MD:PopupBox DockPanel.Dock="Right" x:Name="Local_1" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                            <StackPanel>
+                                <Button x:Name="Local_4" Content="On GitHub" Click="Button_Clicked"></Button>
+                                <Button x:Name="Local_5" Content="On Oschina" Click="Button_Clicked"></Button>
+                                <Button Content="Contact Me" IsEnabled="False" />
+                                <Separator />
+                                <TextBlock x:Name="Local_3" Padding="8,0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </MD:PopupBox>
+                        <TextBlock x:Name="Local_2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="AppName"/>
+                    </DockPanel>
+                </MD:ColorZone>
+            </Grid>
+        </MD:DrawerHost>
+    </MD:DialogHost>
 </Window>

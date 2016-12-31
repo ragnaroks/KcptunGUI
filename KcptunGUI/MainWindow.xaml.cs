@@ -16,9 +16,9 @@ namespace KcptunGUI {
             this.Closing += MainWindow_Closing;//窗口即将关闭,可取消
             this.Closed += MainWindow_Closed;//窗口已确定将关闭
         }
-
+        #region 初始化
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
-            Title = Class.AppAttributes.Name;
+            Title = "Status: ";
             Cursor = App.AppCursor[0];
             //托盘
             App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
@@ -32,8 +32,9 @@ namespace KcptunGUI {
             for(Byte i=0;i<tsmi.Length ;i++ ) {
                 App.nicon.ContextMenuStrip.Items.Insert( i , tsmi[i] );
             }
-            //加载全球化文本
-            /*UInt16[] I18N_Index = { 0 , 1 , 2 , 3 };*/MainWindow_I18N();
+            //加载文本
+            /*UInt16[] I18N_Index = { 0 , 1 , 2 , 3 };*/MainWindow_I18N(); MainWindow_L10N();
+
         }
         /// <summary>窗口即将关闭,可取消</summary>
         /// <param name="sender"></param>
@@ -49,18 +50,41 @@ namespace KcptunGUI {
         /// <summary>加载全球化文本</summary>
         private void MainWindow_I18N() {
             //foreach(UInt16 i in _index ) {var t = this.FindName( "I18N_" + i );}
-            this.I18N_0.Header = Class.I18N.GetString(0);
-            this.I18N_1.Header = Class.I18N.GetString(1);
-            this.I18N_2.Header = Class.I18N.GetString(2);
-            this.I18N_3.Header = Class.I18N.GetString(3);
+            //this.I18N_0.Header = Class.I18N.GetString(0);
+            //this.I18N_1.Header = Class.I18N.GetString(1);
+            //this.I18N_2.Header = Class.I18N.GetString(2);
+            //this.I18N_3.Header = Class.I18N.GetString(3);
         }
+        private void MainWindow_L10N() {
+            this.Local_2.Text = Class.AppAttributes.Name;
+            this.Local_3.Text = "Version: " + Class.AppAttributes.Version;
+        }
+        #endregion
+        #region Button控件响应
+        /// <summary>
+        /// 根据x:Name响应按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Clicked(Object sender,RoutedEventArgs e) {
+            Button thisButton = (Button)sender;
+            switch(thisButton.Name){
+                case "Local_4":
+                    Process.Start("https://github.com/ragnaroks/KcptunGUI/");
+                    break;
+                case "Local_5":
+                    Process.Start("http://git.oschina.net/ragnaroks/KcptunGUI/");
+                    break;
+                default:break;
+            }
+        }
+        #endregion
         private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
             CheckBox thisCheckBox = (CheckBox)sender;
             switch (thisCheckBox.Name) {
                 case "KcptunConfig_Compress":
                      break;
-                default:
-                    break;
+                default:break;
             }
         }
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e){//单选框取消选择事件
@@ -107,7 +131,7 @@ namespace KcptunGUI {
                 default:
                 case System.Windows.Forms.MouseButtons.Left: //按下鼠标左键,显示/隐藏窗口
                     App.nicon.ContextMenuStrip.Hide();
-                    if( Class.Functions.IsWindowVisible( new System.Windows.Interop.WindowInteropHelper( this ).Handle ) ) {
+                    if( Class.Functions.IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle) ) {
                         this.Hide();
                     } else {
                         this.Show();
@@ -155,8 +179,12 @@ namespace KcptunGUI {
             this.MainWindow_RunKcptun.IsEnabled = true; this.MainWindow_StopKcptun.IsEnabled = false;
             */
         }
-
-        private void Canvas_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e){//鼠标离开Canvas
+        /// <summary>
+        /// 响应Canvas控件的"鼠标左键松开"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Canvas_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e){
             Canvas thisCanvas = (Canvas)sender;
             if (!thisCanvas.IsMouseOver) { return; }
             switch (thisCanvas.Name) {
@@ -166,10 +194,5 @@ namespace KcptunGUI {
                 default:break;
             }
         }
-
-        private void AppExit() {
-            System.Environment.Exit( 0 );
-        }
-
     }
 }
