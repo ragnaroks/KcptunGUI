@@ -101,11 +101,38 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;AutoConnect&quot;:{&quot;type&quot;:&quot;boolean&quot;},&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;Nodes&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;hostname&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;ip&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;localport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;remoteport&quot;:{&quot;type&quot;:&quot;integer&quot;}},&quot;required&quot;:[&quot;hostname&quot;,&quot;ip&quot;,&quot;description&quot;,&quot;localport&quot;,&quot;remoteport&quot;]}}},&quot;required&quot;:[&quot;AutoConnect&quot;,&quot;LCID&quot;,&quot;Nodes&quot;]} 的本地化字符串。
+        ///   查找类似 {&quot;LCID&quot;:2052,&quot;Nodes&quot;:[{&quot;hostname&quot;:&quot;too.simple.com&quot;,&quot;ip&quot;:&quot;1.2.4.8&quot;,&quot;description&quot;:&quot;图样主机 - 1&quot;,&quot;localport&quot;:1081,&quot;remoteport&quot;:8000,&quot;autoconnect&quot;:false}]} 的本地化字符串。
+        /// </summary>
+        public static string String_AppConfigJsonDefault {
+            get {
+                return ResourceManager.GetString("String_AppConfigJsonDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;Nodes&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;hostname&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;ip&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;localport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;remoteport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;autoconnect&quot;:{&quot;type&quot;:&quot;boolean&quot;}},&quot;required&quot;:[&quot;hostname&quot;,&quot;ip&quot;,&quot;description&quot;,&quot;localport&quot;,&quot;remoteport&quot;,&quot;autoconnect&quot;]}}},&quot;required&quot;:[&quot;LCID&quot;,&quot;Nodes&quot;]} 的本地化字符串。
         /// </summary>
         public static string String_AppConfigJsonSchema {
             get {
                 return ResourceManager.GetString("String_AppConfigJsonSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;]} 的本地化字符串。
+        /// </summary>
+        public static string String_AppLanguageJsonDefault {
+            get {
+                return ResourceManager.GetString("String_AppLanguageJsonDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;Language&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;LangTag&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;Text&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;string&quot;}}},&quot;required&quot;:[&quot;Language&quot;,&quot;LangTag&quot;,&quot;LCID&quot;,&quot;Text&quot;]} 的本地化字符串。
+        /// </summary>
+        public static string String_AppLanguageJsonSchema {
+            get {
+                return ResourceManager.GetString("String_AppLanguageJsonSchema", resourceCulture);
             }
         }
     }

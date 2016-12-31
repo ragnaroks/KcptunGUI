@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 
 namespace KcptunGUI.Class {
     /// <summary>
@@ -41,6 +38,10 @@ namespace KcptunGUI.Class {
             /// 远程端口
             /// </summary>
             public Int32 remoteport { get; set; }
+            /// <summary>
+            /// 是否自动链接
+            /// </summary>
+            public Boolean autoconnect { get; set; }
         }
         /// <summary>
         /// 服务器节点

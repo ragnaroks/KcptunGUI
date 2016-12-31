@@ -32,7 +32,7 @@ namespace KcptunGUI.Class {
         /// 验证配置文件合法性
         /// </summary>
         /// <returns>是否合法</returns>
-        public static Boolean ValidateJSON() {
+        public static Boolean ValidateConfigJSON() {
             if( String.IsNullOrWhiteSpace( App.AppConfigJson ) || App.AppConfigJson.IndexOf( "}{" , 0 ) > -1 ) { return false; }
             JSchema schema = JSchema.Parse( Properties.Resources.String_AppConfigJsonSchema );
             JObject jo = JObject.Parse( App.AppConfigJson );
@@ -41,7 +41,24 @@ namespace KcptunGUI.Class {
             if( errors.Count == 0 && v == true ) {
                 return true;
             } else {
-                foreach( var value in errors ) { Console.WriteLine( "验证失败: " + value ); }
+                foreach( var value in errors ) { Console.WriteLine( "配置文件验证失败: " + value ); }
+                return false;
+            }
+        }
+        /// <summary>
+        /// 验证语言文件合法性
+        /// </summary>
+        /// <returns>是否合法</returns>
+        public static Boolean ValidateLanguageJSON() {
+            if( String.IsNullOrWhiteSpace( App.AppLanguageJson ) || App.AppLanguageJson.IndexOf( "}{" , 0 ) > -1 ) { return false; }
+            JSchema schema = JSchema.Parse( Properties.Resources.String_AppLanguageJsonSchema );
+            JObject jo = JObject.Parse( App.AppLanguageJson );
+            IList<string> errors;
+            Boolean v = jo.IsValid( schema , out errors );
+            if( errors.Count == 0 && v == true ) {
+                return true;
+            } else {
+                foreach( var value in errors ) { Console.WriteLine( "语言文件验证失败: " + value ); }
                 return false;
             }
         }

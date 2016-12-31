@@ -18,8 +18,9 @@ namespace KcptunGUI {
         }
 
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
-            this.Cursor = App.AppCursor[0];
-            //NotifyIcon
+            Title = Class.AppAttributes.Name;
+            Cursor = App.AppCursor[0];
+            //托盘
             App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
             App.nicon.Text = Class.AppAttributes.Name + "  " + Class.AppAttributes.Version;
             App.nicon.Visible = true;
@@ -31,20 +32,28 @@ namespace KcptunGUI {
             for(Byte i=0;i<tsmi.Length ;i++ ) {
                 App.nicon.ContextMenuStrip.Items.Insert( i , tsmi[i] );
             }
-            //Debug Logs
-            StringBuilder sb = new StringBuilder();
-            this.logs.Text += sb;
-            //
+            //加载全球化文本
+            /*UInt16[] I18N_Index = { 0 , 1 , 2 , 3 };*/MainWindow_I18N();
         }
-
-        private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {//窗口即将关闭,可取消
-
-        }
-        private void MainWindow_Closed( object sender , EventArgs e ) {//窗口已确定将关闭
+        /// <summary>窗口即将关闭,可取消</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {}
+        /// <summary>窗口已确定将关闭</summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainWindow_Closed( object sender , EventArgs e ) {
             App.nicon.Visible = false;
             //if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);}
         }
-        //
+        /// <summary>加载全球化文本</summary>
+        private void MainWindow_I18N() {
+            //foreach(UInt16 i in _index ) {var t = this.FindName( "I18N_" + i );}
+            this.I18N_0.Header = Class.I18N.GetString(0);
+            this.I18N_1.Header = Class.I18N.GetString(1);
+            this.I18N_2.Header = Class.I18N.GetString(2);
+            this.I18N_3.Header = Class.I18N.GetString(3);
+        }
         private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
             CheckBox thisCheckBox = (CheckBox)sender;
             switch (thisCheckBox.Name) {

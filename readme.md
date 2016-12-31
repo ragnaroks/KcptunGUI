@@ -1,21 +1,20 @@
-### KcptunGUI是什么?
+### KcptunGUI是什么? ### What's KcptunGUI?
 KcptunGUI是kcptun的Windows用户界面,用于帮助用户简易方便的配置参数以及管理.
-
-已包含kcptun v20160820,无需额外下载.
-
-发布版本可能不是最新版,最新版请自行下载编译.
 
 ![](http://i1.buimg.com/1949/c569f5074eca2af4.png)
 
-### 需求
-- [.Net运行时最新版](http://go.microsoft.com/fwlink/?LinkId=780601)
-- 操作系统最低Windows7
+### 需求/Require
+- [.Net 4.6.2+](http://go.microsoft.com/fwlink/?LinkId=780601)
+- Windows7+
 
-### 鸣谢
+### 其它/Other
+- [LCID(hex)](https://msdn.microsoft.com/en-us/library/cc233982.aspx)
+
+### 鸣谢/Thanks
 - [kcptun](https://github.com/xtaci/kcptun)
-- [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
+- [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 - [MaterialDesignInXamlToolkit](https://github.com/ButchersBoy/MaterialDesignInXamlToolkit)
 
-### 代码
+### 代码/Code
 - [git@github](https://github.com/ragnaroks/kcptungui)
 - [git@oschina 镜像](http://git.oschina.net/ragnaroks/KcptunGUI)

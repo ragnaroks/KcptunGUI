@@ -154,6 +154,7 @@
     <Compile Include="Class\AppAttributes.cs" />
     <Compile Include="Class\ConfigJson.cs" />
     <Compile Include="Class\I18N.cs" />
+    <Compile Include="Class\LanguageJson.cs" />
     <Compile Include="Class\LocalFunction.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -198,6 +199,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Resx\I18N\1033.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resx\I18N\2052.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

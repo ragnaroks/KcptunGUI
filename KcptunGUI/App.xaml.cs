@@ -20,36 +20,42 @@ namespace KcptunGUI
         public static String AppConfigJson;
         public static Class.ConfigJson AppConfigObject;
         public static String AppLanguageJson;
-
+        public static Class.LanguageJson AppLanguageObject;
 
         protected override void OnStartup( StartupEventArgs e ) {
             //检查环境
             if( !Directory.Exists( Class.AppAttributes.ResxPath ) ) { Directory.CreateDirectory( Class.AppAttributes.ResxPath ); }//若resx目录不存在则创建
             if( !Directory.Exists( Class.AppAttributes.I18NPath ) ) { Directory.CreateDirectory( Class.AppAttributes.I18NPath ); }//若i18n目录不存在则创建
+            if(!File.Exists( Class.AppAttributes.I18NPath+"2052.json") || !File.Exists( Class.AppAttributes.I18NPath+"1033.json") ) { Environment.Exit( 0 ); }//没有默认语言文件直接退出
             //初始化鼠标样式
             AppCursor[0] = new Cursor( Class.Functions.BytesToStream( KcptunGUI.Properties.Resources.cursor_Arrow ) , false);//箭头
-            //初始化首选项
+            //初始化配置文件
             if(!File.Exists( Class.AppAttributes.ConfigFilePath ) ) {
                 File.Create( Class.AppAttributes.ConfigFilePath );//若配置文件不存在则创建
-                File.WriteAllText( Class.AppAttributes.ConfigFilePath , JsonConvert.SerializeObject( Class.LocalFunction.GenDefaultConfigObject() ) , Class.AppAttributes.UTF8EncodingNoBom );//写入默认配置
+                File.WriteAllText(Class.AppAttributes.ConfigFilePath , KcptunGUI.Properties.Resources.String_AppConfigJsonDefault , Class.AppAttributes.UTF8EncodingNoBom);//写入默认配置
             }
             AppConfigJson = File.ReadAllText(Class.AppAttributes.ConfigFilePath,Class.AppAttributes.UTF8EncodingNoBom);
+            Console.WriteLine(KcptunGUI.Properties.Resources.String_AppConfigJsonDefault);// System.Threading.Thread.Sleep(99999);
             //配置文件有效性验证
-            if( !Class.LocalFunction.ValidateJSON() ) {//验证失败
-                if(MessageBox.Show( "配置文件无效,是否重建配置文件?\nConfigure file is invalid,resetup?" , Class.AppAttributes.Name, MessageBoxButton.YesNo , MessageBoxImage.Question ) == MessageBoxResult.Yes ) {
-                    File.WriteAllText( Class.AppAttributes.ConfigFilePath , JsonConvert.SerializeObject( Class.LocalFunction.GenDefaultConfigObject() ) , Class.AppAttributes.UTF8EncodingNoBom );//写入默认配置
-                    MessageBox.Show("配置文件重建完成\nConfigure file setup." , Class.AppAttributes.Name , MessageBoxButton.OK, MessageBoxImage.Information );
+            if( !Class.LocalFunction.ValidateConfigJSON() ) {//验证失败
+                if(MessageBox.Show( "配置文件无效,是否重建配置文件?\nConfigure file is invalid,set up?" , Class.AppAttributes.Name, MessageBoxButton.YesNo , MessageBoxImage.Question ) == MessageBoxResult.Yes ) {
+                    File.WriteAllText( Class.AppAttributes.ConfigFilePath , KcptunGUI.Properties.Resources.String_AppConfigJsonDefault , Class.AppAttributes.UTF8EncodingNoBom );//写入默认配置
+                    MessageBox.Show("配置文件重建完成\nConfigure file is set up." , Class.AppAttributes.Name , MessageBoxButton.OK, MessageBoxImage.Information );
+                    AppConfigJson = File.ReadAllText( Class.AppAttributes.ConfigFilePath , Class.AppAttributes.UTF8EncodingNoBom );
+                    AppConfigObject = JsonConvert.DeserializeObject<Class.ConfigJson>( AppConfigJson );
                 } else {Environment.Exit( 0 );}
             } else {//验证成功
                 AppConfigObject = JsonConvert.DeserializeObject<Class.ConfigJson>(AppConfigJson); //Console.WriteLine( "AppConfigObject_String: "+JsonConvert.SerializeObject( AppConfigObject ) ); System.Threading.Thread.Sleep( 99999 );
             }
             //初始化语言文件
-            if( File.Exists( Class.AppAttributes.I18NPath + App.AppConfigObject.LCID + ".json" ) ) {//语言文件存在
-                //MessageBox.Show( "语言文件存在" );
-
-            }else {
+            if( !File.Exists( Class.AppAttributes.I18NPath + App.AppConfigObject.LCID + ".json" ) ) {//语言文件不存在
                 MessageBox.Show( "语言文件不存在,将使用简体中文\nNot found language file,default use chinese.", Class.AppAttributes.Name, MessageBoxButton.OK,MessageBoxImage.Information);
+                AppLanguageJson = KcptunGUI.Properties.Resources.String_AppLanguageJsonDefault;
+            }else {
+                AppLanguageJson = File.ReadAllText( Class.AppAttributes.I18NPath + App.AppConfigObject.LCID + ".json");
+                AppLanguageObject = JsonConvert.DeserializeObject<Class.LanguageJson>( AppLanguageJson );
             }
+            //终于可以启动了
             base.OnStartup( e );
         }
     }
