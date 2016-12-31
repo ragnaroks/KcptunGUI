@@ -99,5 +99,14 @@ namespace KcptunGUI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;AutoConnect&quot;:{&quot;type&quot;:&quot;boolean&quot;},&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;Nodes&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;hostname&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;ip&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;localport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;remoteport&quot;:{&quot;type&quot;:&quot;integer&quot;}},&quot;required&quot;:[&quot;hostname&quot;,&quot;ip&quot;,&quot;description&quot;,&quot;localport&quot;,&quot;remoteport&quot;]}}},&quot;required&quot;:[&quot;AutoConnect&quot;,&quot;LCID&quot;,&quot;Nodes&quot;]} 的本地化字符串。
+        /// </summary>
+        public static string String_AppConfigJsonSchema {
+            get {
+                return ResourceManager.GetString("String_AppConfigJsonSchema", resourceCulture);
+            }
+        }
     }
 }

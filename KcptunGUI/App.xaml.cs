@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
-using Newtonsoft;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace KcptunGUI
 {
@@ -11,65 +12,45 @@ namespace KcptunGUI
     /// App.xaml 的交互逻辑
     /// </summary>
     public partial class App : Application{
-        public static Dictionary<String ,String> AppAttributes = new Dictionary<String ,String>();//应用属性
         public static System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();//托盘图标
         public static FileStream ConfigStream = null;
         public static StreamWriter ConfigWriter = null;//配置文件_写入
         public static StreamReader ConfigReader = null;//配置文件_读取
         public static Cursor[] AppCursor = new Cursor[2];
-        public static System.Text.UTF8Encoding UTF8EncodingNoBom = new System.Text.UTF8Encoding( false,true);//无BOM编码
-        public const String DefaultConfig = "{\"AutoConnect\":false,\"LCID\":2052,\"ClientNodes\":{}}";
-        /*
-        public static readonly Dictionary<String,JsonType> ConfigFormat = new Dictionary<String,JsonType>(){
-            { "AutoConnect" , JsonType.Boolean },
-            { "LCID" , JsonType.Int },
-            { "ClientNodes1" , JsonType.Object },//{ "ServerNodes" , JsonType.None }
-        };
-        public static JsonData AppConfig;
-        */
+        public static String AppConfigJson;
+        public static Class.ConfigJson AppConfigObject;
+        public static String AppLanguageJson;
+
 
         protected override void OnStartup( StartupEventArgs e ) {
-            //应用属性
-            App.AppAttributes["Name"] = "KcptunGUI";
-            App.AppAttributes["Version"] = Application.ResourceAssembly.GetName().Version.Major.ToString() + "." + Application.ResourceAssembly.GetName().Version.Minor.ToString() + "." + Application.ResourceAssembly.GetName().Version.Build.ToString();
-            App.AppAttributes["VersionR"] = Application.ResourceAssembly.GetName().Version.Revision.ToString();
-            App.AppAttributes["Path"] = Environment.CurrentDirectory;
-            App.AppAttributes["ExecFilePath"] = App.AppAttributes["Path"] + "\\"+App.AppAttributes["Name"]+".exe";
-            App.AppAttributes["ResxPath"] = App.AppAttributes["Path"] + "\\Resx";
-            App.AppAttributes["I18NPath"] = App.AppAttributes["Path"] + "\\I18N";
-            App.AppAttributes["ConfigFilePath"]= App.AppAttributes["ResxPath"] + "\\config.json";
-            //必备环境
-            if( !Directory.Exists( App.AppAttributes["ResxPath"] ) ) { Directory.CreateDirectory( App.AppAttributes["ResxPath"] ); }//若resx目录不存在则创建
-            if( !Directory.Exists( App.AppAttributes["I18NPath"] ) ) { Directory.CreateDirectory( App.AppAttributes["I18NPath"] ); }//若resx目录不存在则创建
+            //检查环境
+            if( !Directory.Exists( Class.AppAttributes.ResxPath ) ) { Directory.CreateDirectory( Class.AppAttributes.ResxPath ); }//若resx目录不存在则创建
+            if( !Directory.Exists( Class.AppAttributes.I18NPath ) ) { Directory.CreateDirectory( Class.AppAttributes.I18NPath ); }//若i18n目录不存在则创建
             //初始化鼠标样式
-            App.AppCursor[0] = new Cursor( Class.Functions.BytesToStream( KcptunGUI.Properties.Resources.cursor_Arrow ) , false);//箭头
+            AppCursor[0] = new Cursor( Class.Functions.BytesToStream( KcptunGUI.Properties.Resources.cursor_Arrow ) , false);//箭头
             //初始化首选项
-            App.ConfigStream = new FileStream( App.AppAttributes["ConfigFilePath"] , FileMode.OpenOrCreate , FileAccess.ReadWrite , FileShare.None );//若配置文件不存在则创建并锁定
-            if( !App.ConfigStream.CanRead || !App.ConfigStream.CanWrite || !App.ConfigStream.CanSeek ) { throw new Exception( "无法操作配置文件" ); }
-            App.ConfigWriter = new StreamWriter( App.ConfigStream , UTF8EncodingNoBom ) { AutoFlush = true };
-            App.ConfigReader = new StreamReader( App.ConfigStream , UTF8EncodingNoBom , false );//强制UTF8读取
+            if(!File.Exists( Class.AppAttributes.ConfigFilePath ) ) {
+                File.Create( Class.AppAttributes.ConfigFilePath );//若配置文件不存在则创建
+                File.WriteAllText( Class.AppAttributes.ConfigFilePath , JsonConvert.SerializeObject( Class.LocalFunction.GenDefaultConfigObject() ) , Class.AppAttributes.UTF8EncodingNoBom );//写入默认配置
+            }
+            AppConfigJson = File.ReadAllText(Class.AppAttributes.ConfigFilePath,Class.AppAttributes.UTF8EncodingNoBom);
             //配置文件有效性验证
-            switch( Class.LocalFunction.ValidateJSON( App.ConfigReader.ReadToEnd() , App.ConfigFormat ) ) {
-                default:
-                case Int32.MaxValue:
-                    if( MessageBox.Show( "配置文件无效,是否重建配置文件?\nConfigure file is invalid,resetup?" , App.AppAttributes["Name"] , MessageBoxButton.YesNo , MessageBoxImage.Question ) == MessageBoxResult.Yes ) {
-                        App.ConfigWriter.Write(App.DefaultConfig); App.ConfigWriter.Flush();
-                    } else {Environment.Exit( 0 );}
-                    break;
-                case 0: break;
+            if( !Class.LocalFunction.ValidateJSON() ) {//验证失败
+                if(MessageBox.Show( "配置文件无效,是否重建配置文件?\nConfigure file is invalid,resetup?" , Class.AppAttributes.Name, MessageBoxButton.YesNo , MessageBoxImage.Question ) == MessageBoxResult.Yes ) {
+                    File.WriteAllText( Class.AppAttributes.ConfigFilePath , JsonConvert.SerializeObject( Class.LocalFunction.GenDefaultConfigObject() ) , Class.AppAttributes.UTF8EncodingNoBom );//写入默认配置
+                    MessageBox.Show("配置文件重建完成\nConfigure file setup." , Class.AppAttributes.Name , MessageBoxButton.OK, MessageBoxImage.Information );
+                } else {Environment.Exit( 0 );}
+            } else {//验证成功
+                AppConfigObject = JsonConvert.DeserializeObject<Class.ConfigJson>(AppConfigJson); //Console.WriteLine( "AppConfigObject_String: "+JsonConvert.SerializeObject( AppConfigObject ) ); System.Threading.Thread.Sleep( 99999 );
             }
-            
-            //System.Threading.Thread.Sleep( 99999 );
             //初始化语言文件
-            /*
-            if( File.Exists( App.AppAttributes["I18NPath"] + ( App.AppConfig["LCID"].IsInt ? App.AppConfig["LCID"].ToString() : "2052" ) + ".json" ) ) {//语言文件存在
-                MessageBox.Show( "语言文件存在" );
+            if( File.Exists( Class.AppAttributes.I18NPath + App.AppConfigObject.LCID + ".json" ) ) {//语言文件存在
+                //MessageBox.Show( "语言文件存在" );
+
             }else {
-                MessageBox.Show( "语言文件不存在" );
+                MessageBox.Show( "语言文件不存在,将使用简体中文\nNot found language file,default use chinese.", Class.AppAttributes.Name, MessageBoxButton.OK,MessageBoxImage.Information);
             }
-            */
             base.OnStartup( e );
         }
-
     }
 }

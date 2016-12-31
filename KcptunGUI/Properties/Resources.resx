@@ -130,4 +130,7 @@
   <data name="icons_niconMenuClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resource\icon\icons_niconmenuclose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="String_AppConfigJsonSchema" xml:space="preserve">
+    <value>{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"AutoConnect":{"type":"boolean"},"LCID":{"type":"integer"},"Nodes":{"type":"array","items":{"type":"object","properties":{"hostname":{"type":"string"},"ip":{"type":"string"},"description":{"type":"string"},"localport":{"type":"integer"},"remoteport":{"type":"integer"}},"required":["hostname","ip","description","localport","remoteport"]}}},"required":["AutoConnect","LCID","Nodes"]}</value>
+  </data>
 </root>

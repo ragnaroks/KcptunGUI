@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,8 +9,6 @@ namespace KcptunGUI {
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window {
-        //
-        
         public MainWindow(){
             InitializeComponent();
             //this.StateChanged += MainWindow_StateChanged;
@@ -23,7 +21,7 @@ namespace KcptunGUI {
             this.Cursor = App.AppCursor[0];
             //NotifyIcon
             App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
-            App.nicon.Text = App.AppAttributes["Name"].ToString() + App.AppAttributes["Version"].ToString();
+            App.nicon.Text = Class.AppAttributes.Name + "  " + Class.AppAttributes.Version;
             App.nicon.Visible = true;
             App.nicon.MouseClick += Nicon_MouseClick;
             App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
@@ -35,12 +33,6 @@ namespace KcptunGUI {
             }
             //Debug Logs
             StringBuilder sb = new StringBuilder();
-            sb.Append( "AppName : " + App.AppAttributes["Name"].ToString()+"\n" );
-            sb.Append( "AppVersion : " + App.AppAttributes["Version"].ToString()+ "\n" );
-            sb.Append( "AppVersionR : " + App.AppAttributes["VersionR"].ToString() + "\n" );
-            sb.Append( "AppPath : " + App.AppAttributes["Path"].ToString() + "\n" );
-            sb.Append( "AppExecFilePath : " + App.AppAttributes["ExecFilePath"].ToString() + "\n" );
-            sb.Append( "AppConfigFilePath : " + App.AppAttributes["ConfigFilePath"].ToString() + "\n" );
             this.logs.Text += sb;
             //
         }
