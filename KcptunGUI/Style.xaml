@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:KcptunGUI"
 >
-    <!--TextBlock-->
+    <!--
     <Style TargetType="TextBlock">
         <Style.Setters>
             <Setter Property="FontSize" Value="12"></Setter>
@@ -26,11 +26,12 @@
             <Setter Property="UseLayoutRounding" Value="True"></Setter>
         </Style.Setters>
     </Style>
-    <!--TextBox-->
+    
     <Style TargetType="TextBox">
         <Style.Setters>
             <Setter Property="UndoLimit" Value="0"></Setter>
             <Setter Property="SpellCheck.IsEnabled" Value="False"></Setter>
         </Style.Setters>
     </Style>
+    -->
 </ResourceDictionary>

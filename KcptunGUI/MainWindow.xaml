@@ -5,45 +5,44 @@
     xmlns:Diagnostics="clr-namespace:System.Diagnostics;assembly=mscorlib"
     xmlns:MD="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
-    Title="MainWindow" Background="{DynamicResource MaterialDesignPaper}" FontFamily="Microsoft YaHei" Icon="Resource/icon/favicon.ico"
+    xmlns:Properties="clr-namespace:KcptunGUI.Properties"
+    Title="MainWindow" Background="{DynamicResource MaterialDesignPaper}" FontFamily="Microsoft YaHei"
     ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" SnapsToDevicePixels="True" TextElement.FontSize="12" TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" 
     WindowStartupLocation="CenterScreen" MinHeight="240" MinWidth="480"
 >
     <MD:DialogHost>
-        <MD:DrawerHost IsLeftDrawerOpen="{Binding ElementName=Local_0, Path=IsChecked}">
+        <MD:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MainWindow_ToggleButton_ToggleMenu, Path=IsChecked,Mode=TwoWay}">
             <MD:DrawerHost.LeftDrawerContent>
-                <StackPanel MinWidth="128">
-                    <ToggleButton IsChecked="{Binding ElementName=Local_0, Path=IsChecked}" Style="{StaticResource ResourceKey=MaterialDesignHamburgerToggleButton}" />
-                    
+                <StackPanel>
+                    <ToggleButton IsChecked="{Binding ElementName=MainWindow_ToggleButton_ToggleMenu, Path=IsChecked,Mode=TwoWay}" Style="{StaticResource ResourceKey=MaterialDesignHamburgerToggleButton}" />
+                    <ListBox Margin="0,16" IsSynchronizedWithCurrentItem="True">
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_ClientMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" TabIndex="0"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_ServerMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" TabIndex="1"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_Configure" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" TabIndex="2"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_Status" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" TabIndex="4"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_About" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" TabIndex="3" IsSelected="True"/>
+                    </ListBox>
                 </StackPanel>
             </MD:DrawerHost.LeftDrawerContent>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <MD:ColorZone Grid.Row="0" Grid.ColumnSpan="2" Padding="8" MD:ShadowAssist.ShadowDepth="Depth1" Mode="Dark">
+            <StackPanel>
+                <MD:ColorZone Padding="8" MD:ShadowAssist.ShadowDepth="Depth1" Mode="Dark">
                     <DockPanel>
-                        <ToggleButton DockPanel.Dock="Left" x:Name="Local_0" IsChecked="False" Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                        <MD:PopupBox DockPanel.Dock="Right" x:Name="Local_1" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                        <ToggleButton x:Name="MainWindow_ToggleButton_ToggleMenu" DockPanel.Dock="Left" IsChecked="False" Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                        <MD:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
-                                <Button x:Name="Local_4" Content="On GitHub" Click="Button_Clicked"></Button>
-                                <Button x:Name="Local_5" Content="On Oschina" Click="Button_Clicked"></Button>
+                                <Button x:Name="MainWindow_Button_ViewSrcOnGitHub" Content="On GitHub" Click="Button_Clicked"></Button>
+                                <Button x:Name="MainWindow_Button_ViewSrcOnOSchina" Content="On OSchina" Click="Button_Clicked"></Button>
                                 <Button Content="Contact Me" IsEnabled="False" />
                                 <Separator />
-                                <TextBlock x:Name="Local_3" Padding="8,0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock x:Name="MainWindow_TextBlock_AppVersion" Padding="8,0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </MD:PopupBox>
-                        <TextBlock x:Name="Local_2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="AppName"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="KcptunGUI"/>
                     </DockPanel>
                 </MD:ColorZone>
-            </Grid>
+                <Frame x:Name="MainWindow_Frame_ViewArea" NavigationUIVisibility="Hidden"></Frame>
+            </StackPanel>
         </MD:DrawerHost>
     </MD:DialogHost>
 </Window>

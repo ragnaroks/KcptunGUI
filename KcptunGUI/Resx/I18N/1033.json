@@ -6,6 +6,7 @@
         "Client",
         "Server",
         "Configure",
-        "About"
+        "About",
+		"Status"
     ]
 }

@@ -22,7 +22,7 @@ namespace KcptunGUI.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace KcptunGUI.Properties {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KcptunGUI.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace KcptunGUI.Properties {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,21 +61,11 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        public static byte[] cursor_Arrow {
-            get {
-                object obj = ResourceManager.GetObject("cursor_Arrow", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Icon favicon_ico {
+        internal static System.Drawing.Icon icon_favicon_ico {
             get {
-                object obj = ResourceManager.GetObject("favicon_ico", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_favicon_ico", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -83,45 +73,35 @@ namespace KcptunGUI.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        public static System.Drawing.Bitmap favicon_png {
+        internal static System.Drawing.Bitmap picture_favicon_png {
             get {
-                object obj = ResourceManager.GetObject("favicon_png", resourceCulture);
+                object obj = ResourceManager.GetObject("picture_favicon_png", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        ///   查找类似 {&quot;LCID&quot;:2052,&quot;TabAutoHide&quot;:true,&quot;Nodes&quot;:[{&quot;hostname&quot;:&quot;too.simple.com&quot;,&quot;ip&quot;:&quot;1.2.4.8&quot;,&quot;description&quot;:&quot;图样主机 - 1&quot;,&quot;localport&quot;:1081,&quot;remoteport&quot;:8000,&quot;autoconnect&quot;:false}]} 的本地化字符串。
         /// </summary>
-        public static System.Drawing.Bitmap icons_niconMenuClose {
-            get {
-                object obj = ResourceManager.GetObject("icons_niconMenuClose", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {&quot;LCID&quot;:2052,&quot;Nodes&quot;:[{&quot;hostname&quot;:&quot;too.simple.com&quot;,&quot;ip&quot;:&quot;1.2.4.8&quot;,&quot;description&quot;:&quot;图样主机 - 1&quot;,&quot;localport&quot;:1081,&quot;remoteport&quot;:8000,&quot;autoconnect&quot;:false}]} 的本地化字符串。
-        /// </summary>
-        public static string String_AppConfigJsonDefault {
+        internal static string String_AppConfigJsonDefault {
             get {
                 return ResourceManager.GetString("String_AppConfigJsonDefault", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;Nodes&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;hostname&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;ip&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;localport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;remoteport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;autoconnect&quot;:{&quot;type&quot;:&quot;boolean&quot;}},&quot;required&quot;:[&quot;hostname&quot;,&quot;ip&quot;,&quot;description&quot;,&quot;localport&quot;,&quot;remoteport&quot;,&quot;autoconnect&quot;]}}},&quot;required&quot;:[&quot;LCID&quot;,&quot;Nodes&quot;]} 的本地化字符串。
+        ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;TabAutoHide&quot;:{&quot;type&quot;:&quot;boolean&quot;},&quot;Nodes&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;hostname&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;ip&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;localport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;remoteport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;autoconnect&quot;:{&quot;type&quot;:&quot;boolean&quot;}},&quot;required&quot;:[&quot;hostname&quot;,&quot;ip&quot;,&quot;description&quot;,&quot;localport&quot;,&quot;remoteport&quot;,&quot;autoconnect&quot;]}}},&quot;required&quot;:[&quot;LCID&quot;,&quot;TabAutoHide&quot;,&quot;Nodes&quot;] [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
-        public static string String_AppConfigJsonSchema {
+        internal static string String_AppConfigJsonSchema {
             get {
                 return ResourceManager.GetString("String_AppConfigJsonSchema", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;]} 的本地化字符串。
+        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;,&quot;状态&quot;]} 的本地化字符串。
         /// </summary>
-        public static string String_AppLanguageJsonDefault {
+        internal static string String_AppLanguageJsonDefault {
             get {
                 return ResourceManager.GetString("String_AppLanguageJsonDefault", resourceCulture);
             }
@@ -130,7 +110,7 @@ namespace KcptunGUI.Properties {
         /// <summary>
         ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;Language&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;LangTag&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;Text&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;string&quot;}}},&quot;required&quot;:[&quot;Language&quot;,&quot;LangTag&quot;,&quot;LCID&quot;,&quot;Text&quot;]} 的本地化字符串。
         /// </summary>
-        public static string String_AppLanguageJsonSchema {
+        internal static string String_AppLanguageJsonSchema {
             get {
                 return ResourceManager.GetString("String_AppLanguageJsonSchema", resourceCulture);
             }

@@ -9,9 +9,8 @@ namespace KcptunGUI.Class
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern Boolean IsWindowVisible(IntPtr hWnd);//当前窗体是否显示
 
-        [DllImport( "Kernel32.dll" , CharSet = CharSet.Auto )]
-        public static extern UInt32 GetThreadLocale();//获取LCID,System.Globalization.CultureInfo.CurrentCulture.LCID
-
+        //[DllImport("gdi32.dll")]
+        //public static extern Boolean DeleteObject(IntPtr hObject);
 
         /// <summary>
         /// 清除空白字符
@@ -41,6 +40,8 @@ namespace KcptunGUI.Class
             _stream.Seek( 0 , SeekOrigin.Begin );
             return bytes;
         }
-        
+        public static void HoldOn() {
+            System.Threading.Thread.Sleep(99999);
+        }
     }
 }

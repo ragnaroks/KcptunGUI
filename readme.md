@@ -18,6 +18,9 @@ KcptunGUI is kcptun's Windows GUI,make it easy to use kcptun and manager.
 - [kcptun](https://github.com/xtaci/kcptun/)
 - [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json/)
 - [MaterialDesignInXamlToolkit](https://github.com/ButchersBoy/MaterialDesignInXamlToolkit/)
+- [sora-meliae](http://sora-meliae.deviantart.com/)
+- [tiheum](http://tiheum.deviantart.com/)
+
 
 # 代码/Code
 - [GitHub](https://github.com/ragnaroks/kcptungui/)

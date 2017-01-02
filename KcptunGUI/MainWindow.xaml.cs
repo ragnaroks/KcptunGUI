@@ -3,12 +3,20 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Text;
+using System.Windows.Interop;
+using System.Drawing;
+using System.IO;
 
 namespace KcptunGUI {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window {
+        public static SubFrame.ClientMode pageClientMode;
+        public static SubFrame.ServerMode pageServerMode;
+        public static SubFrame.Configure pageConfigure;
+        public static SubFrame.Status pageStatus;
+        public static SubFrame.About pageAbout;
         public MainWindow(){
             InitializeComponent();
             //this.StateChanged += MainWindow_StateChanged;
@@ -18,28 +26,37 @@ namespace KcptunGUI {
         }
         #region 初始化
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
-            Title = "Status: ";
-            Cursor = App.AppCursor[0];
+            //this.Title = Class.LocalFunction.GetNetworkInterfaceInstance();
+            //AppResource
             //托盘
-            App.nicon.Icon = System.Drawing.Icon.ExtractAssociatedIcon( System.Windows.Forms.Application.ExecutablePath );
+            App.nicon.Icon= System.Drawing.Icon.FromHandle(Properties.Resources.picture_favicon_png.GetHicon());
             App.nicon.Text = Class.AppAttributes.Name + "  " + Class.AppAttributes.Version;
             App.nicon.Visible = true;
             App.nicon.MouseClick += Nicon_MouseClick;
             App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             System.Windows.Forms.ToolStripMenuItem[] tsmi = new System.Windows.Forms.ToolStripMenuItem[1];
-            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem() {Text = "I18N_ExitApp" , Image = Properties.Resources.icons_niconMenuClose};
+            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem() {Text = "I18N_ExitApp" , Image = AppResource.picture_none_png};
             tsmi[0].Click += ( (Object _sender,EventArgs _e) => { this.Close(); } );
             for(Byte i=0;i<tsmi.Length ;i++ ) {
                 App.nicon.ContextMenuStrip.Items.Insert( i , tsmi[i] );
             }
             //加载文本
-            /*UInt16[] I18N_Index = { 0 , 1 , 2 , 3 };*/MainWindow_I18N(); MainWindow_L10N();
-
+            MainWindow_I18N(); MainWindow_L10N();
+            //实例化页面
+            pageClientMode = new SubFrame.ClientMode();
+            pageServerMode = new SubFrame.ServerMode();
+            pageConfigure = new SubFrame.Configure();
+            pageAbout = new SubFrame.About();
+            pageStatus = new SubFrame.Status();
+            MainWindow_Frame_ViewArea.Content = pageAbout;
+            //
         }
+
         /// <summary>窗口即将关闭,可取消</summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {}
+
         /// <summary>窗口已确定将关闭</summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -47,17 +64,18 @@ namespace KcptunGUI {
             App.nicon.Visible = false;
             //if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);}
         }
+
         /// <summary>加载全球化文本</summary>
         private void MainWindow_I18N() {
-            //foreach(UInt16 i in _index ) {var t = this.FindName( "I18N_" + i );}
-            //this.I18N_0.Header = Class.I18N.GetString(0);
-            //this.I18N_1.Header = Class.I18N.GetString(1);
-            //this.I18N_2.Header = Class.I18N.GetString(2);
-            //this.I18N_3.Header = Class.I18N.GetString(3);
+            this.MainWindow_ListBoxItem_ClientMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ClientMode.TabIndex);//I18N[0]
+            this.MainWindow_ListBoxItem_ServerMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ServerMode.TabIndex);//I18N[1]
+            this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.TabIndex);//I18N[2]
+            this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.TabIndex);//I18N[4]
+            this.MainWindow_ListBoxItem_About.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_About.TabIndex);//I18N[3]
         }
+
         private void MainWindow_L10N() {
-            this.Local_2.Text = Class.AppAttributes.Name;
-            this.Local_3.Text = "Version: " + Class.AppAttributes.Version;
+            this.MainWindow_TextBlock_AppVersion.Text = "Version: " + Class.AppAttributes.Version;
         }
         #endregion
         #region Button控件响应
@@ -69,10 +87,10 @@ namespace KcptunGUI {
         private void Button_Clicked(Object sender,RoutedEventArgs e) {
             Button thisButton = (Button)sender;
             switch(thisButton.Name){
-                case "Local_4":
+                case "MainWindow_Button_ViewSrcOnGitHub":
                     Process.Start("https://github.com/ragnaroks/KcptunGUI/");
                     break;
-                case "Local_5":
+                case "MainWindow_Button_ViewSrcOnOSchina":
                     Process.Start("http://git.oschina.net/ragnaroks/KcptunGUI/");
                     break;
                 default:break;
@@ -131,7 +149,7 @@ namespace KcptunGUI {
                 default:
                 case System.Windows.Forms.MouseButtons.Left: //按下鼠标左键,显示/隐藏窗口
                     App.nicon.ContextMenuStrip.Hide();
-                    if( Class.Functions.IsWindowVisible(new System.Windows.Interop.WindowInteropHelper(this).Handle) ) {
+                    if( Class.Functions.IsWindowVisible(new WindowInteropHelper(this).Handle) ) {
                         this.Hide();
                     } else {
                         this.Show();
@@ -188,9 +206,23 @@ namespace KcptunGUI {
             Canvas thisCanvas = (Canvas)sender;
             if (!thisCanvas.IsMouseOver) { return; }
             switch (thisCanvas.Name) {
-                case "Canvas_VRW":
-                    System.Diagnostics.Process.Start("http://www.ragnaroks.org/");
-                    break;
+                default:break;
+            }
+        }
+        /// <summary>
+        /// 响应ListBoxItem的"鼠标左键松开"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListBoxItem_MouseLeftButtonUp(object sender , System.Windows.Input.MouseButtonEventArgs e) {
+            ListBoxItem thisListBoxItem = (ListBoxItem)sender;
+            if(!thisListBoxItem.IsMouseOver) { return; }
+            switch( thisListBoxItem.Name ) {
+                case "MainWindow_ListBoxItem_ClientMode":this.MainWindow_Frame_ViewArea.Content = pageClientMode;break;
+                case "MainWindow_ListBoxItem_ServerMode": this.MainWindow_Frame_ViewArea.Content = pageServerMode;break;
+                case "MainWindow_ListBoxItem_Configure": this.MainWindow_Frame_ViewArea.Content = pageConfigure;break;
+                case "MainWindow_ListBoxItem_About": this.MainWindow_Frame_ViewArea.Content = pageAbout;break;
+                case "MainWindow_ListBoxItem_Status": this.MainWindow_Frame_ViewArea.Content = pageStatus; break;
                 default:break;
             }
         }

@@ -16,7 +16,7 @@ namespace KcptunGUI
         public static FileStream ConfigStream = null;
         public static StreamWriter ConfigWriter = null;//配置文件_写入
         public static StreamReader ConfigReader = null;//配置文件_读取
-        public static Cursor[] AppCursor = new Cursor[2];
+        //public static Cursor[] AppCursor = new Cursor[2];
         public static String AppConfigJson;
         public static Class.ConfigJson AppConfigObject;
         public static String AppLanguageJson;
@@ -28,7 +28,7 @@ namespace KcptunGUI
             if( !Directory.Exists( Class.AppAttributes.I18NPath ) ) { Directory.CreateDirectory( Class.AppAttributes.I18NPath ); }//若i18n目录不存在则创建
             if(!File.Exists( Class.AppAttributes.I18NPath+"2052.json") || !File.Exists( Class.AppAttributes.I18NPath+"1033.json") ) { Environment.Exit( 0 ); }//没有默认语言文件直接退出
             //初始化鼠标样式
-            AppCursor[0] = new Cursor( Class.Functions.BytesToStream( KcptunGUI.Properties.Resources.cursor_Arrow ) , false);//箭头
+            //AppCursor[0] = new Cursor( Class.Functions.BytesToStream( KcptunGUI.Properties.Resources.cursor_arrow ) , false);//箭头
             //初始化配置文件
             if(!File.Exists( Class.AppAttributes.ConfigFilePath ) ) {
                 File.Create( Class.AppAttributes.ConfigFilePath );//若配置文件不存在则创建

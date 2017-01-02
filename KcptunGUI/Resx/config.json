@@ -1,0 +1,14 @@
+{
+    "LCID": 2052,
+    "TabAutoHide": true,
+    "Nodes": [
+        {
+            "hostname": "too.simple.com",
+            "ip": "1.2.4.8",
+            "description": "图样主机 - 1",
+            "localport": 1081,
+            "remoteport": 8000,
+            "autoconnect": false
+        }
+    ]
+}
