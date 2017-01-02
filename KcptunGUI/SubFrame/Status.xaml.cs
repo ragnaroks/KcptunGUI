@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Windows.Interop;
 
 namespace KcptunGUI.SubFrame {
     /// <summary>
@@ -24,18 +25,16 @@ namespace KcptunGUI.SubFrame {
         public Status() {
             InitializeComponent();
             this.Loaded += Status_Loaded;
-            this.PageStatus_Image_Icon.Source = Class.AppAttributes.BitmapSource_picture_status_png;
-            //this.PageStatus_TextBlock_PageHeader.Text = Class.I18N.GetString( this.PageStatus_TextBlock_PageHeader );
-            //MessageBox.Show("已初始化");
+            this.PageStatus_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(ResourceCSharp.Picture.png_72x72_status_2.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
         }
-        /// <summary>
-        /// 注意,每次切换到都会触发,不能用做初始化操作
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
+        /// <summary>注意,每次切换到都会触发,不能用做初始化操作</summary>
         private void Status_Loaded(object sender , RoutedEventArgs e) {
-            //MessageBox.Show("a");
-            //this.PageStatus_Icon.Source = FindResource("picture_status_png") as ImageSource;
+            PageStatus_I18N();//加载本地化文本,写在这里可以不用手动刷新
+        }
+        /// <summary>加载本地化文本</summary>
+        private void PageStatus_I18N() {
+            this.PageStatus_TextBlock_PageHeader.Text = Class.I18N.GetString(this.PageStatus_TextBlock_PageHeader.Tag);
         }
     }
 }

@@ -9,9 +9,10 @@
       Title="Status"
 >
     <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-            <Image Stretch="Fill" x:Name="PageStatus_Image_Icon"/>
-            <TextBlock Text="PageHeader" x:Name="PageStatus_TextBlock_PageHeader" />
+        <StackPanel Orientation="Horizontal" Height="48">
+            <Image x:Name="PageStatus_Image_Icon" Width="32" Height="32" Margin="8"/>
+            <TextBlock x:Name="PageStatus_TextBlock_PageHeader" Margin="8" Tag="I18N_6" Text="PageStatus_TextBlock_PageHeader" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
+        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
     </StackPanel>
 </Page>

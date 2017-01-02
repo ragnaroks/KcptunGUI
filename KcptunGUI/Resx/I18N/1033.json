@@ -8,6 +8,10 @@
         "Configure",
         "About",
 		"Status",
-		"Help"
+		"Help",
+		"Show application's status",
+		"Get help",
+		"About this application",
+		"Configure settings"
     ]
 }

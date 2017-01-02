@@ -3,12 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:KcptunGUI.SubFrame"
-      mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
-      Title="Configure">
-
-    <Grid>
-        
-    </Grid>
+      xmlns:local="clr-namespace:KcptunGUI.SubFrame" Title="Configure"
+      mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="640"
+>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Height="48">
+            <Image x:Name="PageConfigure_Image_Icon" Width="32" Height="32" Margin="8"/>
+            <TextBlock x:Name="PageConfigure_TextBlock_PageHeader" Margin="8" Tag="I18N_9" Text="PageConfigure_TextBlock_PageHeader" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />        
+    </StackPanel>
 </Page>

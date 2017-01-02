@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Interop;
 using System.Drawing;
 using System.IO;
+using ResourceCSharp;
 
 namespace KcptunGUI {
     /// <summary>
@@ -36,7 +37,7 @@ namespace KcptunGUI {
             App.nicon.MouseClick += Nicon_MouseClick;
             App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             System.Windows.Forms.ToolStripMenuItem[] tsmi = new System.Windows.Forms.ToolStripMenuItem[1];
-            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem() {Text = "I18N_ExitApp" , Image = AppResource.picture_none_png};
+            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem() { Text = "I18N_ExitApp" , Image = ResourceCSharp.Picture.png_none };
             tsmi[0].Click += ( (Object _sender,EventArgs _e) => { this.Close(); } );
             for(Byte i=0;i<tsmi.Length ;i++ ) {
                 App.nicon.ContextMenuStrip.Items.Insert( i , tsmi[i] );

@@ -14,10 +14,10 @@ namespace KcptunGUI.Class {
         
         public static String GetString(Object _SenderTag) {
             Int32 _index;
-            if( Int32.TryParse( ( (String)_SenderTag ).Replace( "I18N_" , "" ) ,out _index ) ) {
+            if( Int32.TryParse( ( (String)_SenderTag ).Replace( "I18N_" , "" ) ,out _index ) && _index<App.AppLanguageObject.Text.Count ) {
                 return App.AppLanguageObject.Text[_index];
             } else {
-                return App.AppLanguageObject.Language;
+                return App.AppLanguageObject.Language+" - "+App.AppLanguageObject.LangTag+" - "+App.AppLanguageObject.LCID;
             }
         }
     }

@@ -23,14 +23,17 @@ namespace KcptunGUI.SubFrame {
     public partial class About : Page {
         public About() {
             InitializeComponent();
-            //MemoryStream ms = new MemoryStream();
-            //AppResource.picture_status_png.Save(ms , ImageFormat.Bmp);
-            //BitmapSource bs=Imaging.CreateBitmapSourceFromHBitmap(AppResource.picture_status_png.GetHbitmap(),IntPtr.Zero,Int32Rect.Empty,BitmapSizeOptions.FromEmptyOptions());
+            this.Loaded += About_Loaded;
+            this.PageAbout_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(ResourceCSharp.Picture.png_72x72_user_1.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
+        }
 
-            //BitmapImage a = new BitmapImage();
-            this.PageAbout_Image.Source = Class.AppAttributes.BitmapSource_picture_status_png;
-            this.PageAbout_Image.Width = 32;
-            this.PageAbout_Image.Height = 32;
+        private void About_Loaded(object sender , RoutedEventArgs e) {
+            PageAbout_I18N();
+        }
+
+        /// <summary>加载本地化文本</summary>
+        private void PageAbout_I18N() {
+            this.PageAbout_TextBlock_PageHeader.Text = Class.I18N.GetString(this.PageAbout_TextBlock_PageHeader.Tag);
         }
     }
 }

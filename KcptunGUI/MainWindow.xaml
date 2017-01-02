@@ -9,13 +9,13 @@
     Title="MainWindow" Background="{DynamicResource MaterialDesignPaper}" FontFamily="Microsoft YaHei"
     ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" SnapsToDevicePixels="True" TextElement.FontSize="12" TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" 
-    WindowStartupLocation="CenterScreen" MinHeight="240" MinWidth="480"
+    WindowStartupLocation="CenterScreen" MinHeight="360" MinWidth="480" MaxHeight="800" MaxWidth="1280"
 >
     <MD:DialogHost>
         <MD:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MainWindow_ToggleButton_ToggleMenu, Path=IsChecked,Mode=TwoWay}">
             <MD:DrawerHost.LeftDrawerContent>
                 <StackPanel>
-                    <ToggleButton IsChecked="{Binding ElementName=MainWindow_ToggleButton_ToggleMenu, Path=IsChecked,Mode=TwoWay}" Style="{StaticResource ResourceKey=MaterialDesignHamburgerToggleButton}" />
+                    <ToggleButton IsChecked="{Binding ElementName=MainWindow_ToggleButton_ToggleMenu, Path=IsChecked,Mode=TwoWay}" Style="{StaticResource ResourceKey=MaterialDesignHamburgerToggleButton}" Margin="0,8,0,0" />
                     <ListBox Margin="0,16" IsSynchronizedWithCurrentItem="True">
                         <ListBoxItem x:Name="MainWindow_ListBoxItem_ClientMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_0"/>
                         <ListBoxItem x:Name="MainWindow_ListBoxItem_ServerMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_1"/>
@@ -27,7 +27,7 @@
                 </StackPanel>
             </MD:DrawerHost.LeftDrawerContent>
             <StackPanel>
-                <MD:ColorZone Padding="8" MD:ShadowAssist.ShadowDepth="Depth1" Mode="Dark">
+                <MD:ColorZone x:Name="colorZone" Padding="8" MD:ShadowAssist.ShadowDepth="Depth1" Mode="Dark">
                     <DockPanel>
                         <ToggleButton x:Name="MainWindow_ToggleButton_ToggleMenu" DockPanel.Dock="Left" IsChecked="False" Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
                         <MD:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
