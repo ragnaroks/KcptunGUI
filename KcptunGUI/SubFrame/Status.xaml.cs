@@ -24,7 +24,8 @@ namespace KcptunGUI.SubFrame {
         public Status() {
             InitializeComponent();
             this.Loaded += Status_Loaded;
-            
+            this.PageStatus_Image_Icon.Source = Class.AppAttributes.BitmapSource_picture_status_png;
+            //this.PageStatus_TextBlock_PageHeader.Text = Class.I18N.GetString( this.PageStatus_TextBlock_PageHeader );
             //MessageBox.Show("已初始化");
         }
         /// <summary>

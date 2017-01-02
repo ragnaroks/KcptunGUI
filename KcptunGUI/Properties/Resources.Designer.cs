@@ -99,7 +99,7 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;,&quot;状态&quot;]} 的本地化字符串。
+        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;,&quot;状态&quot;,&quot;帮助&quot;]} 的本地化字符串。
         /// </summary>
         internal static string String_AppLanguageJsonDefault {
             get {

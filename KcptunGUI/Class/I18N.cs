@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace KcptunGUI.Class {
     class I18N {
@@ -9,11 +11,14 @@ namespace KcptunGUI.Class {
             //todo
             return false;
         }
-        /// <summary>获取全球化语言文本</summary>
-        /// <param name="_index">索引</param>
-        /// <returns>对应LCID的文本</returns>
-        public static String GetString(Int32 _index) {
-            return App.AppLanguageObject.Text[_index];
+        
+        public static String GetString(Object _SenderTag) {
+            Int32 _index;
+            if( Int32.TryParse( ( (String)_SenderTag ).Replace( "I18N_" , "" ) ,out _index ) ) {
+                return App.AppLanguageObject.Text[_index];
+            } else {
+                return App.AppLanguageObject.Language;
+            }
         }
     }
 }

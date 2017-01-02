@@ -31,8 +31,9 @@ namespace KcptunGUI
             //AppCursor[0] = new Cursor( Class.Functions.BytesToStream( KcptunGUI.Properties.Resources.cursor_arrow ) , false);//箭头
             //初始化配置文件
             if(!File.Exists( Class.AppAttributes.ConfigFilePath ) ) {
-                File.Create( Class.AppAttributes.ConfigFilePath );//若配置文件不存在则创建
-                File.WriteAllText(Class.AppAttributes.ConfigFilePath , KcptunGUI.Properties.Resources.String_AppConfigJsonDefault , Class.AppAttributes.UTF8EncodingNoBom);//写入默认配置
+                FileStream fs=File.Create( Class.AppAttributes.ConfigFilePath );//若配置文件不存在则创建
+                fs.Close(); fs.Dispose();
+                //File.WriteAllText(Class.AppAttributes.ConfigFilePath , KcptunGUI.Properties.Resources.String_AppConfigJsonDefault , Class.AppAttributes.UTF8EncodingNoBom);//写入默认配置
             }
             AppConfigJson = File.ReadAllText(Class.AppAttributes.ConfigFilePath,Class.AppAttributes.UTF8EncodingNoBom);
             Console.WriteLine(KcptunGUI.Properties.Resources.String_AppConfigJsonDefault);// System.Threading.Thread.Sleep(99999);

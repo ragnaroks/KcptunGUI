@@ -413,7 +413,7 @@
     <comment>内置默认配置json</comment>
   </data>
   <data name="String_AppLanguageJsonDefault" xml:space="preserve">
-    <value>{"Language":"简体中文","LangTag":"zh_CN","LCID":2052,"Text":["客户端","服务端","首选项","关于","状态"]}</value>
+    <value>{"Language":"简体中文","LangTag":"zh_CN","LCID":2052,"Text":["客户端","服务端","首选项","关于","状态","帮助"]}</value>
     <comment>内置默认语言json</comment>
   </data>
   <data name="String_AppLanguageJsonSchema" xml:space="preserve">

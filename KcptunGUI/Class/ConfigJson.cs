@@ -7,9 +7,9 @@ namespace KcptunGUI.Class {
     /// </summary>
     public class ConfigJson {
         /// <summary>
-        /// 是否自动链接,"enabled"/"disabled"
+        /// 是否自动关闭菜单
         /// </summary>
-        public Boolean AutoConnect { get; set; }
+        public Boolean TabAutoHide { get; set; }
         /// <summary>
         /// 区域ID
         /// </summary>

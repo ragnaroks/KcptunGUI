@@ -17,6 +17,7 @@ namespace KcptunGUI {
         public static SubFrame.Configure pageConfigure;
         public static SubFrame.Status pageStatus;
         public static SubFrame.About pageAbout;
+        public static SubFrame.Helper pageHelper;
         public MainWindow(){
             InitializeComponent();
             //this.StateChanged += MainWindow_StateChanged;
@@ -48,6 +49,7 @@ namespace KcptunGUI {
             pageConfigure = new SubFrame.Configure();
             pageAbout = new SubFrame.About();
             pageStatus = new SubFrame.Status();
+            pageHelper = new SubFrame.Helper();
             MainWindow_Frame_ViewArea.Content = pageAbout;
             //
         }
@@ -67,11 +69,12 @@ namespace KcptunGUI {
 
         /// <summary>加载全球化文本</summary>
         private void MainWindow_I18N() {
-            this.MainWindow_ListBoxItem_ClientMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ClientMode.TabIndex);//I18N[0]
-            this.MainWindow_ListBoxItem_ServerMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ServerMode.TabIndex);//I18N[1]
-            this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.TabIndex);//I18N[2]
-            this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.TabIndex);//I18N[4]
-            this.MainWindow_ListBoxItem_About.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_About.TabIndex);//I18N[3]
+            this.MainWindow_ListBoxItem_ClientMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ClientMode.Tag);//I18N[0]
+            this.MainWindow_ListBoxItem_ServerMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ServerMode.Tag );//I18N[1]
+            this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.Tag);//I18N[2]
+            this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.Tag);//I18N[4]
+            this.MainWindow_ListBoxItem_About.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_About.Tag);//I18N[3]
+            this.MainWindow_ListBoxItem_Helper.Content= Class.I18N.GetString( this.MainWindow_ListBoxItem_Helper.Tag );//I18N[5]
         }
 
         private void MainWindow_L10N() {
@@ -218,13 +221,27 @@ namespace KcptunGUI {
             ListBoxItem thisListBoxItem = (ListBoxItem)sender;
             if(!thisListBoxItem.IsMouseOver) { return; }
             switch( thisListBoxItem.Name ) {
-                case "MainWindow_ListBoxItem_ClientMode":this.MainWindow_Frame_ViewArea.Content = pageClientMode;break;
-                case "MainWindow_ListBoxItem_ServerMode": this.MainWindow_Frame_ViewArea.Content = pageServerMode;break;
-                case "MainWindow_ListBoxItem_Configure": this.MainWindow_Frame_ViewArea.Content = pageConfigure;break;
-                case "MainWindow_ListBoxItem_About": this.MainWindow_Frame_ViewArea.Content = pageAbout;break;
-                case "MainWindow_ListBoxItem_Status": this.MainWindow_Frame_ViewArea.Content = pageStatus; break;
+                case "MainWindow_ListBoxItem_ClientMode":
+                    this.MainWindow_Frame_ViewArea.Content = pageClientMode;
+                    break;
+                case "MainWindow_ListBoxItem_ServerMode":
+                    this.MainWindow_Frame_ViewArea.Content = pageServerMode;
+                    break;
+                case "MainWindow_ListBoxItem_Configure":
+                    this.MainWindow_Frame_ViewArea.Content = pageConfigure;
+                    break;
+                case "MainWindow_ListBoxItem_About":
+                    this.MainWindow_Frame_ViewArea.Content = pageAbout;
+                    break;
+                case "MainWindow_ListBoxItem_Status":
+                    this.MainWindow_Frame_ViewArea.Content = pageStatus;
+                    break;
+                case "MainWindow_ListBoxItem_Helper":
+                    this.MainWindow_Frame_ViewArea.Content = pageHelper;
+                    break;
                 default:break;
             }
+            if( App.AppConfigObject.TabAutoHide ) { this.MainWindow_ToggleButton_ToggleMenu.IsChecked = false; }
         }
     }
 }

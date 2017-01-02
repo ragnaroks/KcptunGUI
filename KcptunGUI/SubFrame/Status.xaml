@@ -11,7 +11,7 @@
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
             <Image Stretch="Fill" x:Name="PageStatus_Image_Icon"/>
-            <TextBlock Text="PageHeader" x:Name="PageStatus_TextBlock_PageHeader"/>
+            <TextBlock Text="PageHeader" x:Name="PageStatus_TextBlock_PageHeader" />
         </StackPanel>
     </StackPanel>
 </Page>

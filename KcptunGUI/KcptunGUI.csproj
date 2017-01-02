@@ -181,6 +181,9 @@
     <Compile Include="SubFrame\Configure.xaml.cs">
       <DependentUpon>Configure.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SubFrame\Helper.xaml.cs">
+      <DependentUpon>Helper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SubFrame\ServerMode.xaml.cs">
       <DependentUpon>ServerMode.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SubFrame\Configure.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubFrame\Helper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

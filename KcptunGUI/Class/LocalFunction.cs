@@ -11,9 +11,9 @@ namespace KcptunGUI.Class {
         /// 生成默认配置文件
         /// </summary>
         /// <returns>默认配置文件JSON</returns>
-        public static Object GenDefaultConfigObject() {
+        Object GenDefaultConfigObject() {
             Class.ConfigJson cjo = new ConfigJson();
-            cjo.AutoConnect = false;
+            cjo.TabAutoHide = false;
             cjo.LCID = System.Globalization.CultureInfo.CurrentCulture.LCID;
             cjo.Nodes = new List<ConfigJson.NodesItems>();
 
