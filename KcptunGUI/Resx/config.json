@@ -1,6 +1,6 @@
 {
     "LCID": 2052,
-    "TabAutoHide": true,
+    "TabAutoHide": false,
     "Nodes": [
         {
             "hostname": "too.simple.com",

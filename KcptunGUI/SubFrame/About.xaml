@@ -5,23 +5,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KcptunGUI.SubFrame"
       xmlns:MD="http://materialdesigninxaml.net/winfx/xaml/themes"
-      Title="About"
+      Title="About" Background="{DynamicResource MaterialDesignPaper}"
       mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="640"
 >
-    <StackPanel>
+    <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" Height="48">
             <Image x:Name="PageAbout_Image_Icon" Width="32" Height="32" Margin="8"/>
             <TextBlock x:Name="PageAbout_TextBlock_PageHeader" Margin="8" Tag="I18N_8" Text="PageAbout_TextBlock_PageHeader" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-        <DataGrid x:Name="d1" CanUserSortColumns="False" CanUserAddRows="False" AutoGenerateColumns="True" MD:DataGridAssist.CellPadding="13 8 8 8" MD:DataGridAssist.ColumnHeaderPadding="8">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Fields" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"/>
-                <!-- if you want to use the pop up style (MaterialDesignDataGridTextColumnPopupEditingStyle), you must use MaterialDataGridTextColumn -->
-                <MD:MaterialDataGridTextColumn Header="Value" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}" />
-                <!-- set a max length to get an indicator in the editor -->
-                <MD:MaterialDataGridTextColumn Header="Description" EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnPopupEditingStyle}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        
     </StackPanel>
 </Page>

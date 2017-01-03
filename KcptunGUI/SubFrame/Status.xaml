@@ -5,14 +5,56 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KcptunGUI.SubFrame"
       xmlns:MD="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
-      Title="Status"
+      Title="Status" Background="{DynamicResource MaterialDesignPaper}"
 >
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" Height="48">
             <Image x:Name="PageStatus_Image_Icon" Width="32" Height="32" Margin="8"/>
-            <TextBlock x:Name="PageStatus_TextBlock_PageHeader" Margin="8" Tag="I18N_6" Text="PageStatus_TextBlock_PageHeader" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock x:Name="PageStatus_TextBlock_PageHeader" Margin="8" Tag="I18N_6" Text="状态标签页" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <MD:Card Grid.Row="0" Grid.Column="0" Background="{StaticResource PrimaryHueMidBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,0,2,4">
+                <StackPanel Orientation="Vertical" Margin="8">
+                    <TextBlock x:Name="PageStatus_TextBlock_AppCpuCardHeader" FontSize="14" Text="处理器占用" Tag="I18N_10"/>
+                    <Separator Style="{StaticResource MaterialDesignLightSeparator}" Height="8"/>
+                    
+                </StackPanel>
+            </MD:Card>
+            <MD:Card Grid.Row="0" Grid.Column="1" Background="{StaticResource PrimaryHueMidBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="2,0,2,4">
+                <StackPanel Orientation="Vertical" Margin="8">
+                    <TextBlock x:Name="PageStatus_TextBlock_AppMemoryCardHeader" FontSize="14" Text="内存占用" Tag="I18N_11"/>
+                    <Separator Style="{StaticResource MaterialDesignLightSeparator}" Height="8"/>
+                    
+                </StackPanel>
+            </MD:Card>
+            <MD:Card Grid.Row="0" Grid.Column="2" Background="{StaticResource PrimaryHueMidBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="2,0,0,4">
+                <StackPanel Orientation="Vertical" Margin="8">
+                    <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardHeader" FontSize="14" Text="网络占用" Tag="I18N_12"/>
+                    <Separator Style="{StaticResource MaterialDesignLightSeparator}" Height="8"/>
+                    <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardUploadPretext" Text="上传速率:" FontSize="12" Margin="0,0,4,0"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardUploadText" Text="0" FontSize="12"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardUploadCountUnit" Text="byte/s" FontSize="12" Margin="4,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardDownloadPretext" Text="下载速率:" FontSize="12" Margin="0,0,4,0"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardDownloadText" Text="0" FontSize="12"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardDownloadCountUnit" Text="byte/s" FontSize="12" Margin="4,0,0,0"/>
+                    </StackPanel>
+                    
+                </StackPanel>
+            </MD:Card>
+        </Grid>
     </StackPanel>
 </Page>

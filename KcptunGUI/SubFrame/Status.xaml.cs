@@ -34,7 +34,10 @@ namespace KcptunGUI.SubFrame {
         }
         /// <summary>加载本地化文本</summary>
         private void PageStatus_I18N() {
-            this.PageStatus_TextBlock_PageHeader.Text = Class.I18N.GetString(this.PageStatus_TextBlock_PageHeader.Tag);
+            PageStatus_TextBlock_PageHeader.Text = Class.I18N.GetString(PageStatus_TextBlock_PageHeader.Tag);
+            PageStatus_TextBlock_AppCpuCardHeader.Text = Class.I18N.GetString(PageStatus_TextBlock_AppCpuCardHeader.Tag);
+            PageStatus_TextBlock_AppMemoryCardHeader.Text = Class.I18N.GetString( PageStatus_TextBlock_AppMemoryCardHeader.Tag );
+            PageStatus_TextBlock_AppNetworkCardHeader.Text = Class.I18N.GetString( PageStatus_TextBlock_AppNetworkCardHeader.Tag );
         }
     }
 }

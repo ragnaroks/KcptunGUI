@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:KcptunGUI.SubFrame"
       xmlns:MD="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="640"
-      Title="Helper"
+      Title="Helper" Background="{DynamicResource MaterialDesignPaper}"
 >
     <StackPanel>
         <StackPanel Orientation="Horizontal" Height="48">

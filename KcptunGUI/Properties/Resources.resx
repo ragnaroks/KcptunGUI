@@ -409,11 +409,11 @@
     <value>{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"LCID":{"type":"integer"},"TabAutoHide":{"type":"boolean"},"Nodes":{"type":"array","items":{"type":"object","properties":{"hostname":{"type":"string"},"ip":{"type":"string"},"description":{"type":"string"},"localport":{"type":"integer"},"remoteport":{"type":"integer"},"autoconnect":{"type":"boolean"}},"required":["hostname","ip","description","localport","remoteport","autoconnect"]}}},"required":["LCID","TabAutoHide","Nodes"]}</value>
   </data>
   <data name="String_AppConfigJsonDefault" xml:space="preserve">
-    <value>{"LCID":2052,"TabAutoHide":true,"Nodes":[{"hostname":"too.simple.com","ip":"1.2.4.8","description":"图样主机 - 1","localport":1081,"remoteport":8000,"autoconnect":false}]}</value>
+    <value>{"LCID":2052,"TabAutoHide":false,"Nodes":[{"hostname":"too.simple.com","ip":"1.2.4.8","description":"图样主机 - 1","localport":1081,"remoteport":8000,"autoconnect":false}]}</value>
     <comment>内置默认配置json</comment>
   </data>
   <data name="String_AppLanguageJsonDefault" xml:space="preserve">
-    <value>{"Language":"简体中文","LangTag":"zh_CN","LCID":2052,"Text":["客户端","服务端","首选项","关于","状态","帮助","显示当前运行状态","获得使用帮助","关于本程序","进行首选项设定"]}</value>
+    <value>{"Language":"简体中文","LangTag":"zh_CN","LCID":2052,"Text":["客户端","服务端","首选项","关于","状态","帮助","显示当前运行状态","获得使用帮助","关于本程序","进行首选项设定","处理器占用","内存占用","网络占用"]}</value>
     <comment>内置默认语言json</comment>
   </data>
   <data name="String_AppLanguageJsonSchema" xml:space="preserve">

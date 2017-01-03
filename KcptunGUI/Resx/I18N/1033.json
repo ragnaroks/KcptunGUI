@@ -12,6 +12,9 @@
 		"Show application's status",
 		"Get help",
 		"About this application",
-		"Configure settings"
+		"Configure settings",
+		"CPU occupying",
+		"Memory occupying",
+		"Network occupying"
     ]
 }

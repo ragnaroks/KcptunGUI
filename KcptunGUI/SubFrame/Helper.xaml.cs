@@ -17,6 +17,8 @@ namespace KcptunGUI.SubFrame {
 
         private void Helper_Loaded(object sender , RoutedEventArgs e) {
             PageStatus_I18N();
+            Single[] a = Class.Functions.获取当前活动网卡的网络速率();
+            Console.WriteLine(Class.Functions.GetNetworkInterfaceInstance() +": "+ a[0]+"/"+a[1]);
         }
 
         /// <summary>加载本地化文本</summary>

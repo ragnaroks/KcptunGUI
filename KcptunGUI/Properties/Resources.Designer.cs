@@ -81,7 +81,7 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {&quot;LCID&quot;:2052,&quot;TabAutoHide&quot;:true,&quot;Nodes&quot;:[{&quot;hostname&quot;:&quot;too.simple.com&quot;,&quot;ip&quot;:&quot;1.2.4.8&quot;,&quot;description&quot;:&quot;图样主机 - 1&quot;,&quot;localport&quot;:1081,&quot;remoteport&quot;:8000,&quot;autoconnect&quot;:false}]} 的本地化字符串。
+        ///   查找类似 {&quot;LCID&quot;:2052,&quot;TabAutoHide&quot;:false,&quot;Nodes&quot;:[{&quot;hostname&quot;:&quot;too.simple.com&quot;,&quot;ip&quot;:&quot;1.2.4.8&quot;,&quot;description&quot;:&quot;图样主机 - 1&quot;,&quot;localport&quot;:1081,&quot;remoteport&quot;:8000,&quot;autoconnect&quot;:false}]} 的本地化字符串。
         /// </summary>
         internal static string String_AppConfigJsonDefault {
             get {
@@ -99,7 +99,7 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;,&quot;状态&quot;,&quot;帮助&quot;,&quot;显示当前运行状态&quot;,&quot;获得使用帮助&quot;,&quot;关于本程序&quot;,&quot;进行首选项设定&quot;]} 的本地化字符串。
+        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;,&quot;状态&quot;,&quot;帮助&quot;,&quot;显示当前运行状态&quot;,&quot;获得使用帮助&quot;,&quot;关于本程序&quot;,&quot;进行首选项设定&quot;,&quot;处理器占用&quot;,&quot;内存占用&quot;,&quot;网络占用&quot;]} 的本地化字符串。
         /// </summary>
         internal static string String_AppLanguageJsonDefault {
             get {
