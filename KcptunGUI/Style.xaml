@@ -28,4 +28,9 @@
             <Setter Property="UseLayoutRounding" Value="True"/>
         </Style.Setters>
     </Style>
+    <Style TargetType="Border">
+        <Style.Setters>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style.Setters>
+    </Style>
 </ResourceDictionary>

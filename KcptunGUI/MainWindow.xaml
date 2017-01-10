@@ -9,7 +9,7 @@
     Title="" Background="{DynamicResource MaterialDesignPaper}" FontFamily="Microsoft YaHei"
     ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" SnapsToDevicePixels="True" TextElement.FontSize="12" TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" 
-    WindowStartupLocation="CenterScreen" MinHeight="360" MinWidth="480" MaxHeight="800" MaxWidth="1280"
+    WindowStartupLocation="Manual" MinHeight="320" MinWidth="480" MaxHeight="480" MaxWidth="800"
 >
     <MD:DialogHost>
         <MD:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MainWindow_ToggleButton_ToggleMenu, Path=IsChecked,Mode=TwoWay}">
@@ -21,7 +21,6 @@
                         <ListBoxItem x:Name="MainWindow_ListBoxItem_ServerMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_1"/>
                         <ListBoxItem x:Name="MainWindow_ListBoxItem_Configure" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_2"/>
                         <ListBoxItem x:Name="MainWindow_ListBoxItem_Status" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_4"/>
-                        <ListBoxItem x:Name="MainWindow_ListBoxItem_Helper" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_5"/>
                         <ListBoxItem x:Name="MainWindow_ListBoxItem_About" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_3" IsSelected="True"/>
                     </ListBox>
                 </StackPanel>
@@ -35,6 +34,8 @@
                                 <Button x:Name="MainWindow_Button_ViewSrcOnGitHub" Content="On GitHub" Click="Button_Clicked"></Button>
                                 <Button x:Name="MainWindow_Button_ViewSrcOnOSchina" Content="On OSchina" Click="Button_Clicked"></Button>
                                 <Button Content="Contact Me" IsEnabled="False" />
+                                <Separator />
+                                <Button x:Name="MainWindow_Button_GetHelp" Content="Get help" Click="Button_Clicked"/>
                                 <Separator />
                                 <TextBlock x:Name="MainWindow_TextBlock_AppVersion" Padding="8,0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>

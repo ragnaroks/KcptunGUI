@@ -14,23 +14,24 @@ namespace KcptunGUI {
         public static SubFrame.Configure pageConfigure;
         public static SubFrame.Status pageStatus;
         public static SubFrame.About pageAbout;
-        public static SubFrame.Helper pageHelper;
+        //public static SubFrame.Helper pageHelper;
         public MainWindow(){
             InitializeComponent();
-            //this.StateChanged += MainWindow_StateChanged;
             this.Loaded += MainWindow_Loaded;//窗体加载完成
             this.Closing += MainWindow_Closing;//窗口即将关闭,可取消
             this.Closed += MainWindow_Closed;//窗口已确定将关闭
             this.LocationChanged += MainWindow_LocationChanged;//窗口位置变动
-            if( App.AppConfigObject.RememberWinLocation ) {
-                this.WindowStartupLocation = WindowStartupLocation.Manual;
-                this.Top = Convert.ToDouble( App.AppConfigObject.WinLocation[0] );
-                this.Left = Convert.ToDouble( App.AppConfigObject.WinLocation[1] );
-            }
         }
 
         #region 初始化
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
+            if( App.AppConfigObject.RememberWinLocation && App.AppConfigObject.WinLocation[0] != 0 && App.AppConfigObject.WinLocation[1] != 0 ) {
+                this.Top = Convert.ToDouble(App.AppConfigObject.WinLocation[0]);
+                this.Left = Convert.ToDouble(App.AppConfigObject.WinLocation[1]);
+            } else {
+                this.Top = ( SystemParameters.PrimaryScreenHeight / 2 ) - ( this.ActualHeight/2 );
+                this.Left = ( SystemParameters.PrimaryScreenWidth / 2 ) - ( this.ActualWidth/2 );
+            }
             //托盘
             App.nicon.Icon= System.Drawing.Icon.FromHandle(Properties.Resources.picture_favicon_png.GetHicon());
             App.nicon.Text = Class.AppAttributes.Name + "  " + Class.AppAttributes.Version;
@@ -49,10 +50,10 @@ namespace KcptunGUI {
             pageClientMode = new SubFrame.ClientMode();
             //pageClientMode.par
             pageServerMode = new SubFrame.ServerMode();
-            pageConfigure = new SubFrame.Configure();
+            pageConfigure = new SubFrame.Configure(); pageConfigure._MainWindow = this;
             pageAbout = new SubFrame.About();
-            pageStatus = new SubFrame.Status();
-            pageHelper = new SubFrame.Helper();
+            pageStatus = new SubFrame.Status(); pageStatus._MainWindow = this;
+            //pageHelper = new SubFrame.Helper();
             MainWindow_Frame_ViewArea.Content = pageAbout;
         }
 
@@ -62,25 +63,29 @@ namespace KcptunGUI {
         /// <summary>窗口已确定将关闭</summary>
         private void MainWindow_Closed( object sender , EventArgs e ) {
             //if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);}
+            App.AppConfigObject.WinLocation[0] = Convert.ToInt32(this.Top);
+            App.AppConfigObject.WinLocation[1] = Convert.ToInt32(this.Left);
             Class.LocalFunction.SaveJsonToFile(App.AppConfigObject,Class.AppAttributes.ConfigFilePath);
             App.nicon.Visible = false;
         }
 
         /// <summary>窗口位置发生变动</summary>
         private void MainWindow_LocationChanged( object sender , EventArgs e ) {
-            App.AppConfigObject.WinLocation[0] = Convert.ToInt32( this.Top );
-            App.AppConfigObject.WinLocation[1] = Convert.ToInt32( this.Left );
-            this.Title = String.Format( "X: {0} - Y: {1}" , App.AppConfigObject.WinLocation[0] , App.AppConfigObject.WinLocation[1] );
+            /*
+            *App.AppConfigObject.WinLocation[0] = Convert.ToInt32( this.Top );
+            *App.AppConfigObject.WinLocation[1] = Convert.ToInt32( this.Left );
+            *this doesn't work,idk why.
+            */
+            //this.Title = String.Format( "X: {0} - Y: {1}" , App.AppConfigObject.WinLocation[0] , App.AppConfigObject.WinLocation[1] );
         }
 
         /// <summary>加载全球化文本</summary>
-        private void MainWindow_I18N() {
+        public void MainWindow_I18N() {
             this.MainWindow_ListBoxItem_ClientMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ClientMode.Tag);//I18N[0]
             this.MainWindow_ListBoxItem_ServerMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ServerMode.Tag );//I18N[1]
             this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.Tag);//I18N[2]
             this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.Tag);//I18N[4]
             this.MainWindow_ListBoxItem_About.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_About.Tag);//I18N[3]
-            this.MainWindow_ListBoxItem_Helper.Content= Class.I18N.GetString( this.MainWindow_ListBoxItem_Helper.Tag );//I18N[5]
         }
 
         private void MainWindow_L10N() {
@@ -95,20 +100,27 @@ namespace KcptunGUI {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Button_Clicked(Object sender,RoutedEventArgs e) {
-            Button thisButton = (Button)sender;
+            Button thisButton = sender as Button;
             switch(thisButton.Name){
                 case "MainWindow_Button_ViewSrcOnGitHub":
-                    Process.Start("https://github.com/ragnaroks/KcptunGUI/");
+                    Process.Start("https://github.com/ragnaroks/KcptunGUI");
                     break;
                 case "MainWindow_Button_ViewSrcOnOSchina":
-                    Process.Start("http://git.oschina.net/ragnaroks/KcptunGUI/");
+                    Process.Start("https://git.oschina.net/ragnaroks/KcptunGUI");
+                    break;
+                case "MainWindow_Button_GetHelp":
+                    Process.Start("https://github.com/ragnaroks/KcptunGUI/wiki");
+                    break;
+                case "MainWindow_Button_GetHelp2":
+                    Process.Start("https://git.oschina.net/ragnaroks/KcptunGUI/wikis");
                     break;
                 default:break;
             }
         }
         #endregion
         private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
-            CheckBox thisCheckBox = (CheckBox)sender;
+            CheckBox thisCheckBox = sender as CheckBox;
+            if( false == thisCheckBox.IsMouseOver ) { return; }
             switch (thisCheckBox.Name) {
                 case "KcptunConfig_Compress":
                      break;
@@ -116,7 +128,8 @@ namespace KcptunGUI {
             }
         }
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e){//单选框取消选择事件
-            CheckBox thisCheckBox = (CheckBox)sender; if (false == thisCheckBox.IsMouseOver) { return; }
+            CheckBox thisCheckBox = sender as CheckBox;
+            if (false == thisCheckBox.IsMouseOver) { return; }
             switch (thisCheckBox.Name){
                 case "KcptunConfig_Compress":
                     break;
@@ -125,7 +138,7 @@ namespace KcptunGUI {
             }
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e){//输入框变动事件
-            TextBox thisTextBox = (TextBox)sender;
+            TextBox thisTextBox = sender as TextBox;
             switch (thisTextBox.Name) {
                 case "MainWindow_LogsText":
                     //this.MainWindow_LogsView.ScrollToBottom(); 
@@ -137,7 +150,7 @@ namespace KcptunGUI {
             }
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e){//下拉选单变动事件
-            ComboBox thisComboBox = (ComboBox)sender;
+            ComboBox thisComboBox = sender as ComboBox;
             switch (thisComboBox.Name) {
                 case "KcptunConfig_SystemBit":
                     break;
@@ -146,7 +159,7 @@ namespace KcptunGUI {
             }
         }
         private void TextBox_LostKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e){//输入框丢失键盘焦点
-            TextBox thisTextBox = (TextBox)sender;
+            TextBox thisTextBox = sender as TextBox;
             switch (thisTextBox.Name) {
                 case "KcptunConfig_MTU":
                     break;
@@ -213,7 +226,7 @@ namespace KcptunGUI {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Canvas_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e){
-            Canvas thisCanvas = (Canvas)sender;
+            Canvas thisCanvas = sender as Canvas;
             if (!thisCanvas.IsMouseOver) { return; }
             switch (thisCanvas.Name) {
                 default:break;
@@ -225,7 +238,7 @@ namespace KcptunGUI {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ListBoxItem_MouseLeftButtonUp(object sender , System.Windows.Input.MouseButtonEventArgs e) {
-            ListBoxItem thisListBoxItem = (ListBoxItem)sender;
+            ListBoxItem thisListBoxItem = sender as ListBoxItem;
             if(!thisListBoxItem.IsMouseOver) { return; }
             switch( thisListBoxItem.Name ) {
                 case "MainWindow_ListBoxItem_ClientMode":
@@ -242,9 +255,6 @@ namespace KcptunGUI {
                     break;
                 case "MainWindow_ListBoxItem_Status":
                     this.MainWindow_Frame_ViewArea.Content = pageStatus;
-                    break;
-                case "MainWindow_ListBoxItem_Helper":
-                    this.MainWindow_Frame_ViewArea.Content = pageHelper;
                     break;
                 default:break;
             }

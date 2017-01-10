@@ -1,14 +1,19 @@
 # KcptunGUI是什么? What's KcptunGUI?
-KcptunGUI是kcptun的Windows用户界面,用于帮助用户简易方便的配置参数以及管理.  
+KcptunGUI是kcptun的Windows用户界面,用于帮助用户简易方便的配置参数以及管理.需求.net 4.5.2(最低兼容4.5.0)
 KcptunGUI is kcptun's Windows GUI,make it easy to use kcptun and manager.
+
 
 ###0.2.lastest (无服务端模式/no server mode)
 ![0.2.lastest](http://i1.buimg.com/1949/c569f5074eca2af4.png)
 ###0.3.now
-![0.3.now](https://static.ragnaroks.org/project/KcptunGUI/mainwindow.png)
+![PageAbout](http://i1.piimg.com/567571/2c1826473b18233c.png)
+![PageConfigure](http://i1.piimg.com/567571/38850c7579c18c13.png)
+![PageStatus](http://i1.piimg.com/567571/d9eccad741ee26dd.png)
+##### and more...
 
 # 需求/Require
-- [.Net 4.5.0+](http://go.microsoft.com/fwlink/?LinkId=780601)
+- .Net 4.5.0(if build on win7)
+- [.Net 4.5.2+](http://go.microsoft.com/fwlink/?LinkId=780601)
 - Windows7+
 
 # 其它/Other

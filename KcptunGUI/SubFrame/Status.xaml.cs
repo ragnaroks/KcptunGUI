@@ -12,6 +12,7 @@ namespace KcptunGUI.SubFrame {
     /// Status.xaml 的交互逻辑
     /// </summary>
     public partial class Status : Page {
+        public MainWindow _MainWindow { get; set; }
         public Status() {
             InitializeComponent();
             this.Loaded += Status_Loaded;
@@ -32,6 +33,9 @@ namespace KcptunGUI.SubFrame {
             PageStatus_TextBlock_AppCPUCardApplicationOccupyingPretext.Text = Class.I18N.GetString( PageStatus_TextBlock_AppCPUCardApplicationOccupyingPretext.Tag );
             //Memory
             PageStatus_TextBlock_AppMemoryCardHeader.Text = Class.I18N.GetString(PageStatus_TextBlock_AppMemoryCardHeader.Tag);
+            PageStatus_TextBlock_AppMemoryCardSystemOccupyingPretext.Text = Class.I18N.GetString(PageStatus_TextBlock_AppMemoryCardSystemOccupyingPretext.Tag);
+            PageStatus_TextBlock_AppMemoryCardApplocationOccupyingPretext.Text = Class.I18N.GetString(PageStatus_TextBlock_AppMemoryCardApplocationOccupyingPretext.Tag);
+            PageStatus_TextBlock_AppMemoryCardApplocationOccupying2Pretext.Text = Class.I18N.GetString(PageStatus_TextBlock_AppMemoryCardApplocationOccupying2Pretext.Tag);
             //Network
             PageStatus_TextBlock_AppNetworkCardHeader.Text = Class.I18N.GetString(PageStatus_TextBlock_AppNetworkCardHeader.Tag);
             PageStatus_TextBlock_AppNetworkCardSystemUploadPretext.Text = Class.I18N.GetString( PageStatus_TextBlock_AppNetworkCardSystemUploadPretext.Tag );
@@ -50,18 +54,20 @@ namespace KcptunGUI.SubFrame {
             PerformanceCounter[] sys_network = Class.Functions.GetSystemPerformanceCounter_Network();//系统网络计数器
             PerformanceCounter sys_cpu = Class.Functions.GetSystemPerformanceCounter_CPU();//系统CPU计数器
             PerformanceCounter app_cpu = Class.Functions.GetApplicationPerformanceCounter_CPU();//本程序CPU计数器
-            while( App.AppConfigObject.FetchSystemStatus ) {
-                String[] value_SystemNetworkOccupying = Class.Functions.GetSystemOccupying_Network( sys_network);//系统网络数据
-                String value_SystemCPUOccupying = Class.Functions.GetSystemOccupying_CPU(sys_cpu);//系统CPU数据
-                String value_ApplicationCPUOccupying = Class.Functions.GetApplicationOccupying_CPU(app_cpu);//本程序CPU数据
-                this.Dispatcher.Invoke(
-                    () => {
-                        this.PageStatus_TextBlock_AppCPUCardSystemOccupyingText.Text = value_SystemCPUOccupying;
-                        this.PageStatus_TextBlock_AppCPUCardApplicationOccupyingText.Text = value_ApplicationCPUOccupying;
-                        this.PageStatus_TextBlock_AppNetworkCardSystemUploadText.Text = value_SystemNetworkOccupying[0];
-                        this.PageStatus_TextBlock_AppNetworkCardSystemDownloadText.Text = value_SystemNetworkOccupying[1];
-                    }
-                );
+            while( true ) {
+                if( App.AppConfigObject.FetchSystemStatus ) {
+                    String[] value_SystemNetworkOccupying = Class.Functions.GetSystemOccupying_Network(sys_network);//系统网络数据
+                    String value_SystemCPUOccupying = Class.Functions.GetSystemOccupying_CPU(sys_cpu);//系统CPU数据
+                    String value_ApplicationCPUOccupying = Class.Functions.GetApplicationOccupying_CPU(app_cpu);//本程序CPU数据
+                    this.Dispatcher.Invoke(
+                        () => {
+                            this.PageStatus_TextBlock_AppCPUCardSystemOccupyingText.Text = value_SystemCPUOccupying;
+                            this.PageStatus_TextBlock_AppCPUCardApplicationOccupyingText.Text = value_ApplicationCPUOccupying;
+                            this.PageStatus_TextBlock_AppNetworkCardSystemUploadText.Text = value_SystemNetworkOccupying[0];
+                            this.PageStatus_TextBlock_AppNetworkCardSystemDownloadText.Text = value_SystemNetworkOccupying[1];
+                        }
+                    );
+                }
                 Thread.Sleep( 1000 );
             }
         }

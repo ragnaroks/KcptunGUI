@@ -3,14 +3,56 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:KcptunGUI.SubFrame" Title="Configure"
-      mc:Ignorable="d" d:DesignHeight="480" d:DesignWidth="640"
+      xmlns:local="clr-namespace:KcptunGUI.SubFrame"
+      Title="Configure" Background="{DynamicResource MaterialDesignPaper}"
 >
     <StackPanel>
         <StackPanel Orientation="Horizontal" Height="48">
             <Image x:Name="PageConfigure_Image_Icon" Width="32" Height="32" Margin="8"/>
             <TextBlock x:Name="PageConfigure_TextBlock_PageHeader" Margin="8" Tag="I18N_9" Text="PageConfigure_TextBlock_PageHeader" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
-        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />        
+        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch"/>
+        <Grid x:Name="PageConfigure_Grid_Configure" Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/><!--Key-->
+                <ColumnDefinition Width="auto"/><!--Description-->
+                <ColumnDefinition Width="72" MaxWidth="72" MinWidth="72"/><!--Value-->
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="3" x:Name="PageConfigure_TextBlock_ConfigureTip" Text="以下选项会即时生效并自动保存" HorizontalAlignment="Center" FontSize="16" Tag="I18N_20" Padding="8,4" Margin="148,0,113,0"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="TabAutoHide" FontSize="14" Padding="8,4"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="PageConfigure_TextBlock_Setting_TabAutoHide" Text="是否自动关闭导航菜单" FontSize="14" Tag="I18N_21" Padding="8,4"/>
+            <ToggleButton Grid.Row="1" Grid.Column="2" IsChecked="{Binding Path=TabAutoHide,Mode=TwoWay}" Padding="8,4" LostFocus="ToggleButton_LostFocus"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="RememberWinLocation" FontSize="14" Padding="8,4"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" x:Name="PageConfigure_TextBlock_Setting_RememberWinLocation" Text="是否记住窗口位置" FontSize="14" Tag="I18N_22" Padding="8,4"/>
+            <ToggleButton Grid.Row="2" Grid.Column="2" IsChecked="{Binding Path=RememberWinLocation,Mode=TwoWay}" Padding="8,4"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="FetchSystemStatus" FontSize="14" Padding="8,4"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" x:Name="PageConfigure_TextBlock_Setting_FetchSystemStatus" Text="是否读取系统状态" FontSize="14" Tag="I18N_23" Padding="8,4"/>
+            <ToggleButton Grid.Row="3" Grid.Column="2" IsChecked="{Binding Path=FetchSystemStatus,Mode=TwoWay}" Padding="8,4"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="LCID" FontSize="14" Padding="8,4"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" x:Name="PageConfigure_TextBlock_Setting_LCID" Text="区域ID,程序会根据区域提供不同的全球化内容" FontSize="14" Tag="I18N_24" Padding="8,4"/>
+            <TextBox Grid.Row="4" Grid.Column="2" x:Name="PageConfigure_TextBox_Setting_LCID" Text="{Binding Path=LCID,Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Language" FontSize="14" Padding="8,4"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" x:Name="PageConfigure_TextBlock_Setting_Language" Text="程序显示语言" FontSize="14" Tag="I18N_25" Padding="8,4"/>
+            <ComboBox Grid.Row="5" Grid.Column="2" x:Name="PageConfigure_ComboBox_Setting_Language" IsSynchronizedWithCurrentItem="True" SelectionChanged="ComboBox_SelectionChanged" IsReadOnly="True">
+                <ComboBoxItem Content="简体中文" Tag="2052"/>
+                <ComboBoxItem Content="English" Tag="1033"/>
+                <ComboBoxItem Content="蛤体中文" Tag="9999"/>
+            </ComboBox>
+                        
+        </Grid>
     </StackPanel>
 </Page>

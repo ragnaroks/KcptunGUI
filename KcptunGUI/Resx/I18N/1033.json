@@ -16,9 +16,18 @@
 		"CPU occupying",
 		"Memory occupying",
 		"Network occupying",
-		"System upload speed",
-		"System download speed",
-		"System CPU occupying",
-		"Application CPU occupying"
+		"System upload speed:",
+		"System download speed:",
+		"System CPU occupying:",
+		"Application CPU occupying:",
+		"System memory occupying:",
+        "Application shard memory occupying:",
+        "Application private memory occupying:",
+		"These settings will immediate apply and auto save",
+		"Whether or not let menu auto close",
+		"Whether or not remember window's location",
+		"Whether or not fetch system status",
+		"LCID,application will provide different content",
+		"Application language"
     ]
 }
