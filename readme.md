@@ -8,7 +8,7 @@ KcptunGUI is kcptun's Windows GUI,make it easy to use kcptun and manager.
 ![0.3.now](https://static.ragnaroks.org/project/KcptunGUI/mainwindow.png)
 
 # 需求/Require
-- [.Net 4.6.2+](http://go.microsoft.com/fwlink/?LinkId=780601)
+- [.Net 4.5.0+](http://go.microsoft.com/fwlink/?LinkId=780601)
 - Windows7+
 
 # 其它/Other
@@ -18,9 +18,6 @@ KcptunGUI is kcptun's Windows GUI,make it easy to use kcptun and manager.
 - [kcptun](https://github.com/xtaci/kcptun/)
 - [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json/)
 - [MaterialDesignInXamlToolkit](https://github.com/ButchersBoy/MaterialDesignInXamlToolkit/)
-- [sora-meliae](http://sora-meliae.deviantart.com/)
-- [tiheum](http://tiheum.deviantart.com/)
-
 
 # 代码/Code
 - [GitHub](https://github.com/ragnaroks/kcptungui/)

@@ -17,6 +17,9 @@ namespace KcptunGUI.Class {
 
         /// <summary>窗口显示位置</summary>
         public Int32[] WinLocation { get; set; }
+
+        /// <summary>是否获取系统状态</summary>
+        public Boolean FetchSystemStatus { get; set; }
         
         /// <summary>服务器节点子类</summary>
         public class NodesItems {

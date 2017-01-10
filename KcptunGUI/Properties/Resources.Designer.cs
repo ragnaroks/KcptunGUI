@@ -81,7 +81,7 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {&quot;LCID&quot;:2052,&quot;TabAutoHide&quot;:false,&quot;RememberWinLocation&quot;:false,&quot;WinLocation&quot;:[0,0],&quot;Nodes&quot;:[{&quot;hostname&quot;:&quot;too.simple.com&quot;,&quot;ip&quot;:&quot;1.2.4.8&quot;,&quot;description&quot;:&quot;图样主机 - 1&quot;,&quot;localport&quot;:1081,&quot;remoteport&quot;:8000,&quot;autoconnect&quot;:false}]} 的本地化字符串。
+        ///   查找类似 {&quot;LCID&quot;:2052,&quot;TabAutoHide&quot;:true,&quot;RememberWinLocation&quot;:true,&quot;FetchSystemStatus&quot;:true,&quot;WinLocation&quot;:[0,0],&quot;Nodes&quot;:[{&quot;hostname&quot;:&quot;too.simple.com&quot;,&quot;ip&quot;:&quot;1.2.4.8&quot;,&quot;description&quot;:&quot;图样主机 - 1&quot;,&quot;localport&quot;:1081,&quot;remoteport&quot;:8000,&quot;autoconnect&quot;:false}]} 的本地化字符串。
         /// </summary>
         internal static string String_AppConfigJsonDefault {
             get {
@@ -90,7 +90,7 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;TabAutoHide&quot;:{&quot;type&quot;:&quot;boolean&quot;},&quot;RememberWinLocation&quot;:{&quot;type&quot;:&quot;boolean&quot;},&quot;WinLocation&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;integer&quot;}},&quot;Nodes&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;hostname&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;ip&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;localport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;remoteport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;autoconnect&quot;:{&quot;type&quot;:&quot;boolean&quot;}},&quot;required&quot;:[&quot;hostname&quot;,&quot;ip&quot; [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///   查找类似 {&quot;$schema&quot;:&quot;http://json-schema.org/draft-04/schema#&quot;,&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;LCID&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;TabAutoHide&quot;:{&quot;type&quot;:&quot;boolean&quot;},&quot;RememberWinLocation&quot;:{&quot;type&quot;:&quot;boolean&quot;},&quot;FetchSystemStatus&quot;:{&quot;type&quot;:&quot;boolean&quot;},&quot;WinLocation&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;integer&quot;}},&quot;Nodes&quot;:{&quot;type&quot;:&quot;array&quot;,&quot;items&quot;:{&quot;type&quot;:&quot;object&quot;,&quot;properties&quot;:{&quot;hostname&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;ip&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;type&quot;:&quot;string&quot;},&quot;localport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;remoteport&quot;:{&quot;type&quot;:&quot;integer&quot;},&quot;autoconnect&quot;:{&quot;type&quot;: [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string String_AppConfigJsonSchema {
             get {

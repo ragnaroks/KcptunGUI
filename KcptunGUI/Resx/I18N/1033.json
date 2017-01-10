@@ -15,6 +15,10 @@
 		"Configure settings",
 		"CPU occupying",
 		"Memory occupying",
-		"Network occupying"
+		"Network occupying",
+		"System upload speed",
+		"System download speed",
+		"System CPU occupying",
+		"Application CPU occupying"
     ]
 }

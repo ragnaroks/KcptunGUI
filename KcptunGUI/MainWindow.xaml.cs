@@ -2,10 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Text;
 using System.Windows.Interop;
-using System.Drawing;
-using System.IO;
 
 namespace KcptunGUI {
     /// <summary>
@@ -29,8 +26,6 @@ namespace KcptunGUI {
                 this.WindowStartupLocation = WindowStartupLocation.Manual;
                 this.Top = Convert.ToDouble( App.AppConfigObject.WinLocation[0] );
                 this.Left = Convert.ToDouble( App.AppConfigObject.WinLocation[1] );
-            } else {
-                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             }
         }
 

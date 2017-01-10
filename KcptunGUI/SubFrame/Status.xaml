@@ -28,7 +28,14 @@
                 <StackPanel Orientation="Vertical" Margin="8">
                     <TextBlock x:Name="PageStatus_TextBlock_AppCpuCardHeader" FontSize="14" Text="处理器占用" Tag="I18N_10"/>
                     <Separator Style="{StaticResource MaterialDesignLightSeparator}" Height="8"/>
-                    
+                    <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
+                        <TextBlock x:Name="PageStatus_TextBlock_AppCPUCardSystemOccupyingPretext" Text="系统CPU负载" FontSize="12" Margin="0,0,4,0" Tag="I18N_15"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppCPUCardSystemOccupyingText" Text="0%" FontSize="12"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
+                        <TextBlock x:Name="PageStatus_TextBlock_AppCPUCardApplicationOccupyingPretext" Text="程序CPU占用" FontSize="12" Margin="0,0,4,0" Tag="I18N_16"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppCPUCardApplicationOccupyingText" Text="0%" FontSize="12"/>
+                    </StackPanel>
                 </StackPanel>
             </MD:Card>
             <MD:Card Grid.Row="0" Grid.Column="1" Background="{StaticResource PrimaryHueMidBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="2,0,2,4">
@@ -43,16 +50,15 @@
                     <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardHeader" FontSize="14" Text="网络占用" Tag="I18N_12"/>
                     <Separator Style="{StaticResource MaterialDesignLightSeparator}" Height="8"/>
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardUploadPretext" Text="上传速率:" FontSize="12" Margin="0,0,4,0"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardUploadText" Text="0" FontSize="12"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardUploadCountUnit" Text="byte/s" FontSize="12" Margin="4,0,0,0"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemUploadPretext" Text="系统上传速率" FontSize="12" Margin="0,0,4,0" Tag="I18N_13"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemUploadText" Text="0" FontSize="12"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemUploadCountUnit" Text="byte/s" FontSize="12" Margin="4,0,0,0" IsEnabled="False" Visibility="Collapsed"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardDownloadPretext" Text="下载速率:" FontSize="12" Margin="0,0,4,0"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardDownloadText" Text="0" FontSize="12"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardDownloadCountUnit" Text="byte/s" FontSize="12" Margin="4,0,0,0"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemDownloadPretext" Text="系统下载速率" FontSize="12" Margin="0,0,4,0" Tag="I18N_14"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemDownloadText" Text="0" FontSize="12"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemDownloadCountUnit" Text="byte/s" FontSize="12" Margin="4,0,0,0" IsEnabled="False" Visibility="Collapsed"/>
                     </StackPanel>
-                    
                 </StackPanel>
             </MD:Card>
         </Grid>
