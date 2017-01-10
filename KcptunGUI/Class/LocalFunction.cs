@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using System.Net.NetworkInformation;
@@ -7,9 +8,7 @@ using System.Diagnostics;
 
 namespace KcptunGUI.Class {
     class LocalFunction {
-        /// <summary>
-        /// 验证配置文件合法性
-        /// </summary>
+        /// <summary>验证配置文件合法性</summary>
         /// <returns>是否合法</returns>
         public static Boolean ValidateConfigJSON() {
             if( String.IsNullOrWhiteSpace( App.AppConfigJson ) || App.AppConfigJson.IndexOf( "}{" , 0 ) > -1 ) { return false; }
@@ -24,9 +23,8 @@ namespace KcptunGUI.Class {
                 return false;
             }
         }
-        /// <summary>
-        /// 验证语言文件合法性
-        /// </summary>
+
+        /// <summary>验证语言文件合法性</summary>
         /// <returns>是否合法</returns>
         public static Boolean ValidateLanguageJSON() {
             if( String.IsNullOrWhiteSpace( App.AppLanguageJson ) || App.AppLanguageJson.IndexOf( "}{" , 0 ) > -1 ) { return false; }
@@ -41,9 +39,8 @@ namespace KcptunGUI.Class {
                 return false;
             }
         }
-        /// <summary>
-        /// 验证指定JSON合法性
-        /// </summary>
+
+        /// <summary>验证指定JSON合法性</summary>
         /// <param name="_JSON">待验证的JSON</param>
         /// <param name="_SchemaString">验证器字符串</param>
         /// <returns>是否合法</returns>
@@ -59,6 +56,13 @@ namespace KcptunGUI.Class {
                 foreach( var value in errors ) { Console.WriteLine( "验证失败: " + value ); }
                 return false;
             }
+        }
+
+        /// <summary>将当前对象写入文件</summary>
+        /// <param name="_JSON">对象</param>
+        /// <param name="_Path">文件完整路径</param>
+        public static void SaveJsonToFile(Object _JSON,String _Path) {
+            System.IO.File.WriteAllText( AppAttributes.ConfigFilePath , JsonConvert.SerializeObject( _JSON ) , AppAttributes.UTF8EncodingNoBom );
         }
     }
 }

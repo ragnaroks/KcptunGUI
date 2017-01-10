@@ -6,7 +6,6 @@ using System.Text;
 using System.Windows.Interop;
 using System.Drawing;
 using System.IO;
-using ResourceCSharp;
 
 namespace KcptunGUI {
     /// <summary>
@@ -25,11 +24,18 @@ namespace KcptunGUI {
             this.Loaded += MainWindow_Loaded;//窗体加载完成
             this.Closing += MainWindow_Closing;//窗口即将关闭,可取消
             this.Closed += MainWindow_Closed;//窗口已确定将关闭
+            this.LocationChanged += MainWindow_LocationChanged;//窗口位置变动
+            if( App.AppConfigObject.RememberWinLocation ) {
+                this.WindowStartupLocation = WindowStartupLocation.Manual;
+                this.Top = Convert.ToDouble( App.AppConfigObject.WinLocation[0] );
+                this.Left = Convert.ToDouble( App.AppConfigObject.WinLocation[1] );
+            } else {
+                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
         }
+
         #region 初始化
         private void MainWindow_Loaded( object sender , RoutedEventArgs e ) {//窗体加载完成
-            //this.Title = Class.LocalFunction.GetNetworkInterfaceInstance();
-            //AppResource
             //托盘
             App.nicon.Icon= System.Drawing.Icon.FromHandle(Properties.Resources.picture_favicon_png.GetHicon());
             App.nicon.Text = Class.AppAttributes.Name + "  " + Class.AppAttributes.Version;
@@ -46,26 +52,30 @@ namespace KcptunGUI {
             MainWindow_I18N(); MainWindow_L10N();
             //实例化页面
             pageClientMode = new SubFrame.ClientMode();
+            //pageClientMode.par
             pageServerMode = new SubFrame.ServerMode();
             pageConfigure = new SubFrame.Configure();
             pageAbout = new SubFrame.About();
             pageStatus = new SubFrame.Status();
             pageHelper = new SubFrame.Helper();
             MainWindow_Frame_ViewArea.Content = pageAbout;
-            //
         }
 
         /// <summary>窗口即将关闭,可取消</summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainWindow_Closing( object sender , System.ComponentModel.CancelEventArgs e ) {}
 
         /// <summary>窗口已确定将关闭</summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MainWindow_Closed( object sender , EventArgs e ) {
-            App.nicon.Visible = false;
             //if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);}
+            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject,Class.AppAttributes.ConfigFilePath);
+            App.nicon.Visible = false;
+        }
+
+        /// <summary>窗口位置发生变动</summary>
+        private void MainWindow_LocationChanged( object sender , EventArgs e ) {
+            App.AppConfigObject.WinLocation[0] = Convert.ToInt32( this.Top );
+            App.AppConfigObject.WinLocation[1] = Convert.ToInt32( this.Left );
+            this.Title = String.Format( "X: {0} - Y: {1}" , App.AppConfigObject.WinLocation[0] , App.AppConfigObject.WinLocation[1] );
         }
 
         /// <summary>加载全球化文本</summary>
@@ -82,6 +92,7 @@ namespace KcptunGUI {
             this.MainWindow_TextBlock_AppVersion.Text = "Version: " + Class.AppAttributes.Version;
         }
         #endregion
+
         #region Button控件响应
         /// <summary>
         /// 根据x:Name响应按钮

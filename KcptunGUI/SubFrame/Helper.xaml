@@ -15,15 +15,51 @@
         </StackPanel>
         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
         <StackPanel>
-            <Expander Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Header="Expander 1a">
+            <Expander Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" Header="Tip1">
                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="16,0,16,16">
-                    <TextBlock Opacity="0.8" TextWrapping="Wrap" Text="吃哇额道教文化的啊d哦啊文化的啊我很快的好卡我卡的黄金卡我好大家开挖后即可会打开文件回家看哇等会肯定会哇空间好的开挖后就肯定会挖金矿好卡哇等会客户挖点矿很卡"/>
+                    <TextBlock Opacity="0.8" TextWrapping="Wrap" Text="HelpText"/>
                 </StackPanel>
             </Expander>
             <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-            <Expander Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Header="Expander 1b">
+            <Expander Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Header="Tip2">
                 <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="16,0,16,16">
-                    <TextBlock Opacity="0.8" TextWrapping="Wrap"  Text="吃哇额道教文化的啊d哦啊文化的啊我很快的好卡我卡的黄金卡我好大家开挖后即可会打开文件回家看哇等会肯定会哇空间好的开挖后就肯定会挖金矿好卡哇等会客户挖点矿很卡"/>
+                    <TextBlock Opacity="0.8" TextWrapping="Wrap"  Text="HelpText"/>
+                </StackPanel>
+            </Expander>
+            <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+            <Expander Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Header="Tip3">
+                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="16,0,16,16">
+                    <TextBlock Opacity="0.8" TextWrapping="Wrap"  Text="HelpText"/>
+                </StackPanel>
+            </Expander>
+            <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+            <Expander Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Header="Tip4">
+                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="16,0,16,16">
+                    <TextBlock Opacity="0.8" TextWrapping="Wrap"  Text="HelpText"/>
+                </StackPanel>
+            </Expander>
+            <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+            <Expander Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Header="Tip5">
+                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="16,0,16,16">
+                    <TextBlock Opacity="0.8" TextWrapping="Wrap"  Text="HelpText"/>
+                </StackPanel>
+            </Expander>
+            <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+            <Expander Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Header="Tip6">
+                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="16,0,16,16">
+                    <TextBlock Opacity="0.8" TextWrapping="Wrap"  Text="HelpText"/>
+                </StackPanel>
+            </Expander>
+            <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+            <Expander Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Header="Tip7">
+                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="16,0,16,16">
+                    <TextBlock Opacity="0.8" TextWrapping="Wrap"  Text="HelpText"/>
+                </StackPanel>
+            </Expander>
+            <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+            <Expander Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Header="Tip8">
+                <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="16,0,16,16">
+                    <TextBlock Opacity="0.8" TextWrapping="Wrap"  Text="HelpText"/>
                 </StackPanel>
             </Expander>
             <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />

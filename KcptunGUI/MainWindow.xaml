@@ -6,10 +6,10 @@
     xmlns:MD="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:Properties="clr-namespace:KcptunGUI.Properties"
-    Title="MainWindow" Background="{DynamicResource MaterialDesignPaper}" FontFamily="Microsoft YaHei"
+    Title="" Background="{DynamicResource MaterialDesignPaper}" FontFamily="Microsoft YaHei"
     ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" SnapsToDevicePixels="True" TextElement.FontSize="12" TextElement.FontWeight="Regular"
     TextElement.Foreground="{DynamicResource MaterialDesignBody}" TextOptions.TextFormattingMode="Ideal" TextOptions.TextRenderingMode="Auto" 
-    WindowStartupLocation="CenterScreen" MinHeight="360" MinWidth="480" MaxHeight="800" MaxWidth="1280"
+    WindowStartupLocation="Manual" MinHeight="360" MinWidth="480" MaxHeight="800" MaxWidth="1280"
 >
     <MD:DialogHost>
         <MD:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MainWindow_ToggleButton_ToggleMenu, Path=IsChecked,Mode=TwoWay}">

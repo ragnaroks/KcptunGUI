@@ -406,10 +406,10 @@
 </value>
   </data>
   <data name="String_AppConfigJsonSchema" xml:space="preserve">
-    <value>{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"LCID":{"type":"integer"},"TabAutoHide":{"type":"boolean"},"Nodes":{"type":"array","items":{"type":"object","properties":{"hostname":{"type":"string"},"ip":{"type":"string"},"description":{"type":"string"},"localport":{"type":"integer"},"remoteport":{"type":"integer"},"autoconnect":{"type":"boolean"}},"required":["hostname","ip","description","localport","remoteport","autoconnect"]}}},"required":["LCID","TabAutoHide","Nodes"]}</value>
+    <value>{"$schema":"http://json-schema.org/draft-04/schema#","type":"object","properties":{"LCID":{"type":"integer"},"TabAutoHide":{"type":"boolean"},"RememberWinLocation":{"type":"boolean"},"WinLocation":{"type":"array","items":{"type":"integer"}},"Nodes":{"type":"array","items":{"type":"object","properties":{"hostname":{"type":"string"},"ip":{"type":"string"},"description":{"type":"string"},"localport":{"type":"integer"},"remoteport":{"type":"integer"},"autoconnect":{"type":"boolean"}},"required":["hostname","ip","description","localport","remoteport","autoconnect"]}}},"required":["LCID","TabAutoHide","RememberWinLocation","WinLocation","Nodes"]}</value>
   </data>
   <data name="String_AppConfigJsonDefault" xml:space="preserve">
-    <value>{"LCID":2052,"TabAutoHide":false,"Nodes":[{"hostname":"too.simple.com","ip":"1.2.4.8","description":"图样主机 - 1","localport":1081,"remoteport":8000,"autoconnect":false}]}</value>
+    <value>{"LCID":2052,"TabAutoHide":false,"RememberWinLocation":false,"WinLocation":[0,0],"Nodes":[{"hostname":"too.simple.com","ip":"1.2.4.8","description":"图样主机 - 1","localport":1081,"remoteport":8000,"autoconnect":false}]}</value>
     <comment>内置默认配置json</comment>
   </data>
   <data name="String_AppLanguageJsonDefault" xml:space="preserve">

@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:KcptunGUI"
 >
+    <!--
     <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="{StaticResource Primary200}"/>
     <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource Primary200Foreground}"/>
     <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource Primary500}"/>
@@ -11,35 +12,20 @@
     <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Primary700Foreground}"/>
     <SolidColorBrush x:Key="SecondaryAccentBrush" Color="{StaticResource Accent200}"/>
     <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="{StaticResource Accent200Foreground}"/>
-    <!--
+    -->
     <Style TargetType="TextBlock">
         <Style.Setters>
-            <Setter Property="FontSize" Value="12"></Setter>
-            <Setter Property="UseLayoutRounding" Value="True"></Setter>
+            <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
         </Style.Setters>
     </Style>
-    <Style TargetType="TextBlock" x:Key="Style_KcptunGUI_TextBlock_LeftCenter">
-        <Style.Setters>
-            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
-            <Setter Property="UseLayoutRounding" Value="True"></Setter>
-        </Style.Setters>
-    </Style>
-    <Style TargetType="TextBlock" x:Key="Style_KcptunGUI_TextBlock_CenterCenter">
-        <Style.Setters>
-            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
-            <Setter Property="UseLayoutRounding" Value="True"></Setter>
-        </Style.Setters>
-    </Style>
-    
     <Style TargetType="TextBox">
         <Style.Setters>
-            <Setter Property="UndoLimit" Value="0"></Setter>
-            <Setter Property="SpellCheck.IsEnabled" Value="False"></Setter>
+            <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+            <Setter Property="UndoLimit" Value="0"/>
+            <Setter Property="SpellCheck.IsEnabled" Value="False"/>
+            <Setter Property="UseLayoutRounding" Value="True"/>
         </Style.Setters>
     </Style>
-    -->
 </ResourceDictionary>

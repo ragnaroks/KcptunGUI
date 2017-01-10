@@ -1,6 +1,8 @@
 {
     "LCID": 2052,
     "TabAutoHide": false,
+    "RememberWinLocation": false,
+    "WinLocation": [0,0],
     "Nodes": [
         {
             "hostname": "too.simple.com",
