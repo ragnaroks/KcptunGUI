@@ -16,7 +16,7 @@ namespace KcptunGUI.SubFrame {
         public Status() {
             InitializeComponent();
             this.Loaded += Status_Loaded;
-            this.PageStatus_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(ResourceCSharp.Picture.png_72x72_status_2.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
+            this.PageStatus_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(KcptunGUI.Resource.图片.png_72x72_status_2.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
             GetOccupyingAsync();
         }
         #region 初始化

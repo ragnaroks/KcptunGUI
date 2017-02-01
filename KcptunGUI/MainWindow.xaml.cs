@@ -20,7 +20,6 @@ namespace KcptunGUI {
             this.Loaded += MainWindow_Loaded;//窗体加载完成
             this.Closing += MainWindow_Closing;//窗口即将关闭,可取消
             this.Closed += MainWindow_Closed;//窗口已确定将关闭
-            this.LocationChanged += MainWindow_LocationChanged;//窗口位置变动
         }
 
         #region 初始化
@@ -39,13 +38,13 @@ namespace KcptunGUI {
             App.nicon.MouseClick += Nicon_MouseClick;
             App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             System.Windows.Forms.ToolStripMenuItem[] tsmi = new System.Windows.Forms.ToolStripMenuItem[1];
-            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem() { Text = "I18N_ExitApp" , Image = ResourceCSharp.Picture.png_none };
+            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem() { Text = "I18N_ExitApp" , Image = KcptunGUI.Resource.图片.png_none};
             tsmi[0].Click += ( (Object _sender,EventArgs _e) => { this.Close(); } );
             for(Byte i=0;i<tsmi.Length ;i++ ) {
                 App.nicon.ContextMenuStrip.Items.Insert( i , tsmi[i] );
             }
             //加载文本
-            MainWindow_I18N(); MainWindow_L10N();
+            MainWindow_I18N();
             //实例化页面
             pageClientMode = new SubFrame.ClientMode();
             //pageClientMode.par
@@ -65,31 +64,18 @@ namespace KcptunGUI {
             //if (cmdp_isRun == true) {MainWindow_StopKcptun_Click(null, null);}
             App.AppConfigObject.WinLocation[0] = Convert.ToInt32(this.Top);
             App.AppConfigObject.WinLocation[1] = Convert.ToInt32(this.Left);
-            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject,Class.AppAttributes.ConfigFilePath);
+            Class.LocalFunction.SaveAppConfig();
             App.nicon.Visible = false;
-        }
-
-        /// <summary>窗口位置发生变动</summary>
-        private void MainWindow_LocationChanged( object sender , EventArgs e ) {
-            /*
-            *App.AppConfigObject.WinLocation[0] = Convert.ToInt32( this.Top );
-            *App.AppConfigObject.WinLocation[1] = Convert.ToInt32( this.Left );
-            *this doesn't work,idk why.
-            */
-            //this.Title = String.Format( "X: {0} - Y: {1}" , App.AppConfigObject.WinLocation[0] , App.AppConfigObject.WinLocation[1] );
         }
 
         /// <summary>加载全球化文本</summary>
         public void MainWindow_I18N() {
+            this.MainWindow_TextBlock_AppVersion.Text = "Version: " + Class.AppAttributes.Version;
             this.MainWindow_ListBoxItem_ClientMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ClientMode.Tag);//I18N[0]
             this.MainWindow_ListBoxItem_ServerMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ServerMode.Tag );//I18N[1]
             this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.Tag);//I18N[2]
             this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.Tag);//I18N[4]
             this.MainWindow_ListBoxItem_About.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_About.Tag);//I18N[3]
-        }
-
-        private void MainWindow_L10N() {
-            this.MainWindow_TextBlock_AppVersion.Text = "Version: " + Class.AppAttributes.Version;
         }
         #endregion
 

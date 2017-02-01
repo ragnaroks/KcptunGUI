@@ -64,5 +64,10 @@ namespace KcptunGUI.Class {
         public static void SaveJsonToFile(Object _JSON,String _Path) {
             System.IO.File.WriteAllText( AppAttributes.ConfigFilePath , JsonConvert.SerializeObject( _JSON ) , AppAttributes.UTF8EncodingNoBom );
         }
+
+        /// <summary>保存配置文件</summary>
+        public static void SaveAppConfig(){
+            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject , Class.AppAttributes.ConfigFilePath);
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace KcptunGUI.SubFrame {
         public Configure() {
             InitializeComponent(); //PageConfigure           
             this.Loaded += Configure_Loaded;
-            this.PageConfigure_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(ResourceCSharp.Picture.png_72x72_configure_1.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
+            this.PageConfigure_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(KcptunGUI.Resource.图片.png_72x72_configure_1.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
             PageConfigure_Grid_Configure.DataContext = App.AppConfigObject;
         }
 

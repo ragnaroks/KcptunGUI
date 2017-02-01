@@ -27,7 +27,7 @@ namespace KcptunGUI.SubFrame {
         public About() {
             InitializeComponent();
             this.Loaded += About_Loaded;
-            this.PageAbout_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(ResourceCSharp.Picture.png_72x72_user_1.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
+            this.PageAbout_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(KcptunGUI.Resource.图片.png_72x72_user_1.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
 
         }
         

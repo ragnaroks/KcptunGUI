@@ -14,7 +14,7 @@ namespace KcptunGUI.SubFrame {
             InitializeComponent();
             mw = this.Parent as MainWindow;
             this.Loaded += Helper_Loaded;
-            this.PageHelper_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap( ResourceCSharp.Picture.png_72x72_text_1.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
+            this.PageHelper_Image_Icon.Source = Imaging.CreateBitmapSourceFromHBitmap(KcptunGUI.Resource.图片.png_72x72_text_1.GetHbitmap() , IntPtr.Zero , Int32Rect.Empty , BitmapSizeOptions.FromEmptyOptions());
         }
 
         private void Helper_Loaded(object sender , RoutedEventArgs e) {

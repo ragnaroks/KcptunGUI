@@ -57,6 +57,7 @@ namespace KcptunGUI
                 AppLanguageObject = JsonConvert.DeserializeObject<Class.LanguageJson>( AppLanguageJson );
             }
             //终于可以启动了
+            //MessageBox.Show(Class.AppAttributes.ExecFilePath);
             base.OnStartup( e );
         }
     }
