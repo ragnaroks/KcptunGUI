@@ -33,4 +33,10 @@
             <Setter Property="SnapsToDevicePixels" Value="True"/>
         </Style.Setters>
     </Style>
+    <Style TargetType="Button" x:Key="ButtonInPopupBox">
+        <Style.Setters>
+            <Setter Property="Height" Value="32"></Setter>
+            <Setter Property="Padding" Value="16,0,16,24"></Setter>
+        </Style.Setters>
+    </Style>
 </ResourceDictionary>

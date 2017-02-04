@@ -61,26 +61,6 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Icon icon_favicon_ico {
-            get {
-                object obj = ResourceManager.GetObject("icon_favicon_ico", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap picture_favicon_png {
-            get {
-                object obj = ResourceManager.GetObject("picture_favicon_png", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 {&quot;LCID&quot;:2052,&quot;TabAutoHide&quot;:true,&quot;RememberWinLocation&quot;:true,&quot;FetchSystemStatus&quot;:true,&quot;WinLocation&quot;:[0,0],&quot;Nodes&quot;:[{&quot;hostname&quot;:&quot;too.simple.com&quot;,&quot;ip&quot;:&quot;1.2.4.8&quot;,&quot;description&quot;:&quot;图样主机 - 1&quot;,&quot;localport&quot;:1081,&quot;remoteport&quot;:8000,&quot;autoconnect&quot;:false}]} 的本地化字符串。
         /// </summary>
         internal static string String_AppConfigJsonDefault {

@@ -13,13 +13,9 @@ namespace KcptunGUI
     /// </summary>
     public partial class App : Application{
         public static System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();//托盘图标
-        public static FileStream ConfigStream = null;
-        public static StreamWriter ConfigWriter = null;//配置文件_写入
-        public static StreamReader ConfigReader = null;//配置文件_读取
-        //public static Cursor[] AppCursor = new Cursor[2];
-        public static String AppConfigJson;
+        public static String AppConfigJson=String.Empty;
         public static Class.ConfigJson AppConfigObject;
-        public static String AppLanguageJson;
+        public static String AppLanguageJson = String.Empty;
         public static Class.LanguageJson AppLanguageObject;
 
         protected override void OnStartup( StartupEventArgs e ) {
@@ -31,8 +27,6 @@ namespace KcptunGUI
                 File.WriteAllText(Path.Combine(Class.AppAttributes.I18NPath , "2052.json") , KcptunGUI.Properties.Resources.String_AppLanguageJsonDefault,Class.AppAttributes.UTF8EncodingNoBom);//写入默认语言文件
             }
             */
-            //初始化鼠标样式
-            //AppCursor[0] = new Cursor( Class.Functions.BytesToStream( KcptunGUI.Properties.Resources.cursor_arrow ) , false);//箭头
             //初始化配置文件
             if(!File.Exists( Class.AppAttributes.ConfigFilePath ) ) {
                 FileStream fs=File.Create( Class.AppAttributes.ConfigFilePath );//若配置文件不存在则创建

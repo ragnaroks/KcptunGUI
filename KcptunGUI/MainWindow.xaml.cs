@@ -32,7 +32,7 @@ namespace KcptunGUI {
                 this.Left = ( SystemParameters.PrimaryScreenWidth / 2 ) - ( this.ActualWidth/2 );
             }
             //托盘
-            App.nicon.Icon= System.Drawing.Icon.FromHandle(Properties.Resources.picture_favicon_png.GetHicon());
+            App.nicon.Icon = KcptunGUI.Resource.图标.ico_64x64_appicon;
             App.nicon.Text = Class.AppAttributes.Name + "  " + Class.AppAttributes.Version;
             App.nicon.Visible = true;
             App.nicon.MouseClick += Nicon_MouseClick;

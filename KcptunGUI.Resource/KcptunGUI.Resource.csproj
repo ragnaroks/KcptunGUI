@@ -34,6 +34,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <RegisterForComInterop>false</RegisterForComInterop>
     <DocumentationFile>bin\Release\KcptunGUI.Resource.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -43,11 +44,6 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="字节.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>字节.resx</DependentUpon>
-    </Compile>
     <Compile Include="Class.cs" />
     <Compile Include="图标.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -60,34 +56,16 @@
       <DependentUpon>图片.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="音频.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>音频.resx</DependentUpon>
-    </Compile>
     <Compile Include="字符串.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>字符串.resx</DependentUpon>
     </Compile>
-    <Compile Include="视频.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>视频.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="字节.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>字节.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="图标.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>图标.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="音频.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>音频.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="图片.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -96,10 +74,6 @@
     <EmbeddedResource Include="字符串.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>字符串.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="视频.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>视频.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

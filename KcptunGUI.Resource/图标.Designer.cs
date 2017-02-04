@@ -59,5 +59,15 @@ namespace KcptunGUI.Resource {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Icon ico_64x64_appicon {
+            get {
+                object obj = ResourceManager.GetObject("ico_64x64_appicon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

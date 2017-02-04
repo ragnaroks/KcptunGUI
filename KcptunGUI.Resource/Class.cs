@@ -8,6 +8,6 @@ namespace KcptunGUI.Resource {
     /// <summary></summary>
     public class Class {
         /// <summary>版本</summary>
-        public const String Version = "2017-02-02";
+        public const String Version = "2017-02-04";
     }
 }

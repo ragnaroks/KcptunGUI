@@ -1,10 +1,6 @@
 using System;
 using System.Windows;
 using System.IO;
-using System.Windows.Interop;
-using System.Windows.Controls;
-using System.ComponentModel;
-using System.Text;
 
 namespace KcptunGUI.Class {
     class AppAttributes {

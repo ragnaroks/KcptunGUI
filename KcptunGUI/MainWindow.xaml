@@ -32,10 +32,8 @@
                         <MD:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                             <StackPanel>
                                 <Button x:Name="MainWindow_Button_ViewSrcOnGitHub" Content="On GitHub" Click="Button_Clicked"></Button>
-                                <Button x:Name="MainWindow_Button_ViewSrcOnOSchina" Content="On OSchina" Click="Button_Clicked"></Button>
+                                <Button x:Name="MainWindow_Button_ViewSrcOnOSchina" Content="On OSChina" Click="Button_Clicked"></Button>
                                 <Button Content="Contact Me" IsEnabled="False" />
-                                <Separator />
-                                <Button x:Name="MainWindow_Button_GetHelp" Content="Get help" Click="Button_Clicked"/>
                                 <Separator />
                                 <TextBlock x:Name="MainWindow_TextBlock_AppVersion" Padding="8,0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
