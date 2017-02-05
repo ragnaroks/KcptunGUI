@@ -26,7 +26,7 @@ namespace KcptunGUI.Class
         /// <param name="_bytes">字节组</param>
         /// <returns>内存流</returns>
         static public Stream BytesToStream(Byte[] _bytes) {
-            return new MemoryStream( _bytes );
+                return new MemoryStream(_bytes);
         }
 
         /// <summary>内存流转字节组</summary>

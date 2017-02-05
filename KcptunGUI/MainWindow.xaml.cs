@@ -47,13 +47,13 @@ namespace KcptunGUI {
             MainWindow_I18N();
             //实例化页面
             pageClientMode = new SubFrame.ClientMode();
-            //pageClientMode.par
             pageServerMode = new SubFrame.ServerMode();
             pageConfigure = new SubFrame.Configure(); pageConfigure._MainWindow = this;
             pageAbout = new SubFrame.About();
             pageStatus = new SubFrame.Status(); pageStatus._MainWindow = this;
-            //pageHelper = new SubFrame.Helper();
             MainWindow_Frame_ViewArea.Content = pageAbout;
+            //
+            this.Cursor=App.AppCursor[0];
         }
 
         /// <summary>窗口即将关闭,可取消</summary>

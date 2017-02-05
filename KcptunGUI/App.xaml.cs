@@ -12,11 +12,12 @@ namespace KcptunGUI
     /// App.xaml 的交互逻辑
     /// </summary>
     public partial class App : Application{
-        public static System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();//托盘图标
         public static String AppConfigJson=String.Empty;
         public static Class.ConfigJson AppConfigObject;
         public static String AppLanguageJson = String.Empty;
         public static Class.LanguageJson AppLanguageObject;
+        public static System.Windows.Forms.NotifyIcon nicon = new System.Windows.Forms.NotifyIcon();//托盘图标
+        public static Cursor[] AppCursor = new Cursor[2];
 
         protected override void OnStartup( StartupEventArgs e ) {
             //检查环境
@@ -52,6 +53,9 @@ namespace KcptunGUI
                 AppLanguageJson = File.ReadAllText(Path.Combine(Class.AppAttributes.I18NPath , App.AppConfigObject.LCID + ".json"));
             }
             AppLanguageObject = JsonConvert.DeserializeObject<Class.LanguageJson>(AppLanguageJson);
+            //鼠标样式
+            AppCursor[0]=new Cursor(Class.Functions.BytesToStream(Resource.Byte.cur_normal));
+            //
             base.OnStartup( e );
         }
     }

@@ -44,6 +44,11 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Byte.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Byte.resx</DependentUpon>
+    </Compile>
     <Compile Include="Class.cs" />
     <Compile Include="图标.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -63,6 +68,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Byte.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Byte.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="图标.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>图标.Designer.cs</LastGenOutput>
@@ -75,6 +84,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>字符串.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\normal.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
