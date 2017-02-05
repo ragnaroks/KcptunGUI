@@ -18,13 +18,29 @@ namespace KcptunGUI.Class {
             App.AppLanguageObject = JsonConvert.DeserializeObject<LanguageJson>(App.AppLanguageJson);
         }
         
+        /// <summary>根据控件tag返回对应的全球化文本</summary>
+        /// <param name="_SenderTag">控件的Tag属性</param>
+        /// <returns>全球化文本</returns>
         public static String GetString(Object _SenderTag) {
-            Int32 _index;
-            if( Int32.TryParse( ( (String)_SenderTag ).Replace( "I18N_" , "" ) ,out _index ) && _index<App.AppLanguageObject.Text.Count ) {
-                return App.AppLanguageObject.Text[_index];
+            Int32 index;
+            if( Int32.TryParse( ( (String)_SenderTag ).Replace( "I18N_" , "" ) ,out index ) && index<App.AppLanguageObject.Text.Count ) {
+                return App.AppLanguageObject.Text[index];
             } else {
                 return App.AppLanguageObject.Language+" - "+App.AppLanguageObject.LangTag+" - "+App.AppLanguageObject.LCID;
             }
         }
+
+        /// <summary>根据索引返回全球化文本</summary>
+        /// <param name="_Index">索引</param>
+        /// <returns>全球化文本</returns>
+        public static String GetString(Int32 _Index) {
+            if(_Index<App.AppLanguageObject.Text.Count) {
+                return App.AppLanguageObject.Text[_Index];
+            }else {
+                return App.AppLanguageObject.Language+" - "+App.AppLanguageObject.LangTag+" - "+App.AppLanguageObject.LCID;
+            }
+        }
+
+        //
     }
 }

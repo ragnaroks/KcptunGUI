@@ -79,7 +79,7 @@ namespace KcptunGUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;,&quot;状态&quot;,&quot;帮助&quot;,&quot;显示当前运行状态&quot;,&quot;获得使用帮助&quot;,&quot;关于本程序&quot;,&quot;进行首选项设定&quot;,&quot;处理器占用&quot;,&quot;内存占用&quot;,&quot;网络占用&quot;,&quot;系统上传速率:&quot;,&quot;系统下载速率:&quot;,&quot;系统CPU负载:&quot;,&quot;程序CPU占用:&quot;,&quot;系统内存占用:&quot;,&quot;程序共享内存占用:&quot;,&quot;程序真实内存占用:&quot;,&quot;以下选项会即时生效并自动保存&quot;,&quot;是否自动关闭导航菜单&quot;,&quot;是否记住窗口位置&quot;,&quot;是否读取系统状态&quot;,&quot;区域ID,程序会根据区域提供不同的全球化内容&quot;,&quot;程序显示语言&quot;]} 的本地化字符串。
+        ///   查找类似 {&quot;Language&quot;:&quot;简体中文&quot;,&quot;LangTag&quot;:&quot;zh_CN&quot;,&quot;LCID&quot;:2052,&quot;Text&quot;:[&quot;客户端&quot;,&quot;服务端&quot;,&quot;首选项&quot;,&quot;关于&quot;,&quot;状态&quot;,&quot;帮助&quot;,&quot;显示当前运行状态&quot;,&quot;获得使用帮助&quot;,&quot;关于本程序&quot;,&quot;进行首选项设定&quot;,&quot;处理器占用&quot;,&quot;内存占用&quot;,&quot;网络占用&quot;,&quot;系统上传速率:&quot;,&quot;系统下载速率:&quot;,&quot;系统CPU负载:&quot;,&quot;程序CPU占用:&quot;,&quot;系统内存占用:&quot;,&quot;程序共享内存占用:&quot;,&quot;程序真实内存占用:&quot;,&quot;以下选项会即时生效并自动保存&quot;,&quot;是否自动关闭导航菜单&quot;,&quot;是否记住窗口位置&quot;,&quot;是否读取系统状态&quot;,&quot;区域ID,程序会根据区域提供不同的全球化内容&quot;,&quot;程序显示语言&quot;,&quot;退出&quot;]} 的本地化字符串。
         /// </summary>
         internal static string String_AppLanguageJsonDefault {
             get {

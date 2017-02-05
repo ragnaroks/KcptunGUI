@@ -19,7 +19,7 @@ namespace KcptunGUI {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;//窗体加载完成
             this.Closing += MainWindow_Closing;//窗口即将关闭,可取消
-            this.Closed += MainWindow_Closed;//窗口已确定将关闭
+            this.Closed += MainWindow_Closed;//窗口已确定将关闭,不可取消
         }
 
         #region 初始化
@@ -38,10 +38,10 @@ namespace KcptunGUI {
             App.nicon.MouseClick += Nicon_MouseClick;
             App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             System.Windows.Forms.ToolStripMenuItem[] tsmi = new System.Windows.Forms.ToolStripMenuItem[1];
-            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem() { Text = "I18N_ExitApp" , Image = KcptunGUI.Resource.图片.png_none};
-            tsmi[0].Click += ( (Object _sender,EventArgs _e) => { this.Close(); } );
+            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem(){Name="NIcon_ToolStripMenuItem_ExitApp",Tag="I18N_26", Image = KcptunGUI.Resource.图片.png_none};
             for(Byte i=0;i<tsmi.Length ;i++ ) {
                 App.nicon.ContextMenuStrip.Items.Insert( i , tsmi[i] );
+                tsmi[i].Click +=ToolStripMenuItem_Click;
             }
             //加载文本
             MainWindow_I18N();
@@ -76,15 +76,12 @@ namespace KcptunGUI {
             this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.Tag);//I18N[2]
             this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.Tag);//I18N[4]
             this.MainWindow_ListBoxItem_About.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_About.Tag);//I18N[3]
+            App.nicon.ContextMenuStrip.Items[0].Text=Class.I18N.GetString(App.nicon.ContextMenuStrip.Items[0].Tag);//I18N[26]
         }
         #endregion
 
-        #region Button控件响应
-        /// <summary>
-        /// 根据x:Name响应按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        #region 控件事件响应
+        /// <summary>根据x:Name响应Button.Click</summary>
         private void Button_Clicked(Object sender,RoutedEventArgs e) {
             Button thisButton = sender as Button;
             switch(thisButton.Name){
@@ -103,8 +100,9 @@ namespace KcptunGUI {
                 default:break;
             }
         }
-        #endregion
-        private void CheckBox_Checked(object sender, RoutedEventArgs e){//单选框选择事件
+
+        /// <summary>根据x:Name响应CheckBox.Checked,单选框选择</summary>
+        private void CheckBox_Checked(object sender, RoutedEventArgs e){
             CheckBox thisCheckBox = sender as CheckBox;
             if( false == thisCheckBox.IsMouseOver ) { return; }
             switch (thisCheckBox.Name) {
@@ -113,7 +111,9 @@ namespace KcptunGUI {
                 default:break;
             }
         }
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e){//单选框取消选择事件
+
+        /// <summary>根据x:Name响应CheckBox.Unchecked,单选框取消选择</summary>
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e){
             CheckBox thisCheckBox = sender as CheckBox;
             if (false == thisCheckBox.IsMouseOver) { return; }
             switch (thisCheckBox.Name){
@@ -123,7 +123,9 @@ namespace KcptunGUI {
                     break;
             }
         }
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e){//输入框变动事件
+
+        /// <summary>根据x:Name响应TextBox.TextChanged,输入框变动</summary>
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e){
             TextBox thisTextBox = sender as TextBox;
             switch (thisTextBox.Name) {
                 case "MainWindow_LogsText":
@@ -135,7 +137,19 @@ namespace KcptunGUI {
                     break;
             }
         }
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e){//下拉选单变动事件
+
+        /// <summary>根据x:Name响应TextBox.LostKeyboardFocus,输入框丢失键盘焦点</summary>
+        private void TextBox_LostKeyboardFocus(object sender,System.Windows.Input.KeyboardFocusChangedEventArgs e) {
+            TextBox thisTextBox = sender as TextBox;
+            switch(thisTextBox.Name) {
+                case "KcptunConfig_MTU":
+                    break;
+                default: break;
+            }
+        }
+
+        /// <summary>根据x:Name响应ComboBox.SelectionChanged,下拉选单变动</summary>
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e){
             ComboBox thisComboBox = sender as ComboBox;
             switch (thisComboBox.Name) {
                 case "KcptunConfig_SystemBit":
@@ -144,23 +158,42 @@ namespace KcptunGUI {
                     break;
             }
         }
-        private void TextBox_LostKeyboardFocus(object sender, System.Windows.Input.KeyboardFocusChangedEventArgs e){//输入框丢失键盘焦点
-            TextBox thisTextBox = sender as TextBox;
-            switch (thisTextBox.Name) {
-                case "KcptunConfig_MTU":
+
+        /// <summary>根据x:Name响应ListBoxItem.MouseLeftButtonUp,响应ListBoxItem鼠标左键松开</summary>
+        private void ListBoxItem_MouseLeftButtonUp(object sender,System.Windows.Input.MouseButtonEventArgs e) {
+            ListBoxItem thisListBoxItem = sender as ListBoxItem;
+            if(!thisListBoxItem.IsMouseOver) { return; }
+            switch(thisListBoxItem.Name) {
+                case "MainWindow_ListBoxItem_ClientMode":
+                    this.MainWindow_Frame_ViewArea.Content = pageClientMode;
                     break;
-                default:break;
+                case "MainWindow_ListBoxItem_ServerMode":
+                    this.MainWindow_Frame_ViewArea.Content = pageServerMode;
+                    break;
+                case "MainWindow_ListBoxItem_Configure":
+                    this.MainWindow_Frame_ViewArea.Content = pageConfigure;
+                    break;
+                case "MainWindow_ListBoxItem_About":
+                    this.MainWindow_Frame_ViewArea.Content = pageAbout;
+                    break;
+                case "MainWindow_ListBoxItem_Status":
+                    this.MainWindow_Frame_ViewArea.Content = pageStatus;
+                    break;
+                default: break;
             }
+            if(App.AppConfigObject.TabAutoHide) { this.MainWindow_ToggleButton_ToggleMenu.IsChecked = false; }
         }
-        
-        private void Nicon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e){
-            switch( e.Button ) {
+
+        /// <summary>托盘鼠标点击事件</summary>
+        private void Nicon_MouseClick(object _sender,System.Windows.Forms.MouseEventArgs _e) {
+            switch(_e.Button) {
                 default:
                 case System.Windows.Forms.MouseButtons.Left: //按下鼠标左键,显示/隐藏窗口
                     App.nicon.ContextMenuStrip.Hide();
-                    if( Class.Functions.IsWindowVisible(new WindowInteropHelper(this).Handle) ) {
+                    if(Class.Functions.IsWindowVisible(new WindowInteropHelper(this).Handle)) {
                         this.Hide();
-                    } else {
+                    }
+                    else {
                         this.Show();
                         this.WindowState = WindowState.Normal;
                     }
@@ -169,10 +202,25 @@ namespace KcptunGUI {
                     App.nicon.ContextMenuStrip.Show();
                     break;
             }
-            
-            
         }
 
+        /// <summary>根据x:Name响应ToolStripMenuItem.Click,菜单点击事件</summary>
+        private void ToolStripMenuItem_Click(object _sender,EventArgs _e){
+            System.Windows.Forms.ToolStripMenuItem thisToolStripMenuItem = _sender as System.Windows.Forms.ToolStripMenuItem;
+            switch(thisToolStripMenuItem.Name) {
+                case "NIcon_ToolStripMenuItem_ExitApp":
+                    this.Close();
+                    break;
+                default:break;
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_RunKcptun_Click(object sender, RoutedEventArgs e){
             var cmdp= new Process();
             cmdp.StartInfo.CreateNoWindow = true;
@@ -192,12 +240,22 @@ namespace KcptunGUI {
             //this.MainWindow_RunKcptun.IsEnabled = false; this.MainWindow_StopKcptun.IsEnabled = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cmdp_ErrorDataReceived(object sender, DataReceivedEventArgs e){
             this.Dispatcher.Invoke(new Action(delegate {
                 //this.MainWindow_LogsText.Text += "\n" + e.Data;
             }));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_StopKcptun_Click(object sender, RoutedEventArgs e){
             /*
             cmdp.CancelErrorRead(); cmdp.Kill(); cmdp_isRun = false;
@@ -206,45 +264,7 @@ namespace KcptunGUI {
             this.MainWindow_RunKcptun.IsEnabled = true; this.MainWindow_StopKcptun.IsEnabled = false;
             */
         }
-        /// <summary>
-        /// 响应Canvas控件的"鼠标左键松开"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Canvas_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e){
-            Canvas thisCanvas = sender as Canvas;
-            if (!thisCanvas.IsMouseOver) { return; }
-            switch (thisCanvas.Name) {
-                default:break;
-            }
-        }
-        /// <summary>
-        /// 响应ListBoxItem的"鼠标左键松开"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListBoxItem_MouseLeftButtonUp(object sender , System.Windows.Input.MouseButtonEventArgs e) {
-            ListBoxItem thisListBoxItem = sender as ListBoxItem;
-            if(!thisListBoxItem.IsMouseOver) { return; }
-            switch( thisListBoxItem.Name ) {
-                case "MainWindow_ListBoxItem_ClientMode":
-                    this.MainWindow_Frame_ViewArea.Content = pageClientMode;
-                    break;
-                case "MainWindow_ListBoxItem_ServerMode":
-                    this.MainWindow_Frame_ViewArea.Content = pageServerMode;
-                    break;
-                case "MainWindow_ListBoxItem_Configure":
-                    this.MainWindow_Frame_ViewArea.Content = pageConfigure;
-                    break;
-                case "MainWindow_ListBoxItem_About":
-                    this.MainWindow_Frame_ViewArea.Content = pageAbout;
-                    break;
-                case "MainWindow_ListBoxItem_Status":
-                    this.MainWindow_Frame_ViewArea.Content = pageStatus;
-                    break;
-                default:break;
-            }
-            if( App.AppConfigObject.TabAutoHide ) { this.MainWindow_ToggleButton_ToggleMenu.IsChecked = false; }
-        }
+
+        
     }
 }
