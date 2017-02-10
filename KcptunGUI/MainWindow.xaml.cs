@@ -38,9 +38,13 @@ namespace KcptunGUI {
             App.nicon.MouseClick += Nicon_MouseClick;
             App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
             System.Windows.Forms.ToolStripMenuItem[] tsmi = new System.Windows.Forms.ToolStripMenuItem[1];
-            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem(){Name="NIcon_ToolStripMenuItem_ExitApp",Tag="I18N_26", Image = KcptunGUI.Resource.图片.png_none};
-            for(Byte i=0;i<tsmi.Length ;i++ ) {
-                App.nicon.ContextMenuStrip.Items.Insert( i , tsmi[i] );
+            tsmi[0] = new System.Windows.Forms.ToolStripMenuItem(){
+                Name="NIcon_ToolStripMenuItem_ExitApp",
+                Image = KcptunGUI.Resource.图片.png_none,
+                ImageScaling=System.Windows.Forms.ToolStripItemImageScaling.SizeToFit
+            };
+            for(Int32 i=0;i<tsmi.Length;i++) {
+                App.nicon.ContextMenuStrip.Items.Insert(i,tsmi[i]);
                 tsmi[i].Click +=ToolStripMenuItem_Click;
             }
             //加载文本
@@ -71,12 +75,12 @@ namespace KcptunGUI {
         /// <summary>加载全球化文本</summary>
         public void MainWindow_I18N() {
             this.MainWindow_TextBlock_AppVersion.Text = "Version: " + Class.AppAttributes.Version;
-            this.MainWindow_ListBoxItem_ClientMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ClientMode.Tag);//I18N[0]
-            this.MainWindow_ListBoxItem_ServerMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ServerMode.Tag );//I18N[1]
-            this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.Tag);//I18N[2]
-            this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.Tag);//I18N[4]
-            this.MainWindow_ListBoxItem_About.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_About.Tag);//I18N[3]
-            App.nicon.ContextMenuStrip.Items[0].Text=Class.I18N.GetString(App.nicon.ContextMenuStrip.Items[0].Tag);//I18N[26]
+            this.MainWindow_ListBoxItem_ClientMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ClientMode.Uid);
+            this.MainWindow_ListBoxItem_ServerMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ServerMode.Uid);
+            this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.Uid);
+            this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.Uid);
+            this.MainWindow_ListBoxItem_About.Content =Class.I18N.GetString(this.MainWindow_ListBoxItem_About.Uid);
+            App.nicon.ContextMenuStrip.Items[0].Text=Class.I18N.GetString(0);
         }
         #endregion
 

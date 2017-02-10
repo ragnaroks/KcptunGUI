@@ -10,7 +10,7 @@
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" Height="48">
             <Image x:Name="PageStatus_Image_Icon" Width="32" Height="32" Margin="8"/>
-            <TextBlock x:Name="PageStatus_TextBlock_PageHeader" Margin="8" Tag="I18N_6" Text="状态标签页" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock x:Name="PageStatus_TextBlock_PageHeader" Margin="8" Uid="6" Text="I18N[6]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
         <Grid Margin="8">

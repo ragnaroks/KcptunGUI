@@ -29,13 +29,13 @@ namespace KcptunGUI.SubFrame {
 
         /// <summary>加载本地化文本</summary>
         private void PageConfigure_I18N() {
-            PageConfigure_TextBlock_PageHeader.Text = Class.I18N.GetString(PageConfigure_TextBlock_PageHeader.Tag);
-            PageConfigure_TextBlock_ConfigureTip.Text = Class.I18N.GetString(PageConfigure_TextBlock_ConfigureTip.Tag);
-            PageConfigure_TextBlock_Setting_TabAutoHide.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_TabAutoHide.Tag);
-            PageConfigure_TextBlock_Setting_RememberWinLocation.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_RememberWinLocation.Tag);
-            PageConfigure_TextBlock_Setting_FetchSystemStatus.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_FetchSystemStatus.Tag);
-            PageConfigure_TextBlock_Setting_LCID.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_LCID.Tag);
-            PageConfigure_TextBlock_Setting_Language.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_Language.Tag);
+            PageConfigure_TextBlock_PageHeader.Text = Class.I18N.GetString(PageConfigure_TextBlock_PageHeader.Uid);
+            PageConfigure_TextBlock_ConfigureTip.Text = Class.I18N.GetString(PageConfigure_TextBlock_ConfigureTip.Uid);
+            PageConfigure_TextBlock_Setting_TabAutoHide.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_TabAutoHide.Uid);
+            PageConfigure_TextBlock_Setting_RememberWinLocation.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_RememberWinLocation.Uid);
+            PageConfigure_TextBlock_Setting_FetchSystemStatus.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_FetchSystemStatus.Uid);
+            PageConfigure_TextBlock_Setting_LCID.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_LCID.Uid);
+            PageConfigure_TextBlock_Setting_Language.Text = Class.I18N.GetString(PageConfigure_TextBlock_Setting_Language.Uid);
 
         }
 
@@ -53,7 +53,7 @@ namespace KcptunGUI.SubFrame {
                     Int32 a = 0;
                     Int32.TryParse(PageConfigure_TextBox_Setting_LCID.Text,out a);
                     App.AppConfigObject.LCID = ( a == 0 ) ? 2052 : a;
-                    Class.I18N.LoadLanguageJsonFile(App.AppConfigObject.LCID);
+                    Class.I18N.LoadLanguageObjectFromJSON(App.AppConfigObject.LCID);
                     PageConfigure_I18N();
                     _MainWindow.MainWindow_I18N();
                     break;

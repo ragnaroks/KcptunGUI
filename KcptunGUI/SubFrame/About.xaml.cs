@@ -37,7 +37,7 @@ namespace KcptunGUI.SubFrame {
 
         /// <summary>加载本地化文本</summary>
         private void PageAbout_I18N() {
-            this.PageAbout_TextBlock_PageHeader.Text = Class.I18N.GetString(this.PageAbout_TextBlock_PageHeader.Tag);
+            this.PageAbout_TextBlock_PageHeader.Text = Class.I18N.GetString(this.PageAbout_TextBlock_PageHeader.Uid);
         }
     }
 }

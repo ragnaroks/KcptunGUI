@@ -182,9 +182,6 @@
     <Compile Include="SubFrame\Configure.xaml.cs">
       <DependentUpon>Configure.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SubFrame\Helper.xaml.cs">
-      <DependentUpon>Helper.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SubFrame\ServerMode.xaml.cs">
       <DependentUpon>ServerMode.xaml</DependentUpon>
     </Compile>
@@ -208,10 +205,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SubFrame\Configure.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SubFrame\Helper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,15 +245,6 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Resx\config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resx\I18N\9999.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resx\I18N\1033.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resx\I18N\2052.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

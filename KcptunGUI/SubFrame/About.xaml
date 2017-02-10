@@ -11,7 +11,7 @@
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" Height="48">
             <Image x:Name="PageAbout_Image_Icon" Width="32" Height="32" Margin="8"/>
-            <TextBlock x:Name="PageAbout_TextBlock_PageHeader" Margin="8" Tag="I18N_8" Text="PageAbout_TextBlock_PageHeader" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock x:Name="PageAbout_TextBlock_PageHeader" Margin="8" Uid="7" Text="I18N[7]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
         

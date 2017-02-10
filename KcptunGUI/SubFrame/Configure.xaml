@@ -9,7 +9,7 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal" Height="48">
             <Image x:Name="PageConfigure_Image_Icon" Width="32" Height="32" Margin="8"/>
-            <TextBlock x:Name="PageConfigure_TextBlock_PageHeader" Margin="8" Tag="I18N_9" Text="PageConfigure_TextBlock_PageHeader" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock x:Name="PageConfigure_TextBlock_PageHeader" Margin="8" Uid="8" Text="I18N[8]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
         <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch"/>
         <Grid x:Name="PageConfigure_Grid_Configure" Margin="8">

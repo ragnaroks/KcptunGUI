@@ -17,11 +17,11 @@
                 <StackPanel>
                     <ToggleButton IsChecked="{Binding ElementName=MainWindow_ToggleButton_ToggleMenu, Path=IsChecked,Mode=TwoWay}" Style="{StaticResource ResourceKey=MaterialDesignHamburgerToggleButton}" Margin="0,8,0,0" />
                     <ListBox Margin="0,16" IsSynchronizedWithCurrentItem="True">
-                        <ListBoxItem x:Name="MainWindow_ListBoxItem_ClientMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_0"/>
-                        <ListBoxItem x:Name="MainWindow_ListBoxItem_ServerMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_1"/>
-                        <ListBoxItem x:Name="MainWindow_ListBoxItem_Configure" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_2"/>
-                        <ListBoxItem x:Name="MainWindow_ListBoxItem_Status" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_4"/>
-                        <ListBoxItem x:Name="MainWindow_ListBoxItem_About" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Tag="I18N_3" IsSelected="True"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_ClientMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Uid="1"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_ServerMode" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Uid="2"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_Configure" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Uid="3"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_Status" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" Uid="4"/>
+                        <ListBoxItem x:Name="MainWindow_ListBoxItem_About" MouseLeftButtonUp="ListBoxItem_MouseLeftButtonUp" IsTabStop="False" IsSelected="True" Uid="5"/>
                     </ListBox>
                 </StackPanel>
             </MD:DrawerHost.LeftDrawerContent>
@@ -38,7 +38,7 @@
                                 <TextBlock x:Name="MainWindow_TextBlock_AppVersion" Padding="8,0" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                             </StackPanel>
                         </MD:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="KcptunGUI"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="KcptunGUI" Uid="0"/>
                     </DockPanel>
                 </MD:ColorZone>
                 <Frame x:Name="MainWindow_Frame_ViewArea" NavigationUIVisibility="Hidden"></Frame>

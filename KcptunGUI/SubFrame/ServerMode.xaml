@@ -6,9 +6,13 @@
       xmlns:local="clr-namespace:KcptunGUI.SubFrame"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="ServerMode">
-
-    <Grid>
-        
-    </Grid>
+      Title="ServerMode"
+>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" Height="48">
+            <Image x:Name="PageServerMode_Image_Icon" Width="32" Height="32" Margin="8"/>
+            <TextBlock x:Name="PageServerMode_TextBlock_PageHeader" Margin="8" Uid="10" Text="I18N[10]" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </StackPanel>
+        <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch"/>
+    </StackPanel>
 </Page>

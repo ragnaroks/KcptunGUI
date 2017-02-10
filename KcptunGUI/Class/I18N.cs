@@ -6,41 +6,38 @@ using Newtonsoft.Json;
 
 namespace KcptunGUI.Class {
     class I18N {
-        /// <summary>通过指定LCID来加载对应的语言文件</summary>
+        /// <summary>通过LCID来加载对应的语言文件</summary>
         /// <param name="_LCID">LCID</param>
-        public static void LoadLanguageJsonFile(Int32 _LCID) {
-            if( !File.Exists(Path.Combine(AppAttributes.I18NPath , App.AppConfigObject.LCID + ".json"))) {//语言文件不存在
-                MessageBox.Show("语言文件不存在,将使用简体中文\nNot found language file,default use chinese." ,AppAttributes.Name , MessageBoxButton.OK , MessageBoxImage.Information);
-                App.AppLanguageJson = Properties.Resources.String_AppLanguageJsonDefault;
-            } else {
-                App.AppLanguageJson = File.ReadAllText(Path.Combine(AppAttributes.I18NPath , App.AppConfigObject.LCID + ".json"));
+        /// <returns>已经反序列化的语言对象</returns>
+        public static Class.LanguageJson LoadLanguageObjectFromJSON(Int32 _LCID) {
+            switch(_LCID) {
+                case 1033:
+                    return JsonConvert.DeserializeObject<Class.LanguageJson>(KcptunGUI.Resource.字符串.String_Language_ENG);//英文
+                case 2052:
+                default:
+                    return JsonConvert.DeserializeObject<Class.LanguageJson>(KcptunGUI.Resource.字符串.String_Language_CHS);//简体中文
             }
-            App.AppLanguageObject = JsonConvert.DeserializeObject<LanguageJson>(App.AppLanguageJson);
         }
         
-        /// <summary>根据控件tag返回对应的全球化文本</summary>
-        /// <param name="_SenderTag">控件的Tag属性</param>
+        /// <summary>根据控件Uid返回对应的全球化文本</summary>
+        /// <param name="_SenderUid">控件的Uid属性</param>
         /// <returns>全球化文本</returns>
-        public static String GetString(Object _SenderTag) {
-            Int32 index;
-            if( Int32.TryParse( ( (String)_SenderTag ).Replace( "I18N_" , "" ) ,out index ) && index<App.AppLanguageObject.Text.Count ) {
-                return App.AppLanguageObject.Text[index];
+        public static String GetString(String _SenderUid) {
+            UInt16 index = 0;
+            if(String.IsNullOrWhiteSpace(_SenderUid)) {
+                return App.AppLanguageObject.Text[0];
             } else {
-                return App.AppLanguageObject.Language+" - "+App.AppLanguageObject.LangTag+" - "+App.AppLanguageObject.LCID;
+                UInt16.TryParse(_SenderUid,out index);
+                return App.AppLanguageObject.Text[index];
             }
         }
 
-        /// <summary>根据索引返回全球化文本</summary>
-        /// <param name="_Index">索引</param>
+        /// <summary>根据控件索引返回对应的全球化文本</summary>
+        /// <param name="_Index">手动指定的索引</param>
         /// <returns>全球化文本</returns>
-        public static String GetString(Int32 _Index) {
-            if(_Index<App.AppLanguageObject.Text.Count) {
-                return App.AppLanguageObject.Text[_Index];
-            }else {
-                return App.AppLanguageObject.Language+" - "+App.AppLanguageObject.LangTag+" - "+App.AppLanguageObject.LCID;
-            }
+        public static String GetString(UInt16 _Index) {
+            return App.AppLanguageObject.Text[_Index];
         }
-
         //
     }
 }
