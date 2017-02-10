@@ -26,20 +26,20 @@ namespace KcptunGUI.SubFrame {
         }
         /// <summary>加载本地化文本</summary>
         private void PageStatus_I18N() {
-            PageStatus_TextBlock_PageHeader.Text = Class.I18N.GetString(PageStatus_TextBlock_PageHeader.Uid);
+            PageStatus_TextBlock_PageHeader.Text = Class.LocalFunction.GetString(PageStatus_TextBlock_PageHeader.Uid);
             //CPU
-            PageStatus_TextBlock_AppCpuCardHeader.Text = Class.I18N.GetString(PageStatus_TextBlock_AppCpuCardHeader.Uid);
-            PageStatus_TextBlock_AppCPUCardSystemOccupyingPretext.Text = Class.I18N.GetString( PageStatus_TextBlock_AppCPUCardSystemOccupyingPretext.Uid);
-            PageStatus_TextBlock_AppCPUCardApplicationOccupyingPretext.Text = Class.I18N.GetString( PageStatus_TextBlock_AppCPUCardApplicationOccupyingPretext.Uid);
+            PageStatus_TextBlock_AppCpuCardHeader.Text = Class.LocalFunction.GetString(PageStatus_TextBlock_AppCpuCardHeader.Uid);
+            PageStatus_TextBlock_AppCPUCardSystemOccupyingPretext.Text = Class.LocalFunction.GetString( PageStatus_TextBlock_AppCPUCardSystemOccupyingPretext.Uid);
+            PageStatus_TextBlock_AppCPUCardApplicationOccupyingPretext.Text = Class.LocalFunction.GetString( PageStatus_TextBlock_AppCPUCardApplicationOccupyingPretext.Uid);
             //Memory
-            PageStatus_TextBlock_AppMemoryCardHeader.Text = Class.I18N.GetString(PageStatus_TextBlock_AppMemoryCardHeader.Uid);
-            PageStatus_TextBlock_AppMemoryCardSystemOccupyingPretext.Text = Class.I18N.GetString(PageStatus_TextBlock_AppMemoryCardSystemOccupyingPretext.Uid);
-            PageStatus_TextBlock_AppMemoryCardApplocationOccupyingPretext.Text = Class.I18N.GetString(PageStatus_TextBlock_AppMemoryCardApplocationOccupyingPretext.Uid);
-            PageStatus_TextBlock_AppMemoryCardApplocationOccupying2Pretext.Text = Class.I18N.GetString(PageStatus_TextBlock_AppMemoryCardApplocationOccupying2Pretext.Uid);
+            PageStatus_TextBlock_AppMemoryCardHeader.Text = Class.LocalFunction.GetString(PageStatus_TextBlock_AppMemoryCardHeader.Uid);
+            PageStatus_TextBlock_AppMemoryCardSystemOccupyingPretext.Text = Class.LocalFunction.GetString(PageStatus_TextBlock_AppMemoryCardSystemOccupyingPretext.Uid);
+            PageStatus_TextBlock_AppMemoryCardApplocationOccupyingPretext.Text = Class.LocalFunction.GetString(PageStatus_TextBlock_AppMemoryCardApplocationOccupyingPretext.Uid);
+            PageStatus_TextBlock_AppMemoryCardApplocationOccupying2Pretext.Text = Class.LocalFunction.GetString(PageStatus_TextBlock_AppMemoryCardApplocationOccupying2Pretext.Uid);
             //Network
-            PageStatus_TextBlock_AppNetworkCardHeader.Text = Class.I18N.GetString(PageStatus_TextBlock_AppNetworkCardHeader.Uid);
-            PageStatus_TextBlock_AppNetworkCardSystemUploadPretext.Text = Class.I18N.GetString( PageStatus_TextBlock_AppNetworkCardSystemUploadPretext.Uid);
-            PageStatus_TextBlock_AppNetworkCardSystemDownloadPretext.Text = Class.I18N.GetString( PageStatus_TextBlock_AppNetworkCardSystemDownloadPretext.Uid);
+            PageStatus_TextBlock_AppNetworkCardHeader.Text = Class.LocalFunction.GetString(PageStatus_TextBlock_AppNetworkCardHeader.Uid);
+            PageStatus_TextBlock_AppNetworkCardSystemUploadPretext.Text = Class.LocalFunction.GetString( PageStatus_TextBlock_AppNetworkCardSystemUploadPretext.Uid);
+            PageStatus_TextBlock_AppNetworkCardSystemDownloadPretext.Text = Class.LocalFunction.GetString( PageStatus_TextBlock_AppNetworkCardSystemDownloadPretext.Uid);
         }
         #endregion
 

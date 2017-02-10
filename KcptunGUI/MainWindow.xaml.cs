@@ -75,12 +75,12 @@ namespace KcptunGUI {
         /// <summary>加载全球化文本</summary>
         public void MainWindow_I18N() {
             this.MainWindow_TextBlock_AppVersion.Text = "Version: " + Class.AppAttributes.Version;
-            this.MainWindow_ListBoxItem_ClientMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ClientMode.Uid);
-            this.MainWindow_ListBoxItem_ServerMode.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_ServerMode.Uid);
-            this.MainWindow_ListBoxItem_Configure.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Configure.Uid);
-            this.MainWindow_ListBoxItem_Status.Content = Class.I18N.GetString(this.MainWindow_ListBoxItem_Status.Uid);
-            this.MainWindow_ListBoxItem_About.Content =Class.I18N.GetString(this.MainWindow_ListBoxItem_About.Uid);
-            App.nicon.ContextMenuStrip.Items[0].Text=Class.I18N.GetString(0);
+            this.MainWindow_ListBoxItem_ClientMode.Content = Class.LocalFunction.GetString(this.MainWindow_ListBoxItem_ClientMode.Uid);
+            this.MainWindow_ListBoxItem_ServerMode.Content = Class.LocalFunction.GetString(this.MainWindow_ListBoxItem_ServerMode.Uid);
+            this.MainWindow_ListBoxItem_Configure.Content = Class.LocalFunction.GetString(this.MainWindow_ListBoxItem_Configure.Uid);
+            this.MainWindow_ListBoxItem_Status.Content = Class.LocalFunction.GetString(this.MainWindow_ListBoxItem_Status.Uid);
+            this.MainWindow_ListBoxItem_About.Content =Class.LocalFunction.GetString(this.MainWindow_ListBoxItem_About.Uid);
+            App.nicon.ContextMenuStrip.Items[0].Text=Class.LocalFunction.GetString(0);
         }
         #endregion
 

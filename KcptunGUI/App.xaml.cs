@@ -33,7 +33,7 @@ namespace KcptunGUI
                 AppConfigObject = JsonConvert.DeserializeObject<Class.ConfigJson>(AppConfigJson);//加载配置文件
             }
             //if(!Directory.Exists(Class.AppAttributes.ResxPath)){ MessageBox.Show("Resx目录不存在(Not found Resx folder)","错误(Error)",MessageBoxButton.OK,MessageBoxImage.Error); Environment.Exit(0); }//若resx目录不存在
-            AppLanguageObject = Class.I18N.LoadLanguageObjectFromJSON(App.AppConfigObject.LCID);
+            AppLanguageObject = Class.LocalFunction.LoadLanguageObjectFromJSON(App.AppConfigObject.LCID);
             AppCursor[0]=new Cursor(Class.Functions.BytesToStream(Resource.Byte.cur_normal));//默认鼠标样式
             //
             base.OnStartup( e );

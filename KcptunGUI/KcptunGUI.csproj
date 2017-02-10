@@ -162,7 +162,6 @@
     </ApplicationDefinition>
     <Compile Include="Class\AppAttributes.cs" />
     <Compile Include="Class\ConfigJson.cs" />
-    <Compile Include="Class\I18N.cs" />
     <Compile Include="Class\LanguageJson.cs" />
     <Compile Include="Class\LocalFunction.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -244,7 +243,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Resx\config.json">
+    <None Include="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -261,6 +260,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resx\" />
     <Folder Include="SubWindow\" />
   </ItemGroup>
   <ItemGroup>
