@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="String_Language_CHS" xml:space="preserve">
-    <value>{"Language":"简体中文","LangTag":"zh_CN","LCID":2052,"Text":["KcptunGUI","客户端","服务端","首选项","状态","关于","显示当前运行状态","关于本程序","进行首选项设定","客户端模式","服务端模式","处理器占用","内存占用","网络占用","系统上传速率:","系统下载速率:","系统CPU负载:","程序CPU占用:","系统内存占用:","程序共享内存占用:","程序真实内存占用:","以下选项会即时生效并自动保存","是否自动关闭导航菜单","是否记住窗口位置","是否读取系统状态","区域ID,程序会根据区域提供不同的全球化内容","程序显示语言","退出"]}</value>
+    <value>{"Language":"简体中文","LangTag":"zh_CN","LCID":2052,"Text":["KcptunGUI","客户端","服务端","首选项","状态","关于","显示当前运行状态","关于本程序","进行首选项设定","客户端模式","服务端模式","以下选项会即时生效并自动保存","是否自动关闭导航菜单","是否记住窗口位置","是否读取系统状态","区域ID,据此提供不同的内容","程序显示语言","处理器","处理器负载:","程序处理器占用:","内存","内存负载:","程序共享内存:","程序独享内存:","网络","系统上传速率:","系统下载速率:","KcptunGUI总出网速率:","KcptunGUI总入网速率:","Kcptun总出网速率:","Kcptun总入网速率:","有效流量比:","退出"]}</value>
     <comment>内置简体中文</comment>
   </data>
   <data name="String_Language_ENG" xml:space="preserve">
-    <value>{"Language":"简体中文","LangTag":"zh_CN","LCID":2052,"Text":["KcptunGUI","客户端","服务端","首选项","状态","关于","显示当前运行状态","关于本程序","进行首选项设定","客户端模式","服务端模式","处理器占用","内存占用","网络占用","系统上传速率:","系统下载速率:","系统CPU负载:","程序CPU占用:","系统内存占用:","程序共享内存占用:","程序真实内存占用:","以下选项会即时生效并自动保存","是否自动关闭导航菜单","是否记住窗口位置","是否读取系统状态","区域ID,程序会根据区域提供不同的全球化内容","程序显示语言","退出"]}</value>
+    <value>{"Language":"English","LangTag":"en_us","LCID":1033,"Text":["KcptunGUI","Client","Server","Config","Status","About","Display application status","About application","Configure settings","Client mode","Server mode","These settings will apply immediately","Whether or not auto close menu","Whether or not remember window location","Whether or not fetch application status","Location ID","Applocation display language","Processor","Processor load:","Application occupied:","Memory","System occupied:","Application occupied[shared]:","Application occupied[private]:","Network","System rate[upload]:","System rate[download]:","KcptunGUI rate[upload]:","KcptunGUI rate[download]:","Kcptun rate[upload]:","Kcptun rate[download]:","Availability flow ratio:","Exit"]}</value>
     <comment>内置英文</comment>
   </data>
 </root>

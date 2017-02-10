@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using MaterialDesignThemes.Wpf;
 
 namespace KcptunGUI.SubFrame {
     /// <summary>
@@ -50,10 +49,8 @@ namespace KcptunGUI.SubFrame {
             switch( thisComboBox.Name ) {
                 case "PageConfigure_ComboBox_Setting_Language":
                     PageConfigure_TextBox_Setting_LCID.Text = (thisComboBox.SelectedItem as ComboBoxItem).Tag.ToString();
-                    Int32 a = 0;
-                    Int32.TryParse(PageConfigure_TextBox_Setting_LCID.Text,out a);
-                    App.AppConfigObject.LCID = ( a == 0 ) ? 2052 : a;
-                    Class.LocalFunction.LoadLanguageObjectFromJSON(App.AppConfigObject.LCID);
+                    App.AppConfigObject.LCID = Int32.Parse(PageConfigure_TextBox_Setting_LCID.Text);
+                    App.AppLanguageObject=Class.LocalFunction.LoadLanguageObjectFromJSON(App.AppConfigObject.LCID);
                     PageConfigure_I18N();
                     _MainWindow.MainWindow_I18N();
                     break;
