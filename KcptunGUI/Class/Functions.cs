@@ -4,8 +4,8 @@ using System.IO;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 
-namespace KcptunGUI.Class
-{
+namespace KcptunGUI.Class{
+    /// <summary>废弃</summary>
     class Functions{
         // C函数声明
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -122,8 +122,13 @@ namespace KcptunGUI.Class
             return String.IsNullOrEmpty( _pn ) ? new PerformanceCounter( "Process" , "% Processor Time" , Process.GetCurrentProcess().ProcessName ) : new PerformanceCounter( "Process" , "% Processor Time" , _pn );
         }
 
+        /// <summary>获取应用程序的CPU占用</summary>
+        /// <param name="_pc">当前应用程序的计数器</param>
+        /// <returns></returns>
         public static String GetApplicationOccupying_CPU( PerformanceCounter _pc) {
             return String.Format("{0:N2}%", _pc.NextValue() / Environment.ProcessorCount );
         }
+
+
     }
 }

@@ -41,7 +41,7 @@ namespace KcptunGUI.SubFrame {
         /// <summary>System.Windows.Controls.Primitives.ToggleButton元素失去焦点的事件</summary>
         private void ToggleButton_LostFocus(object sender , RoutedEventArgs e) {
             //System.Windows.Controls.Primitives.ToggleButton thisToggleButton = (System.Windows.Controls.Primitives.ToggleButton)sender;
-            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject , Class.AppAttributes.ConfigFilePath);
+            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject ,App.AppConfigFilePath);
         }
 
         private void ComboBox_SelectionChanged(object sender , SelectionChangedEventArgs e) {
@@ -56,7 +56,7 @@ namespace KcptunGUI.SubFrame {
                     break;
                 default:break;
             }
-            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject , Class.AppAttributes.ConfigFilePath);
+            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject , App.AppConfigFilePath);
         }
     }
 }

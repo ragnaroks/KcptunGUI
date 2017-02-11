@@ -33,7 +33,7 @@ namespace KcptunGUI {
             }
             //托盘
             App.nicon.Icon = KcptunGUI.Resource.图标.ico_64x64_appicon;
-            App.nicon.Text = Class.AppAttributes.Name + "  " + Class.AppAttributes.Version;
+            App.nicon.Text = App.AppName + "  " + App.AppVersion;
             App.nicon.Visible = true;
             App.nicon.MouseClick += Nicon_MouseClick;
             App.nicon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
@@ -74,7 +74,7 @@ namespace KcptunGUI {
 
         /// <summary>加载全球化文本</summary>
         public void MainWindow_I18N() {
-            this.MainWindow_TextBlock_AppVersion.Text = "Version: " + Class.AppAttributes.Version;
+            this.MainWindow_TextBlock_AppVersion.Text = "Version: " + App.AppVersion;
             this.MainWindow_ListBoxItem_ClientMode.Content = Class.LocalFunction.GetString(this.MainWindow_ListBoxItem_ClientMode.Uid);
             this.MainWindow_ListBoxItem_ServerMode.Content = Class.LocalFunction.GetString(this.MainWindow_ListBoxItem_ServerMode.Uid);
             this.MainWindow_ListBoxItem_Configure.Content = Class.LocalFunction.GetString(this.MainWindow_ListBoxItem_Configure.Uid);

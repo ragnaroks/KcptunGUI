@@ -7,22 +7,6 @@ using System.Diagnostics;
 
 namespace KcptunGUI.Class {
     class LocalFunction {
-        /// <summary>验证配置文件合法性</summary>
-        /// <returns>是否合法</returns>
-        public static Boolean ValidateConfigJSON() {
-            if( String.IsNullOrWhiteSpace( App.AppConfigJson ) || App.AppConfigJson.IndexOf( "}{" , 0 ) > -1 ) { return false; }
-            JSchema schema = JSchema.Parse( KcptunGUI.Properties.Resources.String_AppConfigJsonSchema );
-            JObject jo = JObject.Parse( App.AppConfigJson );
-            IList<string> errors;
-            Boolean v = jo.IsValid( schema , out errors );
-            if( errors.Count == 0 && v == true ) {
-                return true;
-            } else {
-                foreach( var value in errors ) { Console.WriteLine( "配置文件验证失败: " + value ); }
-                return false;
-            }
-        }
-
         /// <summary>验证指定JSON合法性</summary>
         /// <param name="_JSON">待验证的JSON</param>
         /// <param name="_SchemaString">验证器字符串</param>
@@ -78,12 +62,12 @@ namespace KcptunGUI.Class {
         /// <param name="_JSON">JSON对象</param>
         /// <param name="_Path">文件完整路径</param>
         public static void SaveJsonToFile(Object _JSON,String _Path) {
-            System.IO.File.WriteAllText( Class.AppAttributes.ConfigFilePath , JsonConvert.SerializeObject( _JSON ) , Class.AppAttributes.UTF8EncodingNoBom );
+            System.IO.File.WriteAllText( App.AppConfigFilePath , JsonConvert.SerializeObject( _JSON ) , App.UTF8EncodingNoBom );
         }
 
         /// <summary>保存配置文件</summary>
         public static void SaveAppConfig(){
-            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject , Class.AppAttributes.ConfigFilePath);
+            Class.LocalFunction.SaveJsonToFile(App.AppConfigObject , App.AppConfigFilePath);
         }
     }
 }

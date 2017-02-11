@@ -160,7 +160,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Class\AppAttributes.cs" />
     <Compile Include="Class\ConfigJson.cs" />
     <Compile Include="Class\LanguageJson.cs" />
     <Compile Include="Class\LocalFunction.cs" />
