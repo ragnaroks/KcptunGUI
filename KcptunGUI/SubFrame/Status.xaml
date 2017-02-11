@@ -26,49 +26,43 @@
             </Grid.ColumnDefinitions>
             <MD:Card Grid.Row="0" Grid.Column="0" Background="{StaticResource PrimaryHueMidBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="0,0,2,4">
                 <StackPanel Orientation="Vertical" Margin="8">
-                    <TextBlock x:Name="PageStatus_TextBlock_AppCpuCardHeader" FontSize="14" Text="I18N[17]" Uid="17"/>
+                    <TextBlock x:Name="PageStatus_TextBlock_ProcessorCardHeader" FontSize="14" Text="I18N[17]" Uid="17"/>
                     <Separator Style="{StaticResource MaterialDesignSeparator}" Height="8"/>
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppCPUCardSystemOccupyingPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[18]" Uid="18"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppCPUCardSystemOccupyingText" Text="0%" FontSize="12"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_ProcessorCardSystemOccupyingPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[18]" Uid="18"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_ProcessorCardSystemOccupyingText" Text="0%" FontSize="12"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppCPUCardApplicationOccupyingPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[19]" Uid="19"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppCPUCardApplicationOccupyingText" Text="0%" FontSize="12"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_ProcessorCardApplicationOccupyingPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[19]" Uid="19"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_ProcessorCardApplicationOccupyingText" Text="0%" FontSize="12"/>
                     </StackPanel>
                 </StackPanel>
             </MD:Card>
             <MD:Card Grid.Row="0" Grid.Column="1" Background="{StaticResource PrimaryHueMidBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="2,0,2,4">
                 <StackPanel Orientation="Vertical" Margin="8">
-                    <TextBlock x:Name="PageStatus_TextBlock_AppMemoryCardHeader" FontSize="14" Text="I18N[20]" Uid="20"/>
+                    <TextBlock x:Name="PageStatus_TextBlock_MemoryCardHeader" FontSize="14" Text="I18N[20]" Uid="20"/>
                     <Separator Style="{StaticResource MaterialDesignSeparator}" Height="8"/>
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppMemoryCardSystemOccupyingPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[21]" Uid="21"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppMemoryCardSystemOccupyingText" Text="0%" FontSize="12"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_MemoryCardSystemOccupyiedPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[21]" Uid="21"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_MemoryCardSystemOccupyiedText" Text="0%" FontSize="12"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppMemoryCardApplocationOccupyingPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[22]" Uid="22"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppMemoryCardApplocationOccupyingText" Text="0%" FontSize="12"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppMemoryCardApplocationOccupying2Pretext" FontSize="12" Margin="0,0,4,0" Text="I18N[23]" Uid="23"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppMemoryCardApplocationOccupying2Text" Text="0%" FontSize="12"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_MemoryCardApplocationOccupyiedPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[22]" Uid="22"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_MemoryCardApplocationOccupyiedText" Text="0MB" FontSize="12"/>
                     </StackPanel>
                 </StackPanel>
             </MD:Card>
             <MD:Card Grid.Row="0" Grid.Column="2" Background="{StaticResource PrimaryHueMidBrush}" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Margin="2,0,0,4">
                 <StackPanel Orientation="Vertical" Margin="8">
-                    <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardHeader" FontSize="14" Text="I18N[24]" Uid="24"/>
+                    <TextBlock x:Name="PageStatus_TextBlock_NetworkCardHeader" FontSize="14" Text="I18N[23]" Uid="23"/>
                     <Separator Style="{StaticResource MaterialDesignSeparator}" Height="8"/>
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemUploadPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[25]" Uid="25"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemUploadText" Text="0 byte/s" FontSize="12"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemUploadCountUnit" Text="byte/s" FontSize="12" Margin="4,0,0,0" IsEnabled="False" Visibility="Collapsed"/>
-                    </StackPanel>
+                        <TextBlock x:Name="PageStatus_TextBlock_NetworkCardSystemUploadPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[24]" Uid="24"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_NetworkCardSystemUploadText" Text="0 B/s" FontSize="12"/>
+                </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,8">
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemDownloadPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[26]" Uid="26"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemDownloadText" Text="0 byte/s" FontSize="12"/>
-                        <TextBlock x:Name="PageStatus_TextBlock_AppNetworkCardSystemDownloadCountUnit" Text="byte/s" FontSize="12" Margin="4,0,0,0" IsEnabled="False" Visibility="Collapsed"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_NetworkCardSystemDownloadPretext" FontSize="12" Margin="0,0,4,0" Text="I18N[25]" Uid="25"/>
+                        <TextBlock x:Name="PageStatus_TextBlock_NetworkCardSystemDownloadText" Text="0 B/s" FontSize="12"/>
                     </StackPanel>
                 </StackPanel>
             </MD:Card>

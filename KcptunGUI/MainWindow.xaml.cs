@@ -194,7 +194,7 @@ namespace KcptunGUI {
                 default:
                 case System.Windows.Forms.MouseButtons.Left: //按下鼠标左键,显示/隐藏窗口
                     App.nicon.ContextMenuStrip.Hide();
-                    if(Class.Functions.IsWindowVisible(new WindowInteropHelper(this).Handle)) {
+                    if(Class.LocalFunction.IsWindowVisible(new WindowInteropHelper(this).Handle)) {
                         this.Hide();
                     }
                     else {
