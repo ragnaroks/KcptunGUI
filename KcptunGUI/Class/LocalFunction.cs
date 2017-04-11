@@ -245,8 +245,9 @@ namespace KcptunGUI.Class {
                     && item.GetPhysicalAddress() != PhysicalAddress.None
                 ) {ni = item;}
             }
-            _pc1=new PerformanceCounter("Network Interface","Bytes Sent/sec",ni.Description);
-            _pc2=new PerformanceCounter("Network Interface","Bytes Received/sec",ni.Description);
+            /* fix issue #1 by github@Lensual */
+            _pc1=(ni.Description.IndexOf("Intel")>-1) ? new PerformanceCounter("Network Interface","Bytes Sent/sec",ni.Description.Replace('(','[').Replace(')',']')) : new PerformanceCounter("Network Interface","Bytes Sent/sec",ni.Description);
+            _pc2=(ni.Description.IndexOf("Intel")>-1) ? new PerformanceCounter("Network Interface","Bytes Sent/sec",ni.Description.Replace('(','[').Replace(')',']')) : new PerformanceCounter("Network Interface","Bytes Received/sec",ni.Description);
         }
 
         /// <summary>获取网络状态</summary>
